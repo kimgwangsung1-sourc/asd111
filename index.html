@@ -94,6 +94,24 @@
           <label for="message">문의 내용</label>
           <textarea id="message" name="message" rows="4" placeholder="협업 목적과 희망 일정 등을 적어주세요." required></textarea>
         </div>
+        <div class="field">
+          <label for="phone">연락처</label>
+          <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
+        </div>
+        <div class="field">
+          <label for="budget">예산 범위</label>
+          <select id="budget" name="budget">
+            <option value="undecided">미정</option>
+            <option value="under-1m">100만원 미만</option>
+            <option value="1m-3m">100~300만원</option>
+            <option value="3m-5m">300~500만원</option>
+            <option value="over-5m">500만원 이상</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="timeline">희망 일정</label>
+          <input id="timeline" name="timeline" type="text" placeholder="예: 4월 초 시작" />
+        </div>
         <button class="primary" type="submit">문의 보내기</button>
         <p class="hint">보내기 클릭 시 Formspree로 전송됩니다.</p>
       </form>
