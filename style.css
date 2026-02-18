@@ -113,6 +113,16 @@ select {
   font-size: 15px;
 }
 
+textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  resize: vertical;
+}
+
 .hint {
   margin: 0;
   font-size: 12px;
@@ -210,6 +220,11 @@ button:disabled {
   background: rgba(46, 125, 111, 0.12);
   color: var(--text);
   font-size: 14px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
 }
 
 @media (max-width: 720px) {

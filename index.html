@@ -74,6 +74,30 @@
         여러 세트 중 마음에 드는 조합을 선택해 구매해보세요.
       </div>
     </section>
+
+    <section class="panel contact">
+      <h2>제휴 문의</h2>
+      <form class="contact-form" action="https://formspree.io/f/xgolzzzp" method="POST">
+        <div class="field">
+          <label for="company">회사명</label>
+          <input id="company" name="company" type="text" placeholder="회사명 또는 브랜드명" required />
+        </div>
+        <div class="field">
+          <label for="name">담당자 성함</label>
+          <input id="name" name="name" type="text" placeholder="홍길동" required />
+        </div>
+        <div class="field">
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" placeholder="contact@example.com" required />
+        </div>
+        <div class="field">
+          <label for="message">문의 내용</label>
+          <textarea id="message" name="message" rows="4" placeholder="협업 목적과 희망 일정 등을 적어주세요." required></textarea>
+        </div>
+        <button class="primary" type="submit">문의 보내기</button>
+        <p class="hint">보내기 클릭 시 Formspree로 전송됩니다.</p>
+      </form>
+    </section>
   </main>
 
   <script src="/main.js"></script>
