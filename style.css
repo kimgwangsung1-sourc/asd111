@@ -220,4 +220,50 @@ button:disabled {
   .actions {
     flex-direction: column;
   }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  #themeToggle {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .result-card p {
+    font-size: 20px;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+
+  .panel-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tag {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand h1 {
+    font-size: 28px;
+  }
+
+  .sub {
+    font-size: 14px;
+  }
+
+  .result-card p {
+    font-size: 18px;
+  }
 }
