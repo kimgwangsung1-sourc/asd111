@@ -1,14 +1,125 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>픽셀컷 - AI 누끼 스튜디오</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "@imgly/background-removal": "https://unpkg.com/@imgly/background-removal@1.7.0/dist/index.mjs",
+        "onnxruntime-web": "https://unpkg.com/onnxruntime-web@1.21.0-dev.20250114-228dd16893/dist/ort.mjs"
+      }
+    }
+  </script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">AI Cutout Studio</p>
+        <h1>픽셀컷</h1>
+        <p class="sub">
+          JPG, PNG를 올리면 자동으로 배경을 제거해요. 그리고 바로 새 배경을 입혀 다운로드까지.
+        </p>
+      </div>
+      <div class="hero-card">
+        <div class="stat">
+          <span>처리 시간</span>
+          <strong>10~25초</strong>
+        </div>
+        <div class="stat">
+          <span>지원 형식</span>
+          <strong>JPG · PNG · WEBP</strong>
+        </div>
+        <div class="stat">
+          <span>핵심 기능</span>
+          <strong>배경 제거 + 배경 교체</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel upload">
+        <div class="panel-head">
+          <h2>이미지 업로드</h2>
+          <button class="ghost" id="resetBtn">리셋</button>
+        </div>
+        <div class="dropzone" id="dropzone">
+          <div>
+            <p class="drop-title">여기에 이미지를 드롭</p>
+            <p class="drop-sub">또는</p>
+          </div>
+          <button class="primary" id="selectBtn">파일 선택</button>
+          <input id="fileInput" type="file" accept="image/png, image/jpeg, image/webp" hidden />
+          <p class="drop-hint">권장: 인물/제품 사진, 10MB 이하</p>
+        </div>
+        <div class="status" id="status">이미지를 선택하면 바로 누끼를 따요.</div>
+        <div class="actions">
+          <button class="primary" id="removeBtn" disabled>배경 제거 시작</button>
+          <button class="ghost" id="downloadBtn" disabled>PNG 다운로드</button>
+        </div>
+      </section>
+
+      <section class="panel preview">
+        <div class="panel-head">
+          <h2>미리보기</h2>
+          <span class="tag" id="modelTag">모델 준비 중</span>
+        </div>
+        <div class="preview-grid">
+          <div class="canvas-card">
+            <p class="caption">원본</p>
+            <canvas id="inputCanvas"></canvas>
+          </div>
+          <div class="canvas-card">
+            <p class="caption">결과</p>
+            <canvas id="outputCanvas"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel controls">
+        <div class="panel-head">
+          <h2>배경 스튜디오</h2>
+          <p class="hint">추가 핵심 기능: 누끼 결과에 새 배경을 즉시 합성</p>
+        </div>
+        <div class="control-row">
+          <label for="bgMode">배경 타입</label>
+          <select id="bgMode">
+            <option value="transparent">투명</option>
+            <option value="solid">단색</option>
+            <option value="gradient">그라데이션</option>
+            <option value="image">이미지</option>
+          </select>
+        </div>
+        <div class="control-row" data-mode="solid">
+          <label for="solidColor">단색 컬러</label>
+          <input id="solidColor" type="color" value="#f6f1ea" />
+        </div>
+        <div class="control-row" data-mode="gradient">
+          <label for="gradColorA">그라데이션 컬러 A</label>
+          <input id="gradColorA" type="color" value="#f1e8d8" />
+        </div>
+        <div class="control-row" data-mode="gradient">
+          <label for="gradColorB">그라데이션 컬러 B</label>
+          <input id="gradColorB" type="color" value="#c6e0ff" />
+        </div>
+        <div class="control-row" data-mode="gradient">
+          <label for="gradAngle">각도</label>
+          <input id="gradAngle" type="range" min="0" max="360" value="135" />
+        </div>
+        <div class="control-row" data-mode="image">
+          <label for="bgImageInput">배경 이미지</label>
+          <input id="bgImageInput" type="file" accept="image/png, image/jpeg, image/webp" />
+        </div>
+        <div class="tip">
+          투명 배경으로 추출한 뒤, 단색/그라데이션/이미지를 바로 입힐 수 있어요.
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/main.js"></script>
 </body>
 </html>
