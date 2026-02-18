@@ -3,123 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>픽셀컷 - AI 누끼 스튜디오</title>
+  <title>연금복권 번호 추천기</title>
   <link rel="stylesheet" href="/style.css" />
-  <script type="importmap">
-    {
-      "imports": {
-        "@imgly/background-removal": "https://unpkg.com/@imgly/background-removal@1.7.0/dist/index.mjs",
-        "onnxruntime-web": "https://unpkg.com/onnxruntime-web@1.21.0-dev.20250114-228dd16893/dist/ort.mjs"
-      }
-    }
-  </script>
 </head>
 <body>
-  <div class="page">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">AI Cutout Studio</p>
-        <h1>픽셀컷</h1>
-        <p class="sub">
-          JPG, PNG를 올리면 자동으로 배경을 제거해요. 그리고 바로 새 배경을 입혀 다운로드까지.
-        </p>
+  <header class="topbar">
+    <div class="brand">
+      <p class="eyebrow">PENSION LOTTERY</p>
+      <h1>연금복권 번호 추천기</h1>
+      <p class="sub">간단한 컨디션 체크로 맞춤 조합을 추천하고, 한 번에 여러 세트를 생성합니다.</p>
+    </div>
+    <button id="themeToggle" class="ghost">다크 모드</button>
+  </header>
+
+  <main class="layout">
+    <section class="panel form">
+      <h2>맞춤 추천 조건</h2>
+      <div class="field">
+        <label for="count">추천 세트 수</label>
+        <input id="count" type="number" min="1" max="10" value="5" />
       </div>
-      <div class="hero-card">
-        <div class="stat">
-          <span>처리 시간</span>
-          <strong>10~25초</strong>
-        </div>
-        <div class="stat">
-          <span>지원 형식</span>
-          <strong>JPG · PNG · WEBP</strong>
-        </div>
-        <div class="stat">
-          <span>핵심 기능</span>
-          <strong>배경 제거 + 배경 교체</strong>
-        </div>
+      <div class="field">
+        <label for="group">희망 조(1~5)</label>
+        <select id="group">
+          <option value="random">무작위</option>
+          <option value="1">1조</option>
+          <option value="2">2조</option>
+          <option value="3">3조</option>
+          <option value="4">4조</option>
+          <option value="5">5조</option>
+        </select>
       </div>
-    </header>
+      <div class="field">
+        <label for="tone">오늘의 분위기</label>
+        <select id="tone">
+          <option value="steady">차분하게</option>
+          <option value="bold">과감하게</option>
+          <option value="lucky">럭키 감각</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="seed">시드 키워드</label>
+        <input id="seed" type="text" placeholder="예: 여행, 커피, 열정" />
+        <p class="hint">시드 키워드를 넣으면 숫자 패턴이 약간 달라집니다.</p>
+      </div>
+      <div class="actions">
+        <button id="generateBtn" class="primary">추천 번호 생성</button>
+        <button id="copyBtn" class="ghost" disabled>복사하기</button>
+      </div>
+    </section>
 
-    <main class="grid">
-      <section class="panel upload">
-        <div class="panel-head">
-          <h2>이미지 업로드</h2>
-          <button class="ghost" id="resetBtn">리셋</button>
-        </div>
-        <div class="dropzone" id="dropzone">
-          <div>
-            <p class="drop-title">여기에 이미지를 드롭</p>
-            <p class="drop-sub">또는</p>
-          </div>
-          <button class="primary" id="selectBtn">파일 선택</button>
-          <input id="fileInput" type="file" accept="image/png, image/jpeg, image/webp" hidden />
-          <p class="drop-hint">권장: 인물/제품 사진, 10MB 이하</p>
-        </div>
-        <div class="status" id="status">이미지를 선택하면 바로 누끼를 따요.</div>
-        <div class="actions">
-          <button class="primary" id="removeBtn" disabled>배경 제거 시작</button>
-          <button class="ghost" id="downloadBtn" disabled>PNG 다운로드</button>
-        </div>
-      </section>
+    <section class="panel result">
+      <div class="panel-head">
+        <h2>추천 결과</h2>
+        <span class="tag" id="status">대기 중</span>
+      </div>
+      <div id="resultList" class="result-list">
+        <p class="placeholder">추천 번호를 생성하면 이곳에 표시됩니다.</p>
+      </div>
+    </section>
 
-      <section class="panel preview">
-        <div class="panel-head">
-          <h2>미리보기</h2>
-          <span class="tag" id="modelTag">모델 준비 중</span>
-        </div>
-        <div class="preview-grid">
-          <div class="canvas-card">
-            <p class="caption">원본</p>
-            <canvas id="inputCanvas"></canvas>
-          </div>
-          <div class="canvas-card">
-            <p class="caption">결과</p>
-            <canvas id="outputCanvas"></canvas>
-          </div>
-        </div>
-      </section>
+    <section class="panel guide">
+      <h2>연금복권 번호 구조</h2>
+      <ul class="guide-list">
+        <li>조 번호: 1~5조 중 1개</li>
+        <li>본 번호: 6자리 (000000 ~ 999999)</li>
+        <li>추천기는 랜덤 기반이며 당첨을 보장하지 않습니다.</li>
+      </ul>
+      <div class="note">
+        여러 세트 중 마음에 드는 조합을 선택해 구매해보세요.
+      </div>
+    </section>
+  </main>
 
-      <section class="panel controls">
-        <div class="panel-head">
-          <h2>배경 스튜디오</h2>
-          <p class="hint">추가 핵심 기능: 누끼 결과에 새 배경을 즉시 합성</p>
-        </div>
-        <div class="control-row">
-          <label for="bgMode">배경 타입</label>
-          <select id="bgMode">
-            <option value="transparent">투명</option>
-            <option value="solid">단색</option>
-            <option value="gradient">그라데이션</option>
-            <option value="image">이미지</option>
-          </select>
-        </div>
-        <div class="control-row" data-mode="solid">
-          <label for="solidColor">단색 컬러</label>
-          <input id="solidColor" type="color" value="#f6f1ea" />
-        </div>
-        <div class="control-row" data-mode="gradient">
-          <label for="gradColorA">그라데이션 컬러 A</label>
-          <input id="gradColorA" type="color" value="#f1e8d8" />
-        </div>
-        <div class="control-row" data-mode="gradient">
-          <label for="gradColorB">그라데이션 컬러 B</label>
-          <input id="gradColorB" type="color" value="#c6e0ff" />
-        </div>
-        <div class="control-row" data-mode="gradient">
-          <label for="gradAngle">각도</label>
-          <input id="gradAngle" type="range" min="0" max="360" value="135" />
-        </div>
-        <div class="control-row" data-mode="image">
-          <label for="bgImageInput">배경 이미지</label>
-          <input id="bgImageInput" type="file" accept="image/png, image/jpeg, image/webp" />
-        </div>
-        <div class="tip">
-          투명 배경으로 추출한 뒤, 단색/그라데이션/이미지를 바로 입힐 수 있어요.
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <script type="module" src="/main.js"></script>
+  <script src="/main.js"></script>
 </body>
 </html>
