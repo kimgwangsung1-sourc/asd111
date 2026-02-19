@@ -406,12 +406,29 @@
         .result-box {
             text-align: center;
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 100%;
+            width: 90%;
+            max-width: 400px;
         }
         @keyframes zoomIn { from {transform: scale(0.5); opacity: 0;} to {transform: scale(1); opacity: 1;} }
 
         .rank-badge { font-size: 80px; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
         
+        .result-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .summary-item { display: flex; flex-direction: column; gap: 5px; }
+        .summary-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+        .summary-value { color: var(--text); font-size: 20px; font-weight: 800; font-family: 'Roboto Mono', monospace; }
+
+        .result-score-container { margin-bottom: 25px; }
         .result-score {
             font-size: 80px;
             font-weight: 900;
@@ -433,11 +450,12 @@
             font-weight: 800;
             border-radius: 16px;
             cursor: pointer;
-            margin-top: 40px;
+            margin-top: 20px;
             box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            width: 100%;
         }
         .btn-restart:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 0, 255, 0.5); }
         .btn-restart:active { transform: scale(0.95); }
@@ -566,9 +584,23 @@
     <div class="modal-overlay" id="modal">
         <div class="result-box">
             <span class="rank-badge" id="rankBadge">🐢</span>
-            <div class="cps-label">CLICKS PER SECOND</div>
-            <div class="result-score" id="finalCps">0.0</div>
-            <div class="rank-text" id="rankText">NOOB</div>
+            
+            <div class="result-summary">
+                <div class="summary-item">
+                    <span class="summary-label">측정 시간</span>
+                    <span class="summary-value" id="finalTime">0s</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">총 클릭 수</span>
+                    <span class="summary-value" id="finalClicks">0</span>
+                </div>
+            </div>
+
+            <div class="result-score-container">
+                <div class="cps-label">CPS</div>
+                <div class="result-score" id="finalCps">0.0</div>
+                <div class="rank-text" id="rankText">NOOB</div>
+            </div>
             
             <button class="btn-restart" onclick="resetTest()">RETRY</button>
         </div>
@@ -775,7 +807,11 @@
             if (cps >= 11) { rank = "HACKER"; badge = "👾"; color="var(--neon-green)"; }
             if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
 
+            // 상세 결과 업데이트
+            document.getElementById('finalTime').innerText = selectedTime + "초";
+            document.getElementById('finalClicks').innerText = score + "회";
             document.getElementById('finalCps').innerText = cps;
+            
             const rankText = document.getElementById('rankText');
             rankText.innerText = rank;
             rankText.style.color = color;
