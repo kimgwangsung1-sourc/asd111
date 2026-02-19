@@ -263,12 +263,19 @@
         }
 
         .cps-label { color: #aaa; font-size: 14px; margin-bottom: 5px; letter-spacing: 2px; }
-        .clicks-label { color: #777; font-size: 12px; margin-top: 10px; letter-spacing: 2px; }
+        .summary-label { color: #777; font-size: 12px; margin-top: 14px; letter-spacing: 2px; }
         .result-clicks {
             font-size: 36px;
             font-weight: 800;
             color: #fff;
             text-shadow: 0 0 16px rgba(255,255,255,0.25);
+            line-height: 1;
+        }
+        .result-time {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 12px rgba(255,255,255,0.2);
             line-height: 1;
         }
         .rank-text { color: #fff; font-size: 20px; font-weight: bold; margin-top: 5px; text-transform: uppercase;}
@@ -323,10 +330,14 @@
     <div class="modal-overlay" id="modal">
         <div class="result-box">
             <span class="rank-badge" id="rankBadge">🐢</span>
+            <div class="summary-label">MEASURED TIME</div>
+            <div class="result-time" id="finalTime">0s</div>
+
+            <div class="summary-label">TOTAL CLICKS</div>
+            <div class="result-clicks" id="finalClicks">0</div>
+
             <div class="cps-label">CLICKS PER SECOND</div>
             <div class="result-score" id="finalCps">0.0</div>
-            <div class="clicks-label">TOTAL CLICKS</div>
-            <div class="result-clicks" id="finalClicks">0</div>
             <div class="rank-text" id="rankText">NOOB</div>
             
             <button class="btn-restart" onclick="resetTest()">RETRY</button>
@@ -487,6 +498,7 @@
             if (cps >= 11) { rank = "HACKER"; badge = "👾"; color="#00ff00"; }
             if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
 
+            document.getElementById('finalTime').innerText = selectedTime + "s";
             document.getElementById('finalCps').innerText = cps;
             document.getElementById('finalClicks').innerText = score;
             const rankText = document.getElementById('rankText');
