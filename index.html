@@ -442,6 +442,19 @@
         .summary-item { display: flex; flex-direction: column; gap: 5px; }
         .summary-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
         .summary-value { color: var(--text); font-size: 20px; font-weight: 800; font-family: 'Roboto Mono', monospace; }
+        body:not(.light) .result-summary {
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        body:not(.light) .summary-label { color: #cfcfcf; }
+        body:not(.light) .summary-value { color: #ffffff; text-shadow: 0 0 8px rgba(255,255,255,0.2); }
+
+        body.light .result-summary {
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        body.light .summary-label { color: #5f554a; }
+        body.light .summary-value { color: #1d1a16; text-shadow: none; }
 
         .result-score-container { margin-bottom: 25px; }
         .result-score {
