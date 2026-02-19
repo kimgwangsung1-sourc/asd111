@@ -263,6 +263,14 @@
         }
 
         .cps-label { color: #aaa; font-size: 14px; margin-bottom: 5px; letter-spacing: 2px; }
+        .clicks-label { color: #777; font-size: 12px; margin-top: 10px; letter-spacing: 2px; }
+        .result-clicks {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 16px rgba(255,255,255,0.25);
+            line-height: 1;
+        }
         .rank-text { color: #fff; font-size: 20px; font-weight: bold; margin-top: 5px; text-transform: uppercase;}
 
         .btn-restart {
@@ -317,6 +325,8 @@
             <span class="rank-badge" id="rankBadge">🐢</span>
             <div class="cps-label">CLICKS PER SECOND</div>
             <div class="result-score" id="finalCps">0.0</div>
+            <div class="clicks-label">TOTAL CLICKS</div>
+            <div class="result-clicks" id="finalClicks">0</div>
             <div class="rank-text" id="rankText">NOOB</div>
             
             <button class="btn-restart" onclick="resetTest()">RETRY</button>
@@ -423,7 +433,12 @@
 
             if (!isRunning && timeLeft > 0) startTest();
 
-            if (timeLeft > 0) {
+            if (isRunning) {
+                const elapsed = (performance.now() - startTimeMs) / 1000;
+                if (elapsed >= selectedTime) {
+                    endTest();
+                    return;
+                }
                 score++;
                 scoreEl.innerText = score;
                 if (score % 5 === 0) {
@@ -452,14 +467,14 @@
         }
 
         function endTest() {
+            if (!isRunning) return;
             clearInterval(timerInterval);
             isRunning = false;
             timeLeft = 0;
             timerEl.innerText = "0.00s";
             playSound('end');
 
-            const elapsedSeconds = Math.max(0.001, (performance.now() - startTimeMs) / 1000);
-            const cps = (score / elapsedSeconds).toFixed(2);
+            const cps = (score / selectedTime).toFixed(2);
             
             // 랭크 시스템 
             let rank = "TURTLE";
@@ -473,6 +488,7 @@
             if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
 
             document.getElementById('finalCps').innerText = cps;
+            document.getElementById('finalClicks').innerText = score;
             const rankText = document.getElementById('rankText');
             rankText.innerText = rank;
             rankText.style.color = color;
