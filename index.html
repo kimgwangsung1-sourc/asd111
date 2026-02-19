@@ -1,123 +1,508 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>연금복권 번호 추천기</title>
-  <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Professional CPS Speed Test Tool. Measure your click speed accurately.">
+    <title>NEON CLICK SPEED TEST | Utility Tool</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff9d;
+            --bg: #050505;
+            --surface: #111;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* [AD 1] 상단 배너 영역 */
+        .ad-top {
+            width: 100%;
+            height: 60px;
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-family: 'Black Ops One', cursive;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin: 15px 0 5px;
+            letter-spacing: 1px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 11px;
+            margin-bottom: 15px;
+            z-index: 10;
+            letter-spacing: 2px;
+        }
+
+        /* 시간 선택 도구 */
+        .time-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        .time-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            color: #888;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+
+        .time-btn.active {
+            background: var(--neon-blue);
+            color: #000;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* 메인 테스트 영역 (Game 단어 삭제됨) */
+        .test-container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .click-pad {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--neon-blue);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            transition: transform 0.05s, box-shadow 0.1s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .click-pad:active {
+            transform: scale(0.97);
+            background: rgba(0, 243, 255, 0.15);
+            border-color: #fff;
+        }
+
+        .shake { animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(2px, 0, 0); }
+        }
+
+        .score-text {
+            font-size: 80px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .timer-text {
+            font-size: 18px;
+            color: var(--neon-pink);
+            margin-top: 10px;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .status-msg {
+            position: absolute;
+            bottom: 30px;
+            color: #666;
+            font-size: 12px;
+            pointer-events: none;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* 대기 화면 이모지 유동 애니메이션 */
+        .idle-emoji-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .idle-emoji {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.65;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+            animation: floaty var(--dur, 6s) ease-in-out infinite alternate;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        @keyframes floaty {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+            50% { transform: translate3d(var(--dx, 12px), var(--dy, -16px), 0) rotate(var(--rot, 8deg)); }
+            100% { transform: translate3d(calc(var(--dx, 12px) * -1), calc(var(--dy, -16px) * -1), 0) rotate(calc(var(--rot, 8deg) * -1)); }
+        }
+        .idle-hidden { opacity: 0; transition: opacity 0.2s; }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: pop 0.5s ease-out forwards;
+            border-radius: 50%;
+        }
+        @keyframes pop {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* [AD 2] 하단 박스 영역 */
+        .ad-bottom {
+            margin-top: 20px;
+            width: 300px;
+            height: 250px; 
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 10px;
+            border: 1px dashed #333;
+        }
+
+        /* 결과 모달 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .result-box {
+            text-align: center;
+            animation: zoomIn 0.3s ease;
+            width: 100%;
+        }
+        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+
+        .rank-badge { font-size: 50px; display: block; margin-bottom: 5px; }
+        
+        .result-score {
+            font-size: 70px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 30px var(--neon-green);
+            font-family: 'Black Ops One', cursive;
+            line-height: 1;
+        }
+
+        .cps-label { color: #aaa; font-size: 14px; margin-bottom: 5px; letter-spacing: 2px; }
+        .rank-text { color: #fff; font-size: 20px; font-weight: bold; margin-top: 5px; text-transform: uppercase;}
+
+        .btn-restart {
+            background: linear-gradient(90deg, var(--neon-pink), #ff5e00);
+            border: none;
+            padding: 16px 60px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+            transition: 0.2s;
+        }
+        .btn-restart:active { transform: scale(0.95); }
+
+        /* [AD 3] 결과창 광고 영역 */
+        .ad-result {
+            margin-top: 30px;
+            width: 320px;
+            height: 100px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 10px;
+            border: 1px solid #333;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <p class="eyebrow">PENSION LOTTERY</p>
-      <h1>연금복권 번호 추천기</h1>
-      <p class="sub">간단한 컨디션 체크로 맞춤 조합을 추천하고, 한 번에 여러 세트를 생성합니다.</p>
+<body oncontextmenu="return false">
+
+    <div class="ad-top">AD SPACE (Top Banner)</div>
+
+    <h1>NEON SPEED TEST</h1>
+    <div class="subtitle">GLOBAL CLICK RATE UTILITY</div>
+
+    <div class="time-selector">
+        <button class="time-btn" onclick="setTimeMode(1)">1s</button>
+        <button class="time-btn active" onclick="setTimeMode(5)">5s</button>
+        <button class="time-btn" onclick="setTimeMode(10)">10s</button>
+        <button class="time-btn" onclick="setTimeMode(60)">60s</button>
     </div>
-    <button id="themeToggle" class="ghost">다크 모드</button>
-  </header>
 
-  <main class="layout">
-    <section class="panel form">
-      <h2>맞춤 추천 조건</h2>
-      <div class="field">
-        <label for="count">추천 세트 수</label>
-        <input id="count" type="number" min="1" max="10" value="5" />
-      </div>
-      <div class="field">
-        <label for="group">희망 조(1~5)</label>
-        <select id="group">
-          <option value="random">무작위</option>
-          <option value="1">1조</option>
-          <option value="2">2조</option>
-          <option value="3">3조</option>
-          <option value="4">4조</option>
-          <option value="5">5조</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="tone">오늘의 분위기</label>
-        <select id="tone">
-          <option value="steady">차분하게</option>
-          <option value="bold">과감하게</option>
-          <option value="lucky">럭키 감각</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="seed">시드 키워드</label>
-        <input id="seed" type="text" placeholder="예: 여행, 커피, 열정" />
-        <p class="hint">시드 키워드를 넣으면 숫자 패턴이 약간 달라집니다.</p>
-      </div>
-      <div class="actions">
-        <button id="generateBtn" class="primary">추천 번호 생성</button>
-        <button id="copyBtn" class="ghost" disabled>복사하기</button>
-      </div>
-    </section>
+    <div class="test-container">
+        <div class="click-pad" id="clickPad">
+            <div class="idle-emoji-layer" id="idleEmojis"></div>
+            <div class="score-text" id="score">0</div>
+            <div class="timer-text" id="timer">5.00s</div>
+            <div class="status-msg" id="msg">TAP TO START</div>
+        </div>
+    </div>
 
-    <section class="panel result">
-      <div class="panel-head">
-        <h2>추천 결과</h2>
-        <span class="tag" id="status">대기 중</span>
-      </div>
-      <div id="resultList" class="result-list">
-        <p class="placeholder">추천 번호를 생성하면 이곳에 표시됩니다.</p>
-      </div>
-    </section>
+    <div class="ad-bottom">AD SPACE (Bottom Square)</div>
 
-    <section class="panel guide">
-      <h2>연금복권 번호 구조</h2>
-      <ul class="guide-list">
-        <li>조 번호: 1~5조 중 1개</li>
-        <li>본 번호: 6자리 (000000 ~ 999999)</li>
-        <li>추천기는 랜덤 기반이며 당첨을 보장하지 않습니다.</li>
-      </ul>
-      <div class="note">
-        여러 세트 중 마음에 드는 조합을 선택해 구매해보세요.
-      </div>
-    </section>
+    <div class="modal-overlay" id="modal">
+        <div class="result-box">
+            <span class="rank-badge" id="rankBadge">🐢</span>
+            <div class="cps-label">CLICKS PER SECOND</div>
+            <div class="result-score" id="finalCps">0.0</div>
+            <div class="rank-text" id="rankText">NOOB</div>
+            
+            <button class="btn-restart" onclick="resetTest()">RETRY</button>
 
-    <section class="panel contact">
-      <h2>제휴 문의</h2>
-      <form class="contact-form" action="https://formspree.io/f/xgolzzzp" method="POST">
-        <div class="field">
-          <label for="company">회사명</label>
-          <input id="company" name="company" type="text" placeholder="회사명 또는 브랜드명" required />
+            <div class="ad-result">AD SPACE (Result Page)</div>
         </div>
-        <div class="field">
-          <label for="name">담당자 성함</label>
-          <input id="name" name="name" type="text" placeholder="홍길동" required />
-        </div>
-        <div class="field">
-          <label for="email">이메일</label>
-          <input id="email" name="email" type="email" placeholder="contact@example.com" required />
-        </div>
-        <div class="field">
-          <label for="message">문의 내용</label>
-          <textarea id="message" name="message" rows="4" placeholder="협업 목적과 희망 일정 등을 적어주세요." required></textarea>
-        </div>
-        <div class="field">
-          <label for="phone">연락처</label>
-          <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
-        </div>
-        <div class="field">
-          <label for="budget">예산 범위</label>
-          <select id="budget" name="budget">
-            <option value="undecided">미정</option>
-            <option value="under-1m">100만원 미만</option>
-            <option value="1m-3m">100~300만원</option>
-            <option value="3m-5m">300~500만원</option>
-            <option value="over-5m">500만원 이상</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="timeline">희망 일정</label>
-          <input id="timeline" name="timeline" type="text" placeholder="예: 4월 초 시작" />
-        </div>
-        <button class="primary" type="submit">문의 보내기</button>
-        <p class="hint">보내기 클릭 시 Formspree로 전송됩니다.</p>
-      </form>
-    </section>
-  </main>
+    </div>
 
-  <script src="/main.js"></script>
+    <script>
+        // 오디오 시스템
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.04);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.04);
+            } else if (type === 'end') {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.5);
+            }
+        }
+
+        // 진동
+        function vibratePhone() {
+            if (navigator.vibrate) navigator.vibrate(8);
+        }
+
+        // 파티클
+        function createParticle(x, y) {
+            const colors = ['#00f3ff', '#ff00ff', '#ffffff'];
+            const rect = clickPad.getBoundingClientRect();
+            const posX = x || rect.left + rect.width / 2;
+            const posY = y || rect.top + rect.height / 2;
+
+            for (let i = 0; i < 4; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                document.body.appendChild(particle);
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                const tx = (Math.random() - 0.5) * 150;
+                const ty = (Math.random() - 0.5) * 150;
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                setTimeout(() => particle.remove(), 500);
+            }
+        }
+
+        // 로직 변수 (Game -> Test)
+        let score = 0;
+        let selectedTime = 5; 
+        let timeLeft = 5.00;
+        let isRunning = false;
+        let timerInterval;
+        
+        const clickPad = document.getElementById('clickPad');
+        const scoreEl = document.getElementById('score');
+        const timerEl = document.getElementById('timer');
+        const msgEl = document.getElementById('msg');
+        const modal = document.getElementById('modal');
+        const timeBtns = document.querySelectorAll('.time-btn');
+        const idleEmojis = document.getElementById('idleEmojis');
+
+        // 대기 이모지 생성
+        const emojiSet = ['✨','💫','🌟','⚡','🫧','🍀','🎯','🧊'];
+        function buildIdleEmojis() {
+            idleEmojis.innerHTML = '';
+            const count = 10;
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('span');
+                el.className = 'idle-emoji';
+                el.textContent = emojiSet[i % emojiSet.length];
+                const left = Math.random() * 80 + 10;
+                const top = Math.random() * 60 + 15;
+                const dx = Math.random() * 24 + 8;
+                const dy = -(Math.random() * 26 + 8);
+                const rot = Math.random() * 14 + 4;
+                const dur = Math.random() * 5 + 4;
+                el.style.left = `${left}%`;
+                el.style.top = `${top}%`;
+                el.style.setProperty('--dx', `${dx}px`);
+                el.style.setProperty('--dy', `${dy}px`);
+                el.style.setProperty('--rot', `${rot}deg`);
+                el.style.setProperty('--dur', `${dur}s`);
+                idleEmojis.appendChild(el);
+            }
+        }
+        buildIdleEmojis();
+
+        // 시간 설정
+        function setTimeMode(seconds) {
+            if (isRunning) return;
+            selectedTime = seconds;
+            timeLeft = seconds;
+            
+            timeBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            resetTest();
+        }
+
+        clickPad.addEventListener('pointerdown', (e) => {
+            e.preventDefault(); 
+            playSound('click');
+            vibratePhone();
+            createParticle(e.clientX, e.clientY);
+
+            if (!isRunning && timeLeft > 0) startTest();
+
+            if (timeLeft > 0) {
+                score++;
+                scoreEl.innerText = score;
+                if (score % 5 === 0) {
+                    clickPad.classList.remove('shake');
+                    void clickPad.offsetWidth;
+                    clickPad.classList.add('shake');
+                }
+            }
+        });
+
+        function startTest() {
+            isRunning = true;
+            score = 0;
+            timeLeft = selectedTime;
+            msgEl.style.display = 'none';
+            idleEmojis.classList.add('idle-hidden');
+            scoreEl.innerText = score;
+
+            timerInterval = setInterval(() => {
+                timeLeft -= 0.01;
+                if(timeLeft < 0) timeLeft = 0;
+                timerEl.innerText = timeLeft.toFixed(2) + "s";
+
+                if (timeLeft <= 0) endTest();
+            }, 10);
+        }
+
+        function endTest() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = 0;
+            timerEl.innerText = "0.00s";
+            playSound('end');
+
+            const cps = (score / selectedTime).toFixed(2);
+            
+            // 랭크 시스템 
+            let rank = "TURTLE";
+            let badge = "🐢";
+            let color = "#aaa";
+
+            if (cps >= 5) { rank = "HUMAN"; badge = "🙂"; color="#fff"; }
+            if (cps >= 7) { rank = "MASTER"; badge = "⚡"; color="#00f3ff"; } // 
+            if (cps >= 9) { rank = "PRO"; badge = "🏆"; color="#ff00ff"; }
+            if (cps >= 11) { rank = "HACKER"; badge = "👾"; color="#00ff00"; }
+            if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
+
+            document.getElementById('finalCps').innerText = cps;
+            const rankText = document.getElementById('rankText');
+            rankText.innerText = rank;
+            rankText.style.color = color;
+            rankText.style.textShadow = `0 0 20px ${color}`;
+            document.getElementById('rankBadge').innerText = badge;
+
+            setTimeout(() => {
+                modal.style.display = 'flex';
+            }, 500);
+        }
+
+        function resetTest() {
+            modal.style.display = 'none';
+            score = 0;
+            timeLeft = selectedTime;
+            timerEl.innerText = selectedTime.toFixed(2) + "s";
+            scoreEl.innerText = "0";
+            msgEl.style.display = 'block';
+            msgEl.innerText = "TAP TO START";
+            idleEmojis.classList.remove('idle-hidden');
+        }
+    </script>
 </body>
 </html>
