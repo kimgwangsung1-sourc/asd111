@@ -294,6 +294,24 @@
             transition: 0.2s;
         }
         .btn-restart:active { transform: scale(0.95); }
+
+        /* 모바일 가독성 개선 */
+        @media (max-width: 480px) {
+            h1 { font-size: 20px; margin: 12px 0 4px; }
+            .subtitle { font-size: 10px; margin-bottom: 10px; letter-spacing: 1px; }
+            .time-selector { gap: 8px; margin-bottom: 14px; }
+            .time-btn { padding: 7px 12px; font-size: 11px; }
+            .test-container { width: 92%; height: 260px; }
+            .score-text { font-size: 64px; }
+            .timer-text { font-size: 16px; }
+            .status-msg { font-size: 11px; bottom: 22px; }
+            .result-score { font-size: 56px; }
+            .result-clicks { font-size: 30px; }
+            .result-time { font-size: 18px; }
+            .btn-restart { padding: 14px 48px; font-size: 16px; }
+            .hanger-big { top: -52px; right: -14px; height: 170px; }
+            .big-character { width: 52px; height: 52px; }
+        }
     </style>
 </head>
 <body oncontextmenu="return false">
