@@ -300,6 +300,48 @@
         }
         .btn-restart:active { transform: scale(0.95); }
 
+        .content-section {
+            width: 92%;
+            max-width: 720px;
+            margin: 26px auto 10px;
+            padding: 18px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.25);
+            line-height: 1.6;
+        }
+        .content-section h2 {
+            font-family: 'Black Ops One', cursive;
+            font-size: 18px;
+            margin: 4px 0 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0,243,255,0.3);
+        }
+        .content-section p {
+            color: #cfcfcf;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
+        }
+        .content-section li {
+            font-size: 13px;
+            color: #d6d6d6;
+            padding-left: 14px;
+            position: relative;
+            margin: 6px 0;
+        }
+        .content-section li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
         #disqus_thread {
             width: 62%;
             max-width: 420px;
@@ -322,6 +364,7 @@
             .btn-restart { padding: 14px 48px; font-size: 16px; }
             .hanger-big { top: -52px; right: -14px; height: 170px; }
             .big-character { width: 52px; height: 52px; }
+            .content-section { width: 94%; padding: 16px 16px; }
             #disqus_thread { width: 72%; margin-bottom: 32px; }
         }
     </style>
@@ -344,6 +387,31 @@
             <div class="timer-text" id="timer">5.00s</div>
         </div>
     </div>
+
+    <section class="content-section" aria-label="About CPS and measurement">
+        <h2>WHAT THIS TEST MEASURES</h2>
+        <p>
+            이 도구는 선택한 시간 동안의 총 클릭 수를 기반으로 CPS(초당 클릭 수)를 계산합니다.
+            기록은 “측정 시간”과 “총 클릭 수”를 함께 보여 사용자에게 가장 직관적인 결과를 제공합니다.
+        </p>
+        <ul>
+            <li>측정 시간: 사용자가 선택한 시간(1s, 5s, 10s, 60s)을 그대로 기준으로 삼습니다.</li>
+            <li>총 클릭 수: 측정 시간 동안 실제로 기록된 클릭 횟수입니다.</li>
+            <li>CPS: 총 클릭 수 ÷ 측정 시간으로 계산됩니다.</li>
+        </ul>
+        <p>
+            정확도를 높이려면 시작 후 동일한 자세로 일정한 속도를 유지하고, 테스트 중 화면 터치가 끊기지 않도록 해주세요.
+        </p>
+    </section>
+
+    <section class="content-section" aria-label="FAQ">
+        <h2>FAQ</h2>
+        <ul>
+            <li>결과가 매번 다른 이유는? 손의 피로도, 디바이스 입력 지연, 자세 변화가 결과에 영향을 줍니다.</li>
+            <li>모바일과 PC 차이는? 입력 방식과 화면 반응 속도 차이로 CPS가 달라질 수 있습니다.</li>
+            <li>정확한 기록을 위한 팁은? 테스트 시작 전 손을 풀고, 동일한 환경에서 반복 측정하세요.</li>
+        </ul>
+    </section>
 
     <div class="idle-msg" id="idleMsg">TAP THE PAD TO START</div>
 
