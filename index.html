@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             overflow: hidden;
             user-select: none;
@@ -83,13 +84,14 @@
             box-shadow: 0 0 15px var(--neon-blue);
         }
 
-        /* 메인 테스트 영역 (Game 단어 삭제됨) */
+        /* 메인 테스트 영역 */
         .test-container {
             position: relative;
             width: 90%;
             max-width: 400px;
             height: 300px;
             perspective: 1000px;
+            z-index: 5;
         }
 
         .click-pad {
@@ -107,69 +109,6 @@
             transition: transform 0.05s, box-shadow 0.1s;
             position: relative;
             overflow: hidden;
-        }
-
-        /* 클릭 패드 캐릭터 연출 */
-        .pad-characters {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-        .hanger-big {
-            position: absolute;
-            top: -46px;
-            right: -18px;
-            width: 54px;
-            height: 190px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform-origin: top center;
-            animation: swingWide 4.6s ease-in-out infinite;
-        }
-        .hanger-big::before {
-            content: "";
-            width: 3px;
-            height: 120px;
-            background: rgba(255,255,255,0.22);
-            box-shadow: 0 0 10px rgba(0,243,255,0.2);
-        }
-        .big-character {
-            width: 58px;
-            height: 58px;
-            margin-top: 10px;
-            border-radius: 16px 16px 24px 24px;
-            background: linear-gradient(145deg, #0a1b22, #0b0f17);
-            border: 2px solid rgba(0,243,255,0.35);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.45), 0 0 20px rgba(0,243,255,0.25);
-            position: relative;
-        }
-        .big-character::before {
-            content: "";
-            position: absolute;
-            top: 18px;
-            left: 14px;
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 18px 0 0 #fff;
-        }
-        .big-character::after {
-            content: "";
-            position: absolute;
-            top: 32px;
-            left: 16px;
-            width: 24px;
-            height: 8px;
-            border-radius: 0 0 10px 10px;
-            border: 2px solid rgba(255,0,255,0.5);
-            border-top: none;
-        }
-        @keyframes swingWide {
-            0% { transform: translateX(0) rotate(-8deg); }
-            50% { transform: translateX(0) rotate(10deg); }
-            100% { transform: translateX(0) rotate(-8deg); }
         }
 
         .click-pad:active {
@@ -212,6 +151,67 @@
             animation: blink 1.5s infinite;
         }
         @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* Neon Slime Character */
+        .slime-container {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            width: 60px;
+            height: 50px;
+            z-index: 1;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+        }
+        .slime {
+            width: 100%;
+            height: 100%;
+            background: var(--neon-green);
+            border-radius: 50% 50% 20% 20%;
+            position: relative;
+            box-shadow: 0 0 20px var(--neon-green);
+            animation: idleSlime 3s ease-in-out infinite;
+        }
+        .slime-eyes {
+            position: absolute;
+            top: 15px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .eye {
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            animation: blinkSlime 4s infinite;
+        }
+        .slime-mouth {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 4px;
+            border-bottom: 2px solid #000;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        @keyframes idleSlime {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.85) scaleX(1.05); }
+        }
+        @keyframes blinkSlime {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        .jump { animation: jumpSlime 0.3s ease-out !important; }
+        @keyframes jumpSlime {
+            0% { transform: translateY(0) scaleY(0.7); }
+            50% { transform: translateY(-30px) scaleY(1.1); }
+            100% { transform: translateY(0) scaleY(1); }
+        }
 
         .particle {
             position: absolute;
@@ -288,14 +288,19 @@
 
     <div class="test-container">
         <div class="click-pad" id="clickPad">
-            <div class="pad-characters">
-                <div class="hanger-big">
-                    <div class="big-character" aria-hidden="true"></div>
-                </div>
-            </div>
             <div class="score-text" id="score">0</div>
             <div class="timer-text" id="timer">5.00s</div>
             <div class="status-msg" id="msg">TAP TO START</div>
+        </div>
+    </div>
+
+    <div class="slime-container" id="slime">
+        <div class="slime">
+            <div class="slime-eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+            </div>
+            <div class="slime-mouth"></div>
         </div>
     </div>
 
@@ -369,7 +374,7 @@
             }
         }
 
-        // 로직 변수 (Game -> Test)
+        // 로직 변수
         let score = 0;
         let selectedTime = 5; 
         let timeLeft = 5.00;
@@ -382,6 +387,7 @@
         const msgEl = document.getElementById('msg');
         const modal = document.getElementById('modal');
         const timeBtns = document.querySelectorAll('.time-btn');
+        const slime = document.getElementById('slime');
 
         // 시간 설정
         function setTimeMode(seconds) {
@@ -400,6 +406,11 @@
             playSound('click');
             vibratePhone();
             createParticle(e.clientX, e.clientY);
+
+            // Slime jump effect
+            slime.classList.remove('jump');
+            void slime.offsetWidth;
+            slime.classList.add('jump');
 
             if (!isRunning && timeLeft > 0) startTest();
 
@@ -445,7 +456,7 @@
             let color = "#aaa";
 
             if (cps >= 5) { rank = "HUMAN"; badge = "🙂"; color="#fff"; }
-            if (cps >= 7) { rank = "MASTER"; badge = "⚡"; color="#00f3ff"; } // 
+            if (cps >= 7) { rank = "MASTER"; badge = "⚡"; color="#00f3ff"; } 
             if (cps >= 9) { rank = "PRO"; badge = "🏆"; color="#ff00ff"; }
             if (cps >= 11) { rank = "HACKER"; badge = "👾"; color="#00ff00"; }
             if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
