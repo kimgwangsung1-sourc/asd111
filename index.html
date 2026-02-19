@@ -543,7 +543,7 @@
                     <div class="acc-panel-inner">
                         <p>
                             이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 저장되는 개인 식별 정보는 없습니다.
-                            댓글 기능은 Disqus를 통해 제공되며, Disqus는 자체적으로 개인정보처리방침과 쿠키 정책을 가집니다.
+                            댓글 기능은 Disqus를 통해 제공되며, Disqus의 개인정보처리방침이 적용됩니다.
                         </p>
                         <p>
                             광고는 Google AdSense를 통해 제공될 수 있으며, 광고 제공을 위해 쿠키 또는 유사 기술이 사용될 수 있습니다.
@@ -561,7 +561,7 @@
                     <div class="acc-panel-inner">
                         <p>
                             이 사이트는 댓글 및 광고 기능을 위해 쿠키를 사용할 수 있습니다.
-                            쿠키는 사용 환경을 개선하고 서비스 제공을 위해 사용됩니다.
+                            쿠키는 서비스 제공과 사용 환경 개선에 사용됩니다.
                         </p>
                         <p>
                             브라우저 설정에서 쿠키 차단/삭제가 가능하며, 일부 기능이 제한될 수 있습니다.
@@ -713,6 +713,7 @@
         let timeLeft = 5.00;
         let isRunning = false;
         let timerInterval;
+        let startTimeMs = 0;
         
         const clickPad = document.getElementById('clickPad');
         const scoreEl = document.getElementById('score');
@@ -759,11 +760,16 @@
 
             if (!isRunning && timeLeft > 0) startTest();
 
-            if (timeLeft > 0) {
+            if (isRunning) {
+                const elapsed = (performance.now() - startTimeMs) / 1000;
+                if (elapsed >= selectedTime) {
+                    endTest();
+                    return;
+                }
                 score++;
                 scoreEl.innerText = score;
-                
-                const currentCps = (score / (selectedTime - timeLeft || 0.1)).toFixed(1);
+
+                const currentCps = (score / Math.max(0.1, elapsed)).toFixed(1);
                 updateRankEmoji(currentCps);
 
                 if (score % 5 === 0) {
@@ -780,10 +786,11 @@
             timeLeft = selectedTime;
             idleMsg.style.visibility = 'hidden';
             scoreEl.innerText = score;
+            startTimeMs = performance.now();
 
             timerInterval = setInterval(() => {
-                timeLeft -= 0.01;
-                if(timeLeft < 0) timeLeft = 0;
+                const elapsed = (performance.now() - startTimeMs) / 1000;
+                timeLeft = Math.max(0, selectedTime - elapsed);
                 timerEl.innerText = timeLeft.toFixed(2) + "s";
 
                 if (timeLeft <= 0) endTest();
@@ -791,6 +798,7 @@
         }
 
         function endTest() {
+            if (!isRunning) return;
             clearInterval(timerInterval);
             isRunning = false;
             timeLeft = 0;
