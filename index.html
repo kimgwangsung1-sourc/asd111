@@ -303,39 +303,73 @@
         .content-section {
             width: 92%;
             max-width: 720px;
-            margin: 26px auto 10px;
-            padding: 18px 20px;
+            margin: 22px auto 10px;
+            line-height: 1.6;
+        }
+        .accordion {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .acc-item {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
+            overflow: hidden;
             box-shadow: 0 0 20px rgba(0,0,0,0.25);
-            line-height: 1.6;
         }
-        .content-section h2 {
+        .acc-btn {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            color: #fff;
+            text-align: left;
+            padding: 14px 16px;
             font-family: 'Black Ops One', cursive;
-            font-size: 18px;
-            margin: 4px 0 10px;
+            font-size: 16px;
             letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0,243,255,0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .content-section p {
+        .acc-btn span {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            color: var(--neon-blue);
+            transition: transform 0.2s ease;
+        }
+        .acc-btn[aria-expanded="true"] span {
+            transform: rotate(45deg);
+        }
+        .acc-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+            padding: 0 16px;
+        }
+        .acc-panel-inner {
+            padding: 0 0 14px;
+        }
+        .acc-panel p {
             color: #cfcfcf;
             font-size: 13px;
             margin: 8px 0;
         }
-        .content-section ul {
+        .acc-panel ul {
             list-style: none;
             padding: 0;
             margin: 8px 0 0;
         }
-        .content-section li {
+        .acc-panel li {
             font-size: 13px;
             color: #d6d6d6;
             padding-left: 14px;
             position: relative;
             margin: 6px 0;
         }
-        .content-section li::before {
+        .acc-panel li::before {
             content: "•";
             position: absolute;
             left: 0;
@@ -364,7 +398,9 @@
             .btn-restart { padding: 14px 48px; font-size: 16px; }
             .hanger-big { top: -52px; right: -14px; height: 170px; }
             .big-character { width: 52px; height: 52px; }
-            .content-section { width: 94%; padding: 16px 16px; }
+            .content-section { width: 94%; }
+            .acc-btn { font-size: 15px; padding: 12px 14px; }
+            .acc-panel { padding: 0 14px; }
             #disqus_thread { width: 72%; margin-bottom: 32px; }
         }
     </style>
@@ -386,34 +422,87 @@
             <div class="score-text" id="score">0</div>
             <div class="timer-text" id="timer">5.00s</div>
         </div>
+        <div class="idle-msg" id="idleMsg">TAP THE PAD TO START</div>
     </div>
 
-    <section class="content-section" aria-label="About CPS and measurement">
-        <h2>WHAT THIS TEST MEASURES</h2>
-        <p>
-            이 도구는 선택한 시간 동안의 총 클릭 수를 기반으로 CPS(초당 클릭 수)를 계산합니다.
-            기록은 “측정 시간”과 “총 클릭 수”를 함께 보여 사용자에게 가장 직관적인 결과를 제공합니다.
-        </p>
-        <ul>
-            <li>측정 시간: 사용자가 선택한 시간(1s, 5s, 10s, 60s)을 그대로 기준으로 삼습니다.</li>
-            <li>총 클릭 수: 측정 시간 동안 실제로 기록된 클릭 횟수입니다.</li>
-            <li>CPS: 총 클릭 수 ÷ 측정 시간으로 계산됩니다.</li>
-        </ul>
-        <p>
-            정확도를 높이려면 시작 후 동일한 자세로 일정한 속도를 유지하고, 테스트 중 화면 터치가 끊기지 않도록 해주세요.
-        </p>
-    </section>
+    <section class="content-section" aria-label="Info and policies">
+        <div class="accordion">
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-1" id="acc-1-btn">
+                    WHAT THIS TEST MEASURES
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-1" role="region" aria-labelledby="acc-1-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            이 도구는 선택한 시간 동안의 총 클릭 수를 기반으로 CPS(초당 클릭 수)를 계산합니다.
+                            기록은 “측정 시간”과 “총 클릭 수”를 함께 보여 사용자에게 가장 직관적인 결과를 제공합니다.
+                        </p>
+                        <ul>
+                            <li>측정 시간: 사용자가 선택한 시간(1s, 5s, 10s, 60s)을 그대로 기준으로 삼습니다.</li>
+                            <li>총 클릭 수: 측정 시간 동안 실제로 기록된 클릭 횟수입니다.</li>
+                            <li>CPS: 총 클릭 수 ÷ 측정 시간으로 계산됩니다.</li>
+                        </ul>
+                        <p>
+                            정확도를 높이려면 시작 후 동일한 자세로 일정한 속도를 유지하고, 테스트 중 화면 터치가 끊기지 않도록 해주세요.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-    <section class="content-section" aria-label="FAQ">
-        <h2>FAQ</h2>
-        <ul>
-            <li>결과가 매번 다른 이유는? 손의 피로도, 디바이스 입력 지연, 자세 변화가 결과에 영향을 줍니다.</li>
-            <li>모바일과 PC 차이는? 입력 방식과 화면 반응 속도 차이로 CPS가 달라질 수 있습니다.</li>
-            <li>정확한 기록을 위한 팁은? 테스트 시작 전 손을 풀고, 동일한 환경에서 반복 측정하세요.</li>
-        </ul>
-    </section>
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-2" id="acc-2-btn">
+                    FAQ
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-2" role="region" aria-labelledby="acc-2-btn">
+                    <div class="acc-panel-inner">
+                        <ul>
+                            <li>결과가 매번 다른 이유는? 손의 피로도, 디바이스 입력 지연, 자세 변화가 결과에 영향을 줍니다.</li>
+                            <li>모바일과 PC 차이는? 입력 방식과 화면 반응 속도 차이로 CPS가 달라질 수 있습니다.</li>
+                            <li>정확한 기록을 위한 팁은? 테스트 시작 전 손을 풀고, 동일한 환경에서 반복 측정하세요.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <div class="idle-msg" id="idleMsg">TAP THE PAD TO START</div>
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-3" id="acc-3-btn">
+                    PRIVACY POLICY
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-3" role="region" aria-labelledby="acc-3-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 저장되는 개인 식별 정보는 없습니다.
+                            댓글 기능은 Disqus를 통해 제공되며, Disqus는 자체적으로 개인정보처리방침과 쿠키 정책을 가집니다.
+                        </p>
+                        <p>
+                            광고는 Google AdSense를 통해 제공될 수 있으며, 광고 제공을 위해 쿠키 또는 유사 기술이 사용될 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-4" id="acc-4-btn">
+                    COOKIE NOTICE
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-4" role="region" aria-labelledby="acc-4-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            이 사이트는 댓글 및 광고 기능을 위해 쿠키를 사용할 수 있습니다.
+                            쿠키는 사용 환경을 개선하고 서비스 제공을 위해 사용됩니다.
+                        </p>
+                        <p>
+                            브라우저 설정에서 쿠키 차단/삭제가 가능하며, 일부 기능이 제한될 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="slime-container" id="slime">
         <div class="slime">
@@ -536,6 +625,7 @@
         const modal = document.getElementById('modal');
         const timeBtns = document.querySelectorAll('.time-btn');
         const slime = document.getElementById('slime');
+        const accButtons = document.querySelectorAll('.acc-btn');
 
         // 시간 설정
         function setTimeMode(seconds) {
@@ -576,6 +666,16 @@
                     clickPad.classList.add('shake');
                 }
             }
+        });
+
+        accButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const panelId = btn.getAttribute('aria-controls');
+                const panel = document.getElementById(panelId);
+                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                panel.style.maxHeight = !isOpen ? panel.scrollHeight + "px" : "0px";
+            });
         });
 
         function startTest() {
