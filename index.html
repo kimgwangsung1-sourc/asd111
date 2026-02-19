@@ -388,6 +388,7 @@
         let timeLeft = 5.00;
         let isRunning = false;
         let timerInterval;
+        let startTimeMs = 0;
         
         const clickPad = document.getElementById('clickPad');
         const scoreEl = document.getElementById('score');
@@ -439,10 +440,11 @@
             timeLeft = selectedTime;
             idleMsg.style.visibility = 'hidden';
             scoreEl.innerText = score;
+            startTimeMs = performance.now();
 
             timerInterval = setInterval(() => {
-                timeLeft -= 0.01;
-                if(timeLeft < 0) timeLeft = 0;
+                const elapsed = (performance.now() - startTimeMs) / 1000;
+                timeLeft = Math.max(0, selectedTime - elapsed);
                 timerEl.innerText = timeLeft.toFixed(2) + "s";
 
                 if (timeLeft <= 0) endTest();
@@ -456,7 +458,8 @@
             timerEl.innerText = "0.00s";
             playSound('end');
 
-            const cps = (score / selectedTime).toFixed(2);
+            const elapsedSeconds = Math.max(0.001, (performance.now() - startTimeMs) / 1000);
+            const cps = (score / elapsedSeconds).toFixed(2);
             
             // 랭크 시스템 
             let rank = "TURTLE";
