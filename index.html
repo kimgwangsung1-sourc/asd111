@@ -356,6 +356,52 @@
         body.light .idle-msg { color: #0c5aa3; }
         @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.98); } }
 
+        .start-controls {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-height: 44px;
+        }
+        .btn-start {
+            min-width: 132px;
+            padding: 11px 18px;
+            border: 2px solid var(--neon-green);
+            border-radius: 999px;
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--text);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+            box-shadow: 0 0 18px rgba(0, 255, 136, 0.25);
+        }
+        .btn-start:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 24px rgba(0, 255, 136, 0.35);
+        }
+        .btn-start:active { transform: scale(0.98); }
+        .btn-start:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .start-countdown {
+            width: 36px;
+            text-align: center;
+            font-family: 'Black Ops One', cursive;
+            font-size: 30px;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.55);
+            visibility: hidden;
+        }
+        body.light .start-countdown { color: #9e2cbc; }
+
         .content-section {
             width: 92%;
             max-width: 720px;
@@ -441,15 +487,21 @@
             .topbar { margin-top: 12px; }
             .info-panels { max-width: 720px; }
         }
-        @media (max-width: 720px) {
+        @media (max-width: 768px) {
             .info-tabs {
+                display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
+                overflow-y: hidden;
+                gap: 8px;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
             .info-tabs::-webkit-scrollbar { display: none; }
-            .info-tab { white-space: nowrap; }
+            .info-tab {
+                white-space: nowrap;
+                flex: 0 0 auto;
+            }
         }
         @media (max-height: 720px) {
             body { padding-bottom: 24px; }
@@ -457,6 +509,7 @@
             .subtitle { margin-bottom: 18px; }
             .test-container { height: clamp(230px, 42vh, 380px); }
             .idle-msg { margin-top: 18px; }
+            .start-controls { margin-top: 12px; }
         }
 
         #disqus_thread {
@@ -561,19 +614,42 @@
         .rank-badge { font-size: 80px; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
         
         .result-summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin: 20px 0;
             background: rgba(255,255,255,0.05);
-            padding: 15px;
+            padding: 18px 16px;
             border-radius: 20px;
             border: 1px solid var(--border);
         }
 
-        .summary-item { display: flex; flex-direction: column; gap: 5px; }
-        .summary-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .summary-value { color: var(--text); font-size: 20px; font-weight: 800; font-family: 'Roboto Mono', monospace; }
+        .summary-item {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 6px;
+        }
+        .summary-label {
+            color: var(--muted);
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            text-align: left;
+        }
+        .summary-value {
+            color: var(--text);
+            font-size: 34px;
+            font-weight: 900;
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1;
+        }
+        .summary-item.cps-item .summary-value {
+            font-size: 52px;
+            color: var(--neon-green);
+            text-shadow: 0 0 24px var(--neon-green);
+        }
         body:not(.light) .result-summary {
             background: rgba(255,255,255,0.09);
             border: 1px solid rgba(255,255,255,0.15);
@@ -589,18 +665,55 @@
         body.light .summary-label { color: #4a4137; }
         body.light .summary-value { color: #111; text-shadow: none; }
 
-        .result-score-container { margin-bottom: 25px; }
-        .result-score {
-            font-size: 80px;
-            font-weight: 900;
-            color: var(--neon-green);
-            text-shadow: 0 0 40px var(--neon-green);
-            font-family: 'Black Ops One', cursive;
-            line-height: 1;
+        .result-score-container {
+            margin: 12px 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
         }
-
-        .cps-label { color: var(--muted); font-size: 14px; margin-bottom: 5px; letter-spacing: 4px; font-weight: 800; }
-        .rank-text { color: #fff; font-size: 24px; font-weight: 800; margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;}
+        .result-score-container .hype-line {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            opacity: 0.95;
+        }
+        .rank-text {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 800;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .btn-copy {
+            width: 100%;
+            border: 1px solid var(--neon-blue);
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--text);
+            font-size: 17px;
+            font-weight: 800;
+            padding: 13px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .btn-copy:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 243, 255, 0.2);
+        }
+        .btn-copy:active { transform: scale(0.99); }
+        .disqus-cta {
+            width: 92%;
+            max-width: 720px;
+            margin: 26px auto 10px;
+            text-align: center;
+            color: var(--text);
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
 
         .btn-restart {
             background: linear-gradient(135deg, var(--neon-pink), #ff5e00);
@@ -859,9 +972,17 @@
         </div>
     </div>
 
+    <div class="start-controls">
+        <button class="btn-start" id="startBtn" type="button">
+            <span data-lang="ko">START</span>
+            <span data-lang="en">START</span>
+        </button>
+        <div class="start-countdown" id="startCountdown" aria-live="polite"></div>
+    </div>
+
     <div class="idle-msg" id="idleMsg">
-        <span data-lang="ko">TAP THE PAD TO START</span>
-        <span data-lang="en">TAP THE PAD TO START</span>
+        <span data-lang="ko">START 누른 뒤 패드를 탭하세요</span>
+        <span data-lang="en">PRESS START, THEN TAP THE PAD</span>
     </div>
 
     <section class="content-section" aria-label="About the tool">
@@ -899,6 +1020,11 @@
 
     
 
+    <div class="disqus-cta">
+        <span data-lang="ko">💬 댓글에 기록을 남겨보세요</span>
+        <span data-lang="en">💬 Share your record in the comments</span>
+    </div>
+
     <div id="disqus_thread"></div>
 
     <div class="slime-container" id="slime">
@@ -917,20 +1043,44 @@
             
             <div class="result-summary">
                 <div class="summary-item">
-                    <span class="summary-label">Time</span>
+                    <span class="summary-label">
+                        <span data-lang="ko" class="lang-inline">⏱ 측정 시간</span>
+                        <span data-lang="en" class="lang-inline">⏱ Time</span>
+                    </span>
                     <span class="summary-value" id="finalTime">0s</span>
                 </div>
                 <div class="summary-item">
-                    <span class="summary-label">Clicks</span>
-                    <span class="summary-value" id="finalClicks">0 Hits</span>
+                    <span class="summary-label">
+                        <span data-lang="ko" class="lang-inline">🖱 총 클릭 수</span>
+                        <span data-lang="en" class="lang-inline">🖱 Total Clicks</span>
+                    </span>
+                    <span class="summary-value" id="finalClicks">0회</span>
+                </div>
+                <div class="summary-item cps-item">
+                    <span class="summary-label">
+                        <span data-lang="ko" class="lang-inline">⚡ CPS</span>
+                        <span data-lang="en" class="lang-inline">⚡ CPS</span>
+                    </span>
+                    <span class="summary-value" id="finalCps">0.0</span>
                 </div>
             </div>
 
             <div class="result-score-container">
-                <div class="cps-label">CPS</div>
-                <div class="result-score" id="finalCps">0.0</div>
+                <div class="hype-line">
+                    <span data-lang="ko" class="lang-inline">🔥 평균은 6~8 CPS 입니다</span>
+                    <span data-lang="en" class="lang-inline">🔥 Average is around 6-8 CPS</span>
+                </div>
+                <div class="hype-line">
+                    <span data-lang="ko" class="lang-inline">🏆 15 CPS 이상은 상위권입니다</span>
+                    <span data-lang="en" class="lang-inline">🏆 15+ CPS is top-tier</span>
+                </div>
                 <div class="rank-text" id="rankText">NOOB</div>
             </div>
+
+            <button class="btn-copy" type="button" onclick="copyResultLink()">
+                <span data-lang="ko" class="lang-inline">📤 결과 링크 복사</span>
+                <span data-lang="en" class="lang-inline">📤 Copy Result Link</span>
+            </button>
             
             <button class="btn-restart" onclick="resetTest()">RETRY</button>
         </div>
@@ -1085,11 +1235,15 @@
         let isRunning = false;
         let timerInterval;
         let startTimeMs = 0;
+        let countdownInterval;
+        let isCountingDown = false;
         
         const clickPad = document.getElementById('clickPad');
         const scoreEl = document.getElementById('score');
         const timerEl = document.getElementById('timer');
         const idleMsg = document.getElementById('idleMsg');
+        const startBtn = document.getElementById('startBtn');
+        const startCountdown = document.getElementById('startCountdown');
         const modal = document.getElementById('modal');
         const timeBtns = document.querySelectorAll('.time-btn');
         const slime = document.getElementById('slime');
@@ -1121,6 +1275,7 @@
         clickPad.addEventListener('pointerdown', (e) => {
             if (!e.isPrimary) return;
             if (e.pointerType === 'mouse' && e.button !== 0) return;
+            if (!isRunning) return;
             e.preventDefault(); 
             playSound('click');
             vibratePhone();
@@ -1130,8 +1285,6 @@
             slime.classList.remove('jump');
             void slime.offsetWidth;
             slime.classList.add('jump');
-
-            if (!isRunning && timeLeft > 0) startTest();
 
             if (isRunning) {
                 const elapsed = (performance.now() - startTimeMs) / 1000;
@@ -1153,11 +1306,43 @@
             }
         });
 
+        startBtn.addEventListener('click', () => {
+            if (isRunning || isCountingDown || timeLeft <= 0) return;
+            clearInterval(countdownInterval);
+            isCountingDown = true;
+            startBtn.disabled = true;
+            idleMsg.style.visibility = 'hidden';
+            score = 0;
+            scoreEl.innerText = "0";
+            timerEl.innerText = selectedTime.toFixed(2) + "s";
+
+            let count = 3;
+            startCountdown.innerText = String(count);
+            startCountdown.style.visibility = 'visible';
+
+            countdownInterval = setInterval(() => {
+                count -= 1;
+                if (count > 0) {
+                    startCountdown.innerText = String(count);
+                    return;
+                }
+                clearInterval(countdownInterval);
+                startCountdown.innerText = "GO";
+                setTimeout(() => {
+                    startCountdown.style.visibility = 'hidden';
+                    startCountdown.innerText = "";
+                    isCountingDown = false;
+                    startTest();
+                }, 220);
+            }, 1000);
+        });
+
         function startTest() {
             isRunning = true;
             score = 0;
             timeLeft = selectedTime;
             idleMsg.style.visibility = 'hidden';
+            startBtn.disabled = true;
             scoreEl.innerText = score;
             startTimeMs = performance.now();
 
@@ -1170,12 +1355,28 @@
             }, 10);
         }
 
+        async function copyResultLink() {
+            const lang = document.documentElement.getAttribute('lang') || 'ko';
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+            } catch (err) {
+                const temp = document.createElement('textarea');
+                temp.value = window.location.href;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                temp.remove();
+            }
+            alert(lang === 'en' ? "Link copied" : "링크가 복사되었습니다");
+        }
+
         function endTest() {
             if (!isRunning) return;
             clearInterval(timerInterval);
             isRunning = false;
             timeLeft = 0;
             timerEl.innerText = "0.00s";
+            startBtn.disabled = false;
             playSound('end');
 
             const cps = (score / selectedTime).toFixed(2);
@@ -1192,9 +1393,10 @@
             if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
 
             // 상세 결과 업데이트
-            document.getElementById('finalTime').innerText = selectedTime + "s";
-            document.getElementById('finalClicks').innerText = score + " Hits";
-            document.getElementById('finalCps').innerText = cps;
+            const lang = document.documentElement.getAttribute('lang') || 'ko';
+            document.getElementById('finalTime').innerText = lang === 'en' ? `${selectedTime}s` : `${selectedTime}초`;
+            document.getElementById('finalClicks').innerText = lang === 'en' ? `${score} clicks` : `${score}회`;
+            document.getElementById('finalCps').innerText = Number(cps).toFixed(1);
             
             const rankText = document.getElementById('rankText');
             rankText.innerText = rank;
@@ -1209,6 +1411,13 @@
         }
 
         function resetTest() {
+            clearInterval(timerInterval);
+            clearInterval(countdownInterval);
+            isRunning = false;
+            isCountingDown = false;
+            startCountdown.style.visibility = 'hidden';
+            startCountdown.innerText = "";
+            startBtn.disabled = false;
             modal.style.display = 'none';
             document.body.classList.remove('modal-open');
             idleMsg.style.visibility = 'visible';
