@@ -66,6 +66,7 @@
         body.lang-ko [data-lang="ko"] { display: block; }
         body.lang-en [data-lang="en"] { display: block; }
         [data-lang] { display: none; }
+        .lang-option { display: block !important; }
         .lang-inline { display: inline; }
 
         .topbar {
@@ -608,8 +609,8 @@
                     <span>LANG</span>
                 </button>
                 <div class="lang-menu" id="langMenu">
-                    <button type="button" data-lang="ko">한국어</button>
-                    <button type="button" data-lang="en">English</button>
+                    <button type="button" class="lang-option" data-lang="ko">한국어</button>
+                    <button type="button" class="lang-option" data-lang="en">English</button>
                 </div>
             </div>
         </div>
