@@ -256,7 +256,7 @@
         .test-container {
             position: relative;
             width: min(94%, 520px);
-            height: clamp(360px, 68vh, 560px);
+            height: clamp(320px, 60vh, 520px);
             perspective: 1000px;
             z-index: 5;
             display: flex;
@@ -423,6 +423,13 @@
         @media (max-width: 900px) {
             .topbar { margin-top: 12px; }
             .info-panels { max-width: 720px; }
+        }
+        @media (max-height: 720px) {
+            body { padding-bottom: 24px; }
+            .rank-emoji { margin-top: 24px; font-size: 44px; }
+            .subtitle { margin-bottom: 18px; }
+            .test-container { height: clamp(260px, 46vh, 420px); }
+            .idle-msg { margin-top: 18px; }
         }
 
         #disqus_thread {
