@@ -31,11 +31,11 @@
             --bg: #f7f4ef;
             --surface: #ffffff;
             --text: #1d1a16;
-            --muted: #6a6259;
+            --muted: #4f463d;
             --neon-blue: #0088ff;
             --neon-pink: #d000ff;
             --neon-green: #00a86b;
-            --panel-bg: rgba(0, 0, 0, 0.03);
+            --panel-bg: rgba(0, 0, 0, 0.05);
             --border: rgba(0, 0, 0, 0.1);
             --shadow: rgba(0, 0, 0, 0.05);
         }
@@ -59,7 +59,7 @@
             overflow-y: auto;
             user-select: none;
             -webkit-user-select: none;
-            touch-action: manipulation;
+            touch-action: pan-y;
             transition: background 0.4s ease, color 0.4s ease;
             padding-bottom: 60px;
         }
@@ -190,6 +190,7 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(5px);
+            touch-action: manipulation;
         }
 
         .click-pad:active {
@@ -227,6 +228,10 @@
             padding: 4px 12px;
             border-radius: 8px;
         }
+        body.light .timer-text {
+            color: #3a0f47;
+            background: rgba(208, 0, 255, 0.14);
+        }
 
         /* 대기 화면 전용 텍스트 */
         .idle-msg {
@@ -240,6 +245,7 @@
             height: 20px;
             text-transform: uppercase;
         }
+        body.light .idle-msg { color: #0c5aa3; }
         @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.98); } }
 
         /* Accordion Style */
@@ -488,6 +494,13 @@
         }
         .btn-restart:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 0, 255, 0.5); }
         .btn-restart:active { transform: scale(0.95); }
+
+        /* 결과 모달이 열릴 때 광고 노출 차단 (알림/전환 화면 정책 대응) */
+        body.modal-open ins.adsbygoogle,
+        body.modal-open iframe[src*="googleads"],
+        body.modal-open iframe[id^="google_ads_iframe"] {
+            display: none !important;
+        }
     </style>
 </head>
 <body oncontextmenu="return false">
@@ -541,6 +554,66 @@
                         <p>
                             정확도를 높이려면 시작 후 동일한 자세로 일정한 속도를 유지하고, 테스트 중 화면 터치가 끊기지 않도록 해주세요.
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-5" id="acc-5-btn">
+                    HOW TO USE THIS TOOL
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-5" role="region" aria-labelledby="acc-5-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            이 도구는 “짧은 시간 동안 얼마나 안정적으로 탭/클릭할 수 있는지”를 확인하기 위한 반응 속도 테스트입니다.
+                            모바일에서는 연속 터치가 끊기지 않도록 화면을 한 손으로 고정하고, 엄지 또는 검지로 동일한 리듬을 유지해보세요.
+                        </p>
+                        <ul>
+                            <li>테스트 전: 손을 가볍게 풀고 같은 자세로 진행합니다.</li>
+                            <li>테스트 중: 패드 중앙을 일정한 강도로 반복 탭합니다.</li>
+                            <li>테스트 후: CPS, 총 클릭 수, 측정 시간을 함께 확인합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-6" id="acc-6-btn">
+                    ACCURACY & DEVICE NOTES
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-6" role="region" aria-labelledby="acc-6-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            CPS는 디바이스 입력 지연, 화면 주사율, 브라우저 처리 성능에 영향을 받습니다.
+                            동일한 손동작이라도 기기나 브라우저가 달라지면 결과가 달라질 수 있습니다.
+                        </p>
+                        <ul>
+                            <li>고주사율 디스플레이는 체감 반응성이 더 높을 수 있습니다.</li>
+                            <li>배터리 절전 모드에서는 입력 반응이 느려질 수 있습니다.</li>
+                            <li>브라우저 탭이 백그라운드로 내려가면 측정이 정확하지 않을 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-7" id="acc-7-btn">
+                    HEALTH & RESPONSIBLE USE
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-7" role="region" aria-labelledby="acc-7-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            과도한 반복 탭은 손목과 손가락에 부담을 줄 수 있습니다.
+                            불편함이 느껴질 경우 즉시 중단하고 충분히 휴식하세요.
+                        </p>
+                        <ul>
+                            <li>짧은 세션(5~10초) 위주로 진행하세요.</li>
+                            <li>통증이 느껴질 경우 테스트를 중단하세요.</li>
+                            <li>장시간 반복 테스트는 권장하지 않습니다.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -779,6 +852,8 @@
         }
 
         clickPad.addEventListener('pointerdown', (e) => {
+            if (!e.isPrimary) return;
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
             e.preventDefault(); 
             playSound('click');
             vibratePhone();
@@ -861,12 +936,14 @@
             document.getElementById('rankBadge').innerText = badge;
 
             setTimeout(() => {
+                document.body.classList.add('modal-open');
                 modal.style.display = 'flex';
             }, 500);
         }
 
         function resetTest() {
             modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
             idleMsg.style.visibility = 'visible';
             score = 0;
             timeLeft = selectedTime;
