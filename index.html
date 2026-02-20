@@ -83,7 +83,10 @@
         body.lang-en [data-lang="en"] { display: block; }
         [data-lang] { display: none; }
         .lang-option { display: block !important; }
-        .lang-inline { display: inline; }
+        body.lang-ko .lang-inline[data-lang="ko"],
+        body.lang-en .lang-inline[data-lang="en"] { display: inline; }
+        body.lang-ko .lang-inline[data-lang="en"],
+        body.lang-en .lang-inline[data-lang="ko"] { display: none; }
 
         .topbar {
             width: 92%;
@@ -300,6 +303,18 @@
             backdrop-filter: blur(5px);
             touch-action: manipulation;
         }
+        .click-pad.idle .score-text,
+        .click-pad.idle .timer-text,
+        .click-pad.counting .score-text,
+        .click-pad.counting .timer-text {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        .click-pad.running .score-text,
+        .click-pad.running .timer-text {
+            opacity: 1;
+            transform: none;
+        }
 
         .click-pad:active {
             transform: scale(0.96) translateY(2px);
@@ -323,6 +338,7 @@
             pointer-events: none;
             line-height: 0.8;
             font-family: 'Black Ops One', cursive;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
         .timer-text {
@@ -335,6 +351,7 @@
             background: rgba(255, 0, 255, 0.1);
             padding: 4px 12px;
             border-radius: 8px;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
         body.light .timer-text {
             color: #3a0f47;
@@ -356,29 +373,35 @@
         body.light .idle-msg { color: #0c5aa3; }
         @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.98); } }
 
-        .start-controls {
-            margin-top: 18px;
+        .pad-overlay {
+            position: absolute;
+            inset: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            min-height: 44px;
+            gap: 18px;
+            z-index: 4;
+            transition: opacity 0.2s ease;
         }
+        .click-pad.running .pad-overlay { opacity: 0; pointer-events: none; }
+        .click-pad.idle .pad-overlay,
+        .click-pad.counting .pad-overlay { opacity: 1; pointer-events: auto; }
         .btn-start {
-            min-width: 132px;
-            padding: 11px 18px;
+            min-width: min(72%, 320px);
+            padding: 16px 24px;
             border: 2px solid var(--neon-green);
-            border-radius: 999px;
+            border-radius: 20px;
             background: rgba(0, 255, 136, 0.12);
             color: var(--text);
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
+            font-size: clamp(22px, 5vw, 34px);
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-            box-shadow: 0 0 18px rgba(0, 255, 136, 0.25);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.35);
         }
         .btn-start:hover {
             transform: translateY(-1px);
@@ -392,13 +415,14 @@
             box-shadow: none;
         }
         .start-countdown {
-            width: 36px;
+            width: 100%;
             text-align: center;
             font-family: 'Black Ops One', cursive;
-            font-size: 30px;
+            font-size: clamp(70px, 20vw, 140px);
             color: var(--neon-pink);
-            text-shadow: 0 0 10px rgba(255, 0, 255, 0.55);
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
             visibility: hidden;
+            line-height: 1;
         }
         body.light .start-countdown { color: #9e2cbc; }
 
@@ -509,7 +533,7 @@
             .subtitle { margin-bottom: 18px; }
             .test-container { height: clamp(230px, 42vh, 380px); }
             .idle-msg { margin-top: 18px; }
-            .start-controls { margin-top: 12px; }
+            .btn-start { font-size: clamp(20px, 4.8vw, 28px); }
         }
 
         #disqus_thread {
@@ -602,12 +626,13 @@
             align-items: center;
             backdrop-filter: blur(15px);
         }
+        body.light .modal-overlay { background: rgba(248, 250, 255, 0.96); }
 
         .result-box {
             text-align: center;
             animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 90%;
-            max-width: 400px;
+            max-width: 460px;
         }
         @keyframes zoomIn { from {transform: scale(0.5); opacity: 0;} to {transform: scale(1); opacity: 1;} }
 
@@ -633,20 +658,20 @@
         }
         .summary-label {
             color: var(--muted);
-            font-size: 18px;
+            font-size: clamp(18px, 3.8vw, 22px);
             font-weight: 800;
             letter-spacing: 0.2px;
             text-align: left;
         }
         .summary-value {
             color: var(--text);
-            font-size: 34px;
+            font-size: clamp(34px, 7.5vw, 48px);
             font-weight: 900;
             font-family: 'Roboto Mono', monospace;
             line-height: 1;
         }
         .summary-item.cps-item .summary-value {
-            font-size: 52px;
+            font-size: clamp(52px, 11vw, 74px);
             color: var(--neon-green);
             text-shadow: 0 0 24px var(--neon-green);
         }
@@ -680,12 +705,13 @@
         }
         .rank-text {
             color: #fff;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             margin-top: 8px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+        body.light .rank-text { color: #1c2231; }
         .btn-copy {
             width: 100%;
             border: 1px solid var(--neon-blue);
@@ -969,15 +995,14 @@
         <div class="click-pad" id="clickPad">
             <div class="score-text" id="score">0</div>
             <div class="timer-text" id="timer">5.00s</div>
+            <div class="pad-overlay" id="padOverlay">
+                <button class="btn-start" id="startBtn" type="button">
+                    <span data-lang="ko">START</span>
+                    <span data-lang="en">START</span>
+                </button>
+                <div class="start-countdown" id="startCountdown" aria-live="polite"></div>
+            </div>
         </div>
-    </div>
-
-    <div class="start-controls">
-        <button class="btn-start" id="startBtn" type="button">
-            <span data-lang="ko">START</span>
-            <span data-lang="en">START</span>
-        </button>
-        <div class="start-countdown" id="startCountdown" aria-live="polite"></div>
     </div>
 
     <div class="idle-msg" id="idleMsg">
@@ -1100,11 +1125,9 @@
             document.getElementById('themeIcon').innerText = isLight ? '☀️' : '🌙';
         }
 
-        // 초기 테마 로드
-        if (localStorage.getItem('neon_theme') === 'light') {
-            document.body.classList.add('light');
-            updateThemeIcon();
-        }
+        // 첫 진입은 항상 다크 모드로 시작
+        document.body.classList.remove('light');
+        updateThemeIcon();
 
         // 언어 토글
         const langToggle = document.getElementById('langToggle');
@@ -1242,12 +1265,19 @@
         const scoreEl = document.getElementById('score');
         const timerEl = document.getElementById('timer');
         const idleMsg = document.getElementById('idleMsg');
+        const padOverlay = document.getElementById('padOverlay');
         const startBtn = document.getElementById('startBtn');
         const startCountdown = document.getElementById('startCountdown');
         const modal = document.getElementById('modal');
         const timeBtns = document.querySelectorAll('.time-btn');
         const slime = document.getElementById('slime');
         const rankEmojiEl = document.getElementById('rankEmoji');
+
+        function setPadState(state) {
+            clickPad.classList.remove('idle', 'counting', 'running');
+            clickPad.classList.add(state);
+        }
+        setPadState('idle');
 
         // CPS에 따른 실시간 랭크 업데이트
         function updateRankEmoji(cps) {
@@ -1311,6 +1341,8 @@
             clearInterval(countdownInterval);
             isCountingDown = true;
             startBtn.disabled = true;
+            startBtn.style.display = 'none';
+            setPadState('counting');
             idleMsg.style.visibility = 'hidden';
             score = 0;
             scoreEl.innerText = "0";
@@ -1332,6 +1364,7 @@
                     startCountdown.style.visibility = 'hidden';
                     startCountdown.innerText = "";
                     isCountingDown = false;
+                    padOverlay.style.pointerEvents = 'none';
                     startTest();
                 }, 220);
             }, 1000);
@@ -1343,6 +1376,7 @@
             timeLeft = selectedTime;
             idleMsg.style.visibility = 'hidden';
             startBtn.disabled = true;
+            setPadState('running');
             scoreEl.innerText = score;
             startTimeMs = performance.now();
 
@@ -1418,6 +1452,9 @@
             startCountdown.style.visibility = 'hidden';
             startCountdown.innerText = "";
             startBtn.disabled = false;
+            startBtn.style.display = 'inline-flex';
+            padOverlay.style.pointerEvents = 'auto';
+            setPadState('idle');
             modal.style.display = 'none';
             document.body.classList.remove('modal-open');
             idleMsg.style.visibility = 'visible';
