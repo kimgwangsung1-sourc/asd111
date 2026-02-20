@@ -264,9 +264,10 @@
         }
         .content-card h2 {
             margin: 0 0 10px;
-            font-family: 'Black Ops One', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 18px;
             letter-spacing: 1px;
+            font-weight: 800;
         }
         .content-card p {
             margin: 10px 0;
@@ -321,9 +322,10 @@
             color: var(--text);
             text-align: left;
             padding: 16px 20px;
-            font-family: 'Black Ops One', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 16px;
             letter-spacing: 1px;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -332,7 +334,7 @@
         }
         .acc-btn:hover { background: rgba(255,255,255,0.02); }
         .acc-btn span {
-            font-family: 'Roboto Mono', monospace;
+            font-family: inherit;
             font-size: 18px;
             color: var(--neon-blue);
             transition: transform 0.3s ease;
@@ -599,43 +601,47 @@
         </div>
     </section>
 
-    <section class="content-section" aria-label="Contact and site info">
-        <div class="content-card">
-            <h2>CONTACT & SITE INFO</h2>
-            <p>
-                본 사이트는 반응 속도 측정 유틸리티를 제공하며, 사용자에게 명확하고 유용한 정보를 제공하는 것을 목표로 합니다.
-                정책 준수와 사용자 경험 향상을 위해 지속적으로 콘텐츠를 개선하고 있습니다.
-            </p>
-            <p>
-                문의는 아래 간단한 폼을 통해 접수할 수 있습니다.
-            </p>
-            <ul>
-                <li>문의 방법: 아래 문의 폼으로만 접수합니다.</li>
-                <li>운영 범위: 반응 속도 테스트/유틸리티 제공 및 관련 안내 콘텐츠</li>
-            </ul>
-            <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm">
-                <div class="field">
-                    <label for="contactName">이름</label>
-                    <input id="contactName" name="name" type="text" placeholder="이름을 입력하세요" required>
-                </div>
-                <div class="field">
-                    <label for="contactEmail">이메일</label>
-                    <input id="contactEmail" name="email" type="email" placeholder="reply@example.com" required>
-                </div>
-                <div class="field">
-                    <label for="contactMessage">문의 내용</label>
-                    <textarea id="contactMessage" name="message" rows="4" placeholder="문의 내용을 입력하세요" required></textarea>
-                </div>
-                <div class="actions">
-                    <button class="btn-restart" type="submit">문의 보내기</button>
-                </div>
-                <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
-            </form>
-        </div>
-    </section>
-
     <section class="content-section" aria-label="Info and policies">
         <div class="accordion">
+            <div class="acc-item">
+                <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-contact" id="acc-contact-btn">
+                    CONTACT & SITE INFO
+                    <span>+</span>
+                </button>
+                <div class="acc-panel" id="acc-contact" role="region" aria-labelledby="acc-contact-btn">
+                    <div class="acc-panel-inner">
+                        <p>
+                            본 사이트는 반응 속도 측정 유틸리티를 제공하며, 사용자에게 명확하고 유용한 정보를 제공하는 것을 목표로 합니다.
+                            정책 준수와 사용자 경험 향상을 위해 지속적으로 콘텐츠를 개선하고 있습니다.
+                        </p>
+                        <p>
+                            아래 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.
+                        </p>
+                        <ul>
+                            <li>문의 방법: 아래 문의 폼으로만 접수합니다.</li>
+                            <li>운영 범위: 반응 속도 테스트/유틸리티 제공 및 관련 안내 콘텐츠</li>
+                        </ul>
+                        <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm">
+                            <div class="field">
+                                <label for="contactName">이름</label>
+                                <input id="contactName" name="name" type="text" placeholder="이름을 입력하세요" required>
+                            </div>
+                            <div class="field">
+                                <label for="contactEmail">이메일</label>
+                                <input id="contactEmail" name="email" type="email" placeholder="reply@example.com" required>
+                            </div>
+                            <div class="field">
+                                <label for="contactMessage">문의 내용</label>
+                                <textarea id="contactMessage" name="message" rows="4" placeholder="문의 내용을 입력하세요" required></textarea>
+                            </div>
+                            <div class="actions">
+                                <button class="btn-restart" type="submit">문의 보내기</button>
+                            </div>
+                            <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="acc-item">
                 <button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-1" id="acc-1-btn">
                     WHAT THIS TEST MEASURES
