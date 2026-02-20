@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Professional CPS Speed Test Tool. Measure your click speed accurately.">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
-    <title>NEON CLICK SPEED TEST | Utility Tool</title>
+    <title>NEON SPEED TEST | Global CPS Utility</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9418686584056529"
@@ -34,7 +34,7 @@
             --surface: #111;
             --text: #ffffff;
             --muted: #888;
-            --neon-blue: #00f3ff;
+            --neon-blue: #00f5c4;
             --neon-pink: #ff00ff;
             --neon-green: #00ff9d;
             --panel-bg: rgba(255, 255, 255, 0.03);
@@ -63,6 +63,7 @@
 
         body {
             background-color: var(--bg);
+            background-image: radial-gradient(circle at 20% 10%, rgba(0, 245, 196, 0.08), transparent 42%), radial-gradient(circle at 80% 85%, rgba(0, 255, 157, 0.08), transparent 40%);
             color: var(--text);
             font-family: 'Manrope', sans-serif;
             margin: 0;
@@ -121,6 +122,7 @@
             gap: 8px;
             transition: 0.2s;
             box-shadow: 0 4px 15px var(--shadow);
+            min-height: 44px;
         }
         .topbar-card:active { transform: scale(0.96); }
         .lang-selector { position: relative; }
@@ -166,6 +168,7 @@
             cursor: pointer;
             text-transform: uppercase;
             box-shadow: 0 4px 15px var(--shadow);
+            min-height: 44px;
         }
         .info-tab.active { background: var(--neon-blue); color: #000; }
         .info-panels {
@@ -263,6 +266,7 @@
             transition: 0.2s;
             font-weight: 800;
             font-family: 'Roboto Mono', monospace;
+            min-height: 44px;
         }
 
         .time-btn.active {
@@ -402,6 +406,7 @@
             cursor: pointer;
             transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
             box-shadow: 0 0 30px rgba(0, 255, 136, 0.35);
+            min-height: 44px;
         }
         .btn-start:hover {
             transform: translateY(-1px);
@@ -553,6 +558,16 @@
             pointer-events: none;
             transition: transform 0.1s ease, opacity 0.5s ease;
         }
+        .slime-container::after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 157, 0.55);
+            opacity: 0;
+            transform: scale(0.88);
+            pointer-events: none;
+        }
         .slime {
             width: 100%;
             height: 100%;
@@ -561,6 +576,20 @@
             position: relative;
             box-shadow: 0 0 30px var(--neon-green);
             animation: idleSlime 3s ease-in-out infinite;
+        }
+        .slime-container.glow-advanced .slime {
+            box-shadow: 0 0 36px var(--neon-green);
+        }
+        .slime-container.glow-advanced.glow-hit .slime {
+            animation: idleSlime 3s ease-in-out infinite, advancedGlowHit 0.3s ease-out;
+            box-shadow: 0 0 46px rgba(0, 255, 157, 0.9);
+        }
+        .slime-container.glow-elite .slime {
+            box-shadow: 0 0 44px rgba(0, 255, 157, 0.95);
+        }
+        .slime-container.glow-elite::after {
+            opacity: 0.9;
+            animation: eliteRingPulse 1s ease-in-out infinite;
         }
         .slime-eyes {
             position: absolute;
@@ -602,6 +631,16 @@
             40% { transform: translateY(-50px) scaleY(1.2); }
             100% { transform: translateY(0) scaleY(1); }
         }
+        @keyframes advancedGlowHit {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        @keyframes eliteRingPulse {
+            0% { transform: scale(0.88); opacity: 0.35; }
+            50% { transform: scale(1.04); opacity: 0.95; }
+            100% { transform: scale(0.88); opacity: 0.35; }
+        }
 
         .particle {
             position: absolute;
@@ -636,82 +675,106 @@
         }
         @keyframes zoomIn { from {transform: scale(0.5); opacity: 0;} to {transform: scale(1); opacity: 1;} }
 
-        .rank-badge { font-size: 80px; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
-        
+        .result-header { margin-bottom: 14px; text-align: center; }
+        .result-title {
+            margin: 0;
+            color: #00f5c4;
+            font-weight: 700;
+            font-size: clamp(24px, 5.4vw, 34px);
+            text-shadow: 0 0 8px rgba(0,245,196,0.5);
+            letter-spacing: 0.4px;
+        }
+        .result-subtitle {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: clamp(13px, 3vw, 16px);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
         .result-summary {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin: 20px 0;
-            background: rgba(255,255,255,0.05);
+            margin: 16px 0 14px;
+            background: rgba(255,255,255,0.06);
             padding: 18px 16px;
             border-radius: 20px;
             border: 1px solid var(--border);
         }
-
         .summary-item {
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 8px 6px;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
         }
         .summary-label {
             color: var(--muted);
-            font-size: clamp(18px, 3.8vw, 22px);
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            text-align: left;
+            font-size: clamp(16px, 3.6vw, 20px);
+            font-weight: 700;
+            text-align: center;
         }
         .summary-value {
             color: var(--text);
-            font-size: clamp(34px, 7.5vw, 48px);
+            font-size: clamp(30px, 7vw, 42px);
             font-weight: 900;
             font-family: 'Roboto Mono', monospace;
             line-height: 1;
         }
         .summary-item.cps-item .summary-value {
-            font-size: clamp(52px, 11vw, 74px);
-            color: var(--neon-green);
-            text-shadow: 0 0 24px var(--neon-green);
+            font-size: clamp(54px, 12.5vw, 76px);
+            color: #00ff9d;
+            text-shadow: 0 0 6px rgba(0,255,157,0.7), 0 0 14px rgba(0,255,157,0.5);
         }
-        body:not(.light) .result-summary {
-            background: rgba(255,255,255,0.09);
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-        body:not(.light) .summary-label { color: #cfcfcf; }
-        body:not(.light) .summary-value { color: #ffffff; text-shadow: 0 0 8px rgba(255,255,255,0.2); }
-
-        body.light .result-summary {
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.12);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-        }
-        body.light .summary-label { color: #4a4137; }
-        body.light .summary-value { color: #111; text-shadow: none; }
-
-        .result-score-container {
-            margin: 12px 0 20px;
+        .result-guides {
+            margin: 12px 0 4px;
             display: flex;
             flex-direction: column;
             gap: 6px;
-            align-items: center;
+            text-align: center;
         }
-        .result-score-container .hype-line {
-            font-size: 15px;
+        .result-guide {
+            font-size: 14px;
             font-weight: 700;
             color: var(--text);
             opacity: 0.95;
+            white-space: nowrap;
         }
-        .rank-text {
-            color: #fff;
-            font-size: 26px;
-            font-weight: 800;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .result-actions {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: center;
         }
-        body.light .rank-text { color: #1c2231; }
+        .result-action {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+        }
+        .result-footnote {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+            text-align: center;
+        }
+        body:not(.light) .result-summary {
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.16);
+        }
+        body:not(.light) .summary-label { color: #d1d5db; }
+        body:not(.light) .summary-value { color: #ffffff; }
+        body.light .result-summary {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(0,0,0,0.12);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        body.light .summary-label { color: #334155; }
+        body.light .summary-value { color: #0f172a; text-shadow: none; }
         .btn-copy {
             width: 100%;
             border: 1px solid var(--neon-blue);
@@ -724,12 +787,17 @@
             cursor: pointer;
             margin-top: 8px;
             transition: transform 0.12s ease, box-shadow 0.12s ease;
+            min-height: 44px;
         }
         .btn-copy:hover {
             transform: translateY(-1px);
             box-shadow: 0 8px 20px rgba(0, 243, 255, 0.2);
         }
         .btn-copy:active { transform: scale(0.99); }
+        @media (max-width: 430px) {
+            .result-guide,
+            .result-action { white-space: normal; }
+        }
         .disqus-cta {
             width: 92%;
             max-width: 720px;
@@ -756,9 +824,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             width: 100%;
+            min-height: 44px;
         }
         .btn-restart:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 0, 255, 0.5); }
         .btn-restart:active { transform: scale(0.95); }
+        .topbar-card:hover,
+        .info-tab:hover,
+        .time-btn:hover,
+        .btn-start:hover,
+        .btn-copy:hover,
+        .btn-restart:hover {
+            box-shadow: 0 0 14px rgba(0, 255, 157, 0.35), 0 0 28px rgba(0, 245, 196, 0.25);
+        }
 
         /* 결과 모달이 열릴 때 광고 노출 차단 (알림/전환 화면 정책 대응) */
         body.modal-open ins.adsbygoogle,
@@ -768,31 +845,27 @@
         }
     </style>
 </head>
-<body oncontextmenu="return false" class="lang-ko">
+<body oncontextmenu="return false" class="lang-en">
 
     <div class="topbar">
         <div class="info-tabs" role="tablist" aria-label="Info tabs">
-            <button class="info-tab" data-target="panel-how">HOW IT WORKS</button>
-            <button class="info-tab" data-target="panel-usage">USAGE</button>
-            <button class="info-tab" data-target="panel-health">SAFETY</button>
-            <button class="info-tab" data-target="panel-faq">FAQ</button>
-            <button class="info-tab" data-target="panel-contact">CONTACT</button>
-            <button class="info-tab" data-target="panel-policy">POLICY</button>
+            <button class="info-tab" data-target="panel-how" data-i18n="navHow">HOW IT WORKS</button>
+            <button class="info-tab" data-target="panel-usage" data-i18n="navUsage">USAGE</button>
+            <button class="info-tab" data-target="panel-health" data-i18n="navSafety">SAFETY</button>
+            <button class="info-tab" data-target="panel-faq" data-i18n="navFaq">FAQ</button>
+            <button class="info-tab" data-target="panel-contact" data-i18n="navContact">CONTACT</button>
+            <button class="info-tab" data-target="panel-policy" data-i18n="navPolicy">POLICY</button>
         </div>
         <div class="topbar-group utilities">
             <div class="lang-selector">
                 <button class="topbar-card" id="langToggle" aria-expanded="false" aria-haspopup="true">
                     <span>🌐</span>
-                    <span>LANG</span>
+                    <span id="langToggleText" data-i18n="langButton">LANG</span>
                 </button>
-                <div class="lang-menu" id="langMenu">
-                    <button type="button" class="lang-option" data-lang="ko">한국어</button>
-                    <button type="button" class="lang-option" data-lang="en">English</button>
-                </div>
             </div>
             <button class="topbar-card" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
                 <span id="themeIcon">🌙</span>
-                <span>THEME</span>
+                <span data-i18n="theme">THEME</span>
             </button>
         </div>
     </div>
@@ -997,18 +1070,14 @@
             <div class="timer-text" id="timer">5.00s</div>
             <div class="pad-overlay" id="padOverlay">
                 <button class="btn-start" id="startBtn" type="button">
-                    <span data-lang="ko">START</span>
-                    <span data-lang="en">START</span>
+                    <span data-i18n="start">START</span>
                 </button>
                 <div class="start-countdown" id="startCountdown" aria-live="polite"></div>
             </div>
         </div>
     </div>
 
-    <div class="idle-msg" id="idleMsg">
-        <span data-lang="ko">START 누른 뒤 패드를 탭하세요</span>
-        <span data-lang="en">PRESS START, THEN TAP THE PAD</span>
-    </div>
+    <div class="idle-msg" id="idleMsg" data-i18n="idleMsg">PRESS START, THEN TAP THE PAD</div>
 
     <section class="content-section" aria-label="About the tool">
         <div class="content-card">
@@ -1045,10 +1114,7 @@
 
     
 
-    <div class="disqus-cta">
-        <span data-lang="ko">💬 댓글에 기록을 남겨보세요</span>
-        <span data-lang="en">💬 Share your record in the comments</span>
-    </div>
+    <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
 
     <div id="disqus_thread"></div>
 
@@ -1064,50 +1130,46 @@
 
     <div class="modal-overlay" id="modal">
         <div class="result-box">
-            <span class="rank-badge" id="rankBadge">🐢</span>
-            
+            <div class="result-header">
+                <h2 class="result-title"><span data-i18n="resultTitle">🎯 YOUR RESULT</span></h2>
+                <div class="result-subtitle" data-i18n="resultSub">Click Speed Performance</div>
+            </div>
+
             <div class="result-summary">
-                <div class="summary-item">
-                    <span class="summary-label">
-                        <span data-lang="ko" class="lang-inline">⏱ 측정 시간</span>
-                        <span data-lang="en" class="lang-inline">⏱ Time</span>
-                    </span>
-                    <span class="summary-value" id="finalTime">0s</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">
-                        <span data-lang="ko" class="lang-inline">🖱 총 클릭 수</span>
-                        <span data-lang="en" class="lang-inline">🖱 Total Clicks</span>
-                    </span>
-                    <span class="summary-value" id="finalClicks">0회</span>
-                </div>
                 <div class="summary-item cps-item">
-                    <span class="summary-label">
-                        <span data-lang="ko" class="lang-inline">⚡ CPS</span>
-                        <span data-lang="en" class="lang-inline">⚡ CPS</span>
-                    </span>
+                    <span class="summary-label" data-i18n="cps">⚡ CPS</span>
                     <span class="summary-value" id="finalCps">0.0</span>
                 </div>
+                <div class="summary-item">
+                    <span class="summary-label" data-i18n="clicks">🖱 Total Clicks</span>
+                    <span class="summary-value" id="finalClicks">0 clicks</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label" data-i18n="time">⏱ Time (seconds)</span>
+                    <span class="summary-value" id="finalTime">0s</span>
+                </div>
             </div>
 
-            <div class="result-score-container">
-                <div class="hype-line">
-                    <span data-lang="ko" class="lang-inline">🔥 평균은 6~8 CPS 입니다</span>
-                    <span data-lang="en" class="lang-inline">🔥 Average is around 6-8 CPS</span>
-                </div>
-                <div class="hype-line">
-                    <span data-lang="ko" class="lang-inline">🏆 15 CPS 이상은 상위권입니다</span>
-                    <span data-lang="en" class="lang-inline">🏆 15+ CPS is top-tier</span>
-                </div>
-                <div class="rank-text" id="rankText">NOOB</div>
+            <div class="result-guides">
+                <div class="result-guide" data-i18n="avgInfo">ℹ Most users score around 6-8 CPS</div>
+                <div class="result-guide" data-i18n="fastInfo">🎯 9+ CPS is considered fast</div>
+                <div class="result-guide" data-i18n="veryFastInfo">🚀 15+ CPS is very fast</div>
             </div>
 
-            <button class="btn-copy" type="button" onclick="copyResultLink()">
-                <span data-lang="ko" class="lang-inline">📤 결과 링크 복사</span>
-                <span data-lang="en" class="lang-inline">📤 Copy Result Link</span>
-            </button>
+            <div class="result-actions">
+                <div class="result-action" data-i18n="share">📤 Share your result</div>
+                <div class="result-action" data-i18n="comment">💬 Drop your record in the comments</div>
+                <div class="result-action" data-i18n="retryHint">🔁 Try again to improve your speed</div>
+            </div>
+
+            <div class="result-footnote">
+                <div data-i18n="privacyNote">No personal data is collected.</div>
+                <div data-i18n="autoclickerNote">Auto-clickers are not supported.</div>
+            </div>
+
+            <button class="btn-copy" type="button" onclick="copyResultLink()" data-i18n="copyResultLink">📤 Copy Result Link</button>
             
-            <button class="btn-restart" onclick="resetTest()">RETRY</button>
+            <button class="btn-restart" onclick="resetTest()" data-i18n="retry">RETRY</button>
         </div>
     </div>
 
@@ -1129,37 +1191,112 @@
         document.body.classList.remove('light');
         updateThemeIcon();
 
-        // 언어 토글
-        const langToggle = document.getElementById('langToggle');
-        const langMenu = document.getElementById('langMenu');
+        const translations = {
+            en: {
+                langButton: "LANG",
+                theme: "THEME",
+                navHow: "HOW IT WORKS",
+                navUsage: "USAGE",
+                navSafety: "SAFETY",
+                navFaq: "FAQ",
+                navContact: "CONTACT",
+                navPolicy: "POLICY",
+                start: "START",
+                idleMsg: "PRESS START, THEN TAP THE PAD",
+                disqusCta: "💬 Share your record in the comments",
+                resultTitle: "🎯 YOUR RESULT",
+                resultSub: "Click Speed Performance",
+                time: "⏱ Time (seconds)",
+                clicks: "🖱 Total Clicks",
+                cps: "⚡ CPS",
+                avgInfo: "ℹ Most users score around 6-8 CPS",
+                fastInfo: "🎯 9+ CPS is considered fast",
+                veryFastInfo: "🚀 15+ CPS is very fast",
+                share: "📤 Share your result",
+                comment: "💬 Drop your record in the comments",
+                retryHint: "🔁 Try again to improve your speed",
+                privacyNote: "No personal data is collected.",
+                autoclickerNote: "Auto-clickers are not supported.",
+                copyResultLink: "📤 Copy Result Link",
+                retry: "RETRY",
+                copiedAlert: "Link copied",
+                timeUnit: " s",
+                clickUnit: " clicks",
+                countdownGo: "GO"
+            },
+            ko: {
+                langButton: "언어",
+                theme: "테마",
+                navHow: "사용 방법",
+                navUsage: "이용 안내",
+                navSafety: "안전 안내",
+                navFaq: "자주 묻는 질문",
+                navContact: "문의하기",
+                navPolicy: "이용 정책",
+                start: "시작",
+                idleMsg: "START 버튼을 누른 뒤 패드를 탭하세요",
+                disqusCta: "💬 댓글에 기록을 남겨보세요",
+                resultTitle: "🎯 결과",
+                resultSub: "클릭 속도 측정 결과",
+                time: "⏱ 측정 시간(초)",
+                clicks: "🖱 총 클릭 수",
+                cps: "⚡ CPS",
+                avgInfo: "ℹ 일반적으로 6~8 CPS가 많이 나옵니다",
+                fastInfo: "🎯 9 CPS 이상이면 빠른 편입니다",
+                veryFastInfo: "🚀 15 CPS 이상은 매우 빠른 수준입니다",
+                share: "📤 결과 공유",
+                comment: "💬 댓글에 네 기록을 남겨보세요",
+                retryHint: "🔁 다시 시도해 속도를 높여보세요",
+                privacyNote: "개인정보는 수집하지 않습니다.",
+                autoclickerNote: "오토클리커는 지원하지 않습니다.",
+                copyResultLink: "📤 결과 링크 복사",
+                retry: "다시하기",
+                copiedAlert: "링크가 복사되었습니다",
+                timeUnit: "초",
+                clickUnit: "회",
+                countdownGo: "시작"
+            }
+        };
+
+        let currentLang = localStorage.getItem('neon_lang') || 'en';
+        let lastResult = null;
+
+        function t(key) {
+            return (translations[currentLang] && translations[currentLang][key]) || key;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach((el) => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = t(key);
+            });
+            if (lastResult) {
+                document.getElementById('finalTime').innerText = `${lastResult.time}${t('timeUnit')}`;
+                document.getElementById('finalClicks').innerText = `${lastResult.clicks}${t('clickUnit')}`;
+                document.getElementById('finalCps').innerText = lastResult.cps.toFixed(1);
+            } else {
+                document.getElementById('finalTime').innerText = `0${t('timeUnit')}`;
+                document.getElementById('finalClicks').innerText = `0${t('clickUnit')}`;
+                document.getElementById('finalCps').innerText = "0.0";
+            }
+        }
+
         function setLanguage(lang) {
-            document.body.classList.toggle('lang-ko', lang === 'ko');
-            document.body.classList.toggle('lang-en', lang === 'en');
-            document.documentElement.setAttribute('lang', lang);
-            localStorage.setItem('neon_lang', lang);
+            currentLang = translations[lang] ? lang : 'en';
+            document.body.classList.toggle('lang-ko', currentLang === 'ko');
+            document.body.classList.toggle('lang-en', currentLang === 'en');
+            document.documentElement.setAttribute('lang', currentLang);
+            localStorage.setItem('neon_lang', currentLang);
+            applyTranslations();
         }
-        const savedLang = localStorage.getItem('neon_lang') || 'ko';
-        setLanguage(savedLang);
-        if (langToggle && langMenu) {
-            langToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                langMenu.classList.toggle('open');
-                langToggle.setAttribute('aria-expanded', String(langMenu.classList.contains('open')));
-            });
-            langMenu.querySelectorAll('button[data-lang]').forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    setLanguage(btn.getAttribute('data-lang'));
-                    langMenu.classList.remove('open');
-                    langToggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-            document.addEventListener('click', () => {
-                if (langMenu.classList.contains('open')) {
-                    langMenu.classList.remove('open');
-                    langToggle.setAttribute('aria-expanded', 'false');
-                }
+
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'ko' : 'en');
             });
         }
+        setLanguage(currentLang);
 
         // 정보 탭 토글
         const infoTabs = document.querySelectorAll('.info-tab');
@@ -1279,15 +1416,28 @@
         }
         setPadState('idle');
 
+        function updateSlimeMode(cpsValue) {
+            slime.classList.remove('glow-advanced', 'glow-elite');
+            if (cpsValue >= 15) {
+                slime.classList.add('glow-elite');
+                return;
+            }
+            if (cpsValue >= 9) {
+                slime.classList.add('glow-advanced');
+            }
+        }
+
         // CPS에 따른 실시간 랭크 업데이트
         function updateRankEmoji(cps) {
+            const cpsValue = Number(cps) || 0;
             let emoji = "🐢";
-            if (cps >= 5) emoji = "🙂";
-            if (cps >= 7) emoji = "⚡";
-            if (cps >= 9) emoji = "🏆";
-            if (cps >= 11) emoji = "👾";
-            if (cps >= 13) emoji = "👑";
+            if (cpsValue >= 5) emoji = "🙂";
+            if (cpsValue >= 7) emoji = "⚡";
+            if (cpsValue >= 9) emoji = "🏆";
+            if (cpsValue >= 11) emoji = "👾";
+            if (cpsValue >= 13) emoji = "👑";
             rankEmojiEl.innerText = emoji;
+            updateSlimeMode(cpsValue);
         }
 
         // 시간 설정
@@ -1315,6 +1465,12 @@
             slime.classList.remove('jump');
             void slime.offsetWidth;
             slime.classList.add('jump');
+            if (slime.classList.contains('glow-advanced')) {
+                slime.classList.remove('glow-hit');
+                void slime.offsetWidth;
+                slime.classList.add('glow-hit');
+                setTimeout(() => slime.classList.remove('glow-hit'), 300);
+            }
 
             if (isRunning) {
                 const elapsed = (performance.now() - startTimeMs) / 1000;
@@ -1359,7 +1515,7 @@
                     return;
                 }
                 clearInterval(countdownInterval);
-                startCountdown.innerText = "GO";
+                startCountdown.innerText = t('countdownGo');
                 setTimeout(() => {
                     startCountdown.style.visibility = 'hidden';
                     startCountdown.innerText = "";
@@ -1390,7 +1546,6 @@
         }
 
         async function copyResultLink() {
-            const lang = document.documentElement.getAttribute('lang') || 'ko';
             try {
                 await navigator.clipboard.writeText(window.location.href);
             } catch (err) {
@@ -1401,7 +1556,19 @@
                 document.execCommand('copy');
                 temp.remove();
             }
-            alert(lang === 'en' ? "Link copied" : "링크가 복사되었습니다");
+            alert(t('copiedAlert'));
+        }
+
+        function animateValue(el, from, to, durationMs, formatValue) {
+            const start = performance.now();
+            function frame(now) {
+                const progress = Math.min(1, (now - start) / durationMs);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = from + (to - from) * eased;
+                el.innerText = formatValue(current);
+                if (progress < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
         }
 
         function endTest() {
@@ -1414,33 +1581,27 @@
             playSound('end');
 
             const cps = (score / selectedTime).toFixed(2);
-            
-            // 랭크 시스템 
-            let rank = "TURTLE";
-            let badge = "🐢";
-            let color = "#aaa";
+            const cpsValue = Number(cps);
 
-            if (cps >= 5) { rank = "HUMAN"; badge = "🙂"; color="#fff"; }
-            if (cps >= 7) { rank = "MASTER"; badge = "⚡"; color="var(--neon-blue)"; } 
-            if (cps >= 9) { rank = "PRO"; badge = "🏆"; color="var(--neon-pink)"; }
-            if (cps >= 11) { rank = "HACKER"; badge = "👾"; color="var(--neon-green)"; }
-            if (cps >= 13) { rank = "GOD"; badge = "👑"; color="#ffd700"; }
+            const finalTimeEl = document.getElementById('finalTime');
+            const finalClicksEl = document.getElementById('finalClicks');
+            const finalCpsEl = document.getElementById('finalCps');
+            finalTimeEl.innerText = `0${t('timeUnit')}`;
+            finalClicksEl.innerText = `0${t('clickUnit')}`;
+            finalCpsEl.innerText = "0.0";
 
-            // 상세 결과 업데이트
-            const lang = document.documentElement.getAttribute('lang') || 'ko';
-            document.getElementById('finalTime').innerText = lang === 'en' ? `${selectedTime}s` : `${selectedTime}초`;
-            document.getElementById('finalClicks').innerText = lang === 'en' ? `${score} clicks` : `${score}회`;
-            document.getElementById('finalCps').innerText = Number(cps).toFixed(1);
-            
-            const rankText = document.getElementById('rankText');
-            rankText.innerText = rank;
-            rankText.style.color = color;
-            rankText.style.textShadow = `0 0 20px ${color}`;
-            document.getElementById('rankBadge').innerText = badge;
+            lastResult = {
+                time: selectedTime,
+                clicks: score,
+                cps: cpsValue
+            };
 
             setTimeout(() => {
                 document.body.classList.add('modal-open');
                 modal.style.display = 'flex';
+                animateValue(finalTimeEl, 0, selectedTime, 800, (v) => `${Math.round(v)}${t('timeUnit')}`);
+                animateValue(finalClicksEl, 0, score, 800, (v) => `${Math.round(v)}${t('clickUnit')}`);
+                animateValue(finalCpsEl, 0, cpsValue, 800, (v) => v.toFixed(1));
             }, 500);
         }
 
@@ -1455,6 +1616,10 @@
             startBtn.style.display = 'inline-flex';
             padOverlay.style.pointerEvents = 'auto';
             setPadState('idle');
+            lastResult = null;
+            document.getElementById('finalTime').innerText = `0${t('timeUnit')}`;
+            document.getElementById('finalClicks').innerText = `0${t('clickUnit')}`;
+            document.getElementById('finalCps').innerText = "0.0";
             modal.style.display = 'none';
             document.body.classList.remove('modal-open');
             idleMsg.style.visibility = 'visible';
@@ -1463,6 +1628,7 @@
             timerEl.innerText = selectedTime.toFixed(2) + "s";
             scoreEl.innerText = "0";
             rankEmojiEl.innerText = "🐢";
+            slime.classList.remove('glow-advanced', 'glow-elite', 'glow-hit');
         }
 
         // 문의 폼(Formspree) 제출 처리
