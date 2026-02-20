@@ -294,6 +294,13 @@
             top: 3px;
             color: var(--neon-green);
         }
+        .contact-status {
+            margin: 10px 0 0;
+            font-size: 13px;
+            color: var(--muted);
+        }
+        .contact-status.success { color: #1f7a42; }
+        .contact-status.error { color: #9a1f2e; }
         .accordion {
             width: 100%;
             display: flex;
@@ -606,7 +613,7 @@
                 <li>문의 이메일: kimgwangsung1@gmail.com</li>
                 <li>운영 범위: 반응 속도 테스트/유틸리티 제공 및 관련 안내 콘텐츠</li>
             </ul>
-            <form action="https://formspree.io/f/xgolzzzp" method="POST">
+            <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm">
                 <div class="field">
                     <label for="contactName">이름</label>
                     <input id="contactName" name="name" type="text" placeholder="이름을 입력하세요" required>
@@ -622,6 +629,7 @@
                 <div class="actions">
                     <button class="btn-restart" type="submit">문의 보내기</button>
                 </div>
+                <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
             </form>
         </div>
     </section>
@@ -1085,6 +1093,35 @@
             timerEl.innerText = selectedTime.toFixed(2) + "s";
             scoreEl.innerText = "0";
             rankEmojiEl.innerText = "🐢";
+        }
+
+        // 문의 폼(Formspree) 제출 처리
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactStatus');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                contactStatus.className = 'contact-status';
+                contactStatus.textContent = '전송 중입니다...';
+                try {
+                    const res = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        contactStatus.classList.add('success');
+                        contactStatus.textContent = '문의가 정상적으로 전송되었습니다. 감사합니다.';
+                        contactForm.reset();
+                    } else {
+                        contactStatus.classList.add('error');
+                        contactStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+                    }
+                } catch (err) {
+                    contactStatus.classList.add('error');
+                    contactStatus.textContent = '네트워크 오류가 발생했습니다. 다시 시도해 주세요.';
+                }
+            });
         }
     </script>
 </body>
