@@ -86,6 +86,7 @@
             gap: 10px;
             align-items: center;
         }
+        .topbar-group.utilities { margin-left: auto; }
         .topbar-card {
             background: var(--panel-bg);
             border: 1px solid var(--border);
@@ -256,7 +257,7 @@
         .test-container {
             position: relative;
             width: min(94%, 520px);
-            height: clamp(320px, 60vh, 520px);
+            height: clamp(300px, 58vh, 500px);
             perspective: 1000px;
             z-index: 5;
             display: flex;
@@ -428,7 +429,7 @@
             body { padding-bottom: 24px; }
             .rank-emoji { margin-top: 24px; font-size: 44px; }
             .subtitle { margin-bottom: 18px; }
-            .test-container { height: clamp(260px, 46vh, 420px); }
+            .test-container { height: clamp(230px, 42vh, 380px); }
             .idle-msg { margin-top: 18px; }
         }
 
@@ -605,11 +606,15 @@
 <body oncontextmenu="return false" class="lang-ko">
 
     <div class="topbar">
-        <div class="topbar-group">
-            <button class="topbar-card" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <span id="themeIcon">🌙</span>
-                <span>THEME</span>
-            </button>
+        <div class="info-tabs" role="tablist" aria-label="Info tabs">
+            <button class="info-tab" data-target="panel-contact">CONTACT</button>
+            <button class="info-tab" data-target="panel-how">HOW IT WORKS</button>
+            <button class="info-tab" data-target="panel-usage">USAGE & TIPS</button>
+            <button class="info-tab" data-target="panel-health">HEALTH & LIMITS</button>
+            <button class="info-tab" data-target="panel-policy">POLICY</button>
+            <button class="info-tab" data-target="panel-faq">FAQ</button>
+        </div>
+        <div class="topbar-group utilities">
             <div class="lang-selector">
                 <button class="topbar-card" id="langToggle" aria-expanded="false" aria-haspopup="true">
                     <span>🌐</span>
@@ -620,14 +625,10 @@
                     <button type="button" class="lang-option" data-lang="en">English</button>
                 </div>
             </div>
-        </div>
-        <div class="info-tabs" role="tablist" aria-label="Info tabs">
-            <button class="info-tab" data-target="panel-contact">CONTACT</button>
-            <button class="info-tab" data-target="panel-how">HOW IT WORKS</button>
-            <button class="info-tab" data-target="panel-usage">USAGE & TIPS</button>
-            <button class="info-tab" data-target="panel-health">HEALTH & LIMITS</button>
-            <button class="info-tab" data-target="panel-policy">POLICY</button>
-            <button class="info-tab" data-target="panel-faq">FAQ</button>
+            <button class="topbar-card" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="themeIcon">🌙</span>
+                <span>THEME</span>
+            </button>
         </div>
     </div>
 
@@ -642,13 +643,13 @@
                 We continuously improve content to comply with policies and enhance user experience.
             </p>
             <p data-lang="ko">
-                아래 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.
+                이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.
             </p>
             <p data-lang="en">
                 Please enter your name, email, and message below, then press "Send".
             </p>
             <ul data-lang="ko">
-                <li>문의 방법: 아래 문의 폼으로만 접수합니다.</li>
+                <li>문의 방법: 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.</li>
                 <li>운영 범위: 반응 속도 테스트/유틸리티 제공 및 관련 안내 콘텐츠</li>
             </ul>
             <ul data-lang="en">
