@@ -425,6 +425,16 @@
             .topbar { margin-top: 12px; }
             .info-panels { max-width: 720px; }
         }
+        @media (max-width: 720px) {
+            .info-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .info-tabs::-webkit-scrollbar { display: none; }
+            .info-tab { white-space: nowrap; }
+        }
         @media (max-height: 720px) {
             body { padding-bottom: 24px; }
             .rank-emoji { margin-top: 24px; font-size: 44px; }
