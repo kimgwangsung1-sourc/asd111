@@ -1407,11 +1407,28 @@
             });
         }
 
+        function safeStorageGet(key, fallbackValue) {
+            try {
+                const value = window.localStorage.getItem(key);
+                return value === null ? fallbackValue : value;
+            } catch (err) {
+                return fallbackValue;
+            }
+        }
+
+        function safeStorageSet(key, value) {
+            try {
+                window.localStorage.setItem(key, value);
+            } catch (err) {
+                // Ignore storage errors (private mode / restricted storage).
+            }
+        }
+
         // 테마 관리
         function toggleTheme() {
             document.body.classList.toggle('light');
             const isLight = document.body.classList.contains('light');
-            localStorage.setItem('neon_theme', isLight ? 'light' : 'dark');
+            safeStorageSet('neon_theme', isLight ? 'light' : 'dark');
             updateThemeIcon();
             scheduleDisqusThemeRefresh();
         }
@@ -1494,7 +1511,7 @@
             }
         };
 
-        let currentLang = localStorage.getItem('neon_lang') || 'en';
+        let currentLang = safeStorageGet('neon_lang', 'en');
         let lastResult = null;
 
         function t(key) {
@@ -1522,7 +1539,7 @@
             document.body.classList.toggle('lang-ko', currentLang === 'ko');
             document.body.classList.toggle('lang-en', currentLang === 'en');
             document.documentElement.setAttribute('lang', currentLang);
-            localStorage.setItem('neon_lang', currentLang);
+            safeStorageSet('neon_lang', currentLang);
             applyTranslations();
         }
 
@@ -1559,11 +1576,26 @@
             this.page.url = getCanonicalPageUrl();
             this.page.identifier = "neon-speed-test";
         };
-        (function() {
+
+        function loadDisqusEmbed(shortname, onError) {
             var d = document, s = d.createElement('script');
-            s.src = 'https://neoncps.disqus.com/embed.js';
+            s.src = `https://${shortname}.disqus.com/embed.js`;
+            s.async = true;
             s.setAttribute('data-timestamp', +new Date());
+            if (typeof onError === 'function') {
+                s.onerror = onError;
+            }
             (d.head || d.body).appendChild(s);
+        }
+
+        (function() {
+            var primaryShortname = 'neoncps';
+            var fallbackShortname = 'https-asd111-pages-dev';
+            loadDisqusEmbed(primaryShortname, function () {
+                if (fallbackShortname !== primaryShortname) {
+                    loadDisqusEmbed(fallbackShortname);
+                }
+            });
         })();
 
         // 오디오 시스템
