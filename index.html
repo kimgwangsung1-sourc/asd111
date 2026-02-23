@@ -21,6 +21,7 @@
     <meta name="twitter:description" content="Free CPS test for desktop and mobile. Measure clicks per second with repeatable, easy-to-read results.">
     <meta name="twitter:image" content="https://neoncps.com/favicon.svg">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+    <meta name="kakao-js-key" content="">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.svg">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
@@ -112,6 +113,7 @@
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXBYS7FWMH"></script>
+    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -1435,9 +1437,12 @@
 
             <div class="share-buttons" aria-label="Social share buttons">
                 <button class="btn-share native" type="button" onclick="shareNative()" data-i18n="shareNative">📲 Share</button>
+                <button class="btn-share" type="button" onclick="shareTo('kakao')" data-i18n="shareKakao">💛 KakaoTalk</button>
                 <button class="btn-share" type="button" onclick="shareTo('x')" data-i18n="shareX">𝕏 X</button>
                 <button class="btn-share" type="button" onclick="shareTo('facebook')" data-i18n="shareFacebook">f Facebook</button>
+                <button class="btn-share" type="button" onclick="shareTo('threads')" data-i18n="shareThreads">@ Threads</button>
                 <button class="btn-share" type="button" onclick="shareTo('whatsapp')" data-i18n="shareWhatsapp">💬 WhatsApp</button>
+                <button class="btn-share" type="button" onclick="shareTo('instagram')" data-i18n="shareInstagram">📸 Instagram</button>
                 <button class="btn-share" type="button" onclick="shareTo('reddit')" data-i18n="shareReddit">👽 Reddit</button>
             </div>
 
@@ -1545,9 +1550,12 @@
                 comment: "💬 Drop your record in the comments",
                 retryHint: "🔁 Try again to improve your speed",
                 shareNative: "📲 Share",
+                shareKakao: "💛 Share on KakaoTalk",
                 shareX: "𝕏 Share on X",
                 shareFacebook: "f Share on Facebook",
+                shareThreads: "@ Share on Threads",
                 shareWhatsapp: "💬 Share on WhatsApp",
+                shareInstagram: "📸 Instagram (copy text)",
                 shareReddit: "👽 Share on Reddit",
                 privacyNote: "No personal data is collected.",
                 autoclickerNote: "Auto-clickers are not supported.",
@@ -1583,9 +1591,12 @@
                 comment: "💬 댓글에 네 기록을 남겨보세요",
                 retryHint: "🔁 다시 시도해 속도를 높여보세요",
                 shareNative: "📲 공유하기",
+                shareKakao: "💛 카카오톡 공유",
                 shareX: "𝕏 X 공유",
                 shareFacebook: "f 페이스북 공유",
+                shareThreads: "@ 스레드 공유",
                 shareWhatsapp: "💬 왓츠앱 공유",
+                shareInstagram: "📸 인스타그램 (문구 복사)",
                 shareReddit: "👽 레딧 공유",
                 privacyNote: "개인정보는 수집하지 않습니다.",
                 autoclickerNote: "오토클리커는 지원하지 않습니다.",
@@ -1987,6 +1998,24 @@
             window.open(url, "_blank", features);
         }
 
+        async function copyTextToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+            } catch (err) {
+                const temp = document.createElement('textarea');
+                temp.value = text;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                temp.remove();
+            }
+        }
+
+        function getKakaoJsKey() {
+            const meta = document.querySelector('meta[name="kakao-js-key"]');
+            return (meta && meta.content ? meta.content.trim() : "");
+        }
+
         function shareTo(platform) {
             const shareUrl = getResultShareUrl();
             const text = getShareText();
@@ -1998,8 +2027,47 @@
                 targetUrl = `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
             } else if (platform === "facebook") {
                 targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
+            } else if (platform === "threads") {
+                targetUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${shareUrl}`)}`;
             } else if (platform === "whatsapp") {
                 targetUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${shareUrl}`)}`;
+            } else if (platform === "instagram") {
+                copyTextToClipboard(`${text} ${shareUrl}`).then(() => showCopyToast(shareUrl));
+                targetUrl = "https://www.instagram.com/";
+            } else if (platform === "kakao") {
+                const kakaoKey = getKakaoJsKey();
+                if (window.Kakao && kakaoKey) {
+                    try {
+                        if (!window.Kakao.isInitialized()) {
+                            window.Kakao.init(kakaoKey);
+                        }
+                        window.Kakao.Share.sendDefault({
+                            objectType: "feed",
+                            content: {
+                                title: "NEONCPS",
+                                description: text,
+                                imageUrl: "https://neoncps.com/favicon.svg",
+                                link: {
+                                    mobileWebUrl: shareUrl,
+                                    webUrl: shareUrl
+                                }
+                            },
+                            buttons: [
+                                {
+                                    title: currentLang === "ko" ? "결과 보기" : "View Result",
+                                    link: {
+                                        mobileWebUrl: shareUrl,
+                                        webUrl: shareUrl
+                                    }
+                                }
+                            ]
+                        });
+                        return;
+                    } catch (err) {
+                        // Fall back to web sharer below.
+                    }
+                }
+                targetUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodedUrl}&text=${encodedText}`;
             } else if (platform === "reddit") {
                 targetUrl = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`;
             }
