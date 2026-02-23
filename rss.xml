@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>NEONCPS Updates</title>
+    <link>https://neoncps.com/</link>
+    <description>Latest updates for NEONCPS CPS click speed test.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>NEONCPS CPS Speed Test</title>
+      <link>https://neoncps.com/</link>
+      <guid>https://neoncps.com/</guid>
+      <pubDate>Mon, 23 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Measure click speed accurately on desktop and mobile.</description>
+    </item>
+  </channel>
+</rss>
