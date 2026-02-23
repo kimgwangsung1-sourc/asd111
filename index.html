@@ -1647,11 +1647,12 @@
         }
 
         async function copyResultLink() {
+            const shareUrl = getCanonicalPageUrl();
             try {
-                await navigator.clipboard.writeText(window.location.href);
+                await navigator.clipboard.writeText(shareUrl);
             } catch (err) {
                 const temp = document.createElement('textarea');
-                temp.value = window.location.href;
+                temp.value = shareUrl;
                 document.body.appendChild(temp);
                 temp.select();
                 document.execCommand('copy');
