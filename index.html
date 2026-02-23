@@ -841,6 +841,79 @@
             .result-guide,
             .result-action { white-space: normal; }
         }
+        .copy-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(18px);
+            width: min(92%, 540px);
+            background: rgba(8, 14, 24, 0.9);
+            border: 1px solid rgba(0, 245, 196, 0.35);
+            border-radius: 14px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 245, 196, 0.2);
+            padding: 12px 14px;
+            z-index: 130;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+        .copy-toast.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .copy-toast-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #d9fff7;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .copy-toast-url {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            color: #9be8dc;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 10px;
+            padding: 8px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .copy-toast-actions {
+            margin-top: 8px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+        .copy-toast-btn {
+            border: 1px solid rgba(0, 245, 196, 0.45);
+            background: rgba(0, 245, 196, 0.12);
+            color: #d9fff7;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 6px 10px;
+            min-height: 36px;
+            cursor: pointer;
+        }
+        body.light .copy-toast {
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid rgba(0, 136, 255, 0.26);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        }
+        body.light .copy-toast-title { color: #0f172a; }
+        body.light .copy-toast-url {
+            color: #334155;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        body.light .copy-toast-btn {
+            border: 1px solid rgba(0, 136, 255, 0.35);
+            background: rgba(0, 136, 255, 0.1);
+            color: #0f172a;
+        }
         .disqus-cta {
             width: 92%;
             max-width: 720px;
@@ -1216,6 +1289,14 @@
         </div>
     </div>
 
+    <div class="copy-toast" id="copyToast" role="status" aria-live="polite">
+        <div class="copy-toast-title" data-i18n="copiedAlert">Link copied</div>
+        <div class="copy-toast-url" id="copyToastUrl"></div>
+        <div class="copy-toast-actions">
+            <button class="copy-toast-btn" type="button" id="copyToastClose" data-i18n="toastClose">Close</button>
+        </div>
+    </div>
+	
     <script>
         function getCanonicalPageUrl() {
             return `https://neoncps.com${window.location.pathname}${window.location.search}`;
@@ -1288,6 +1369,7 @@
                 copyResultLink: "📤 Copy Result Link",
                 retry: "RETRY",
                 copiedAlert: "Link copied",
+                toastClose: "Close",
                 timeUnit: " s",
                 clickUnit: " clicks",
                 countdownGo: "GO"
@@ -1320,6 +1402,7 @@
                 copyResultLink: "📤 결과 링크 복사",
                 retry: "다시하기",
                 copiedAlert: "링크가 복사되었습니다",
+                toastClose: "닫기",
                 timeUnit: "초",
                 clickUnit: "회",
                 countdownGo: "시작"
@@ -1498,6 +1581,30 @@
         const timeBtns = document.querySelectorAll('.time-btn');
         const slime = document.getElementById('slime');
         const rankEmojiEl = document.getElementById('rankEmoji');
+        const copyToast = document.getElementById('copyToast');
+        const copyToastUrl = document.getElementById('copyToastUrl');
+        const copyToastClose = document.getElementById('copyToastClose');
+        let copyToastTimer = null;
+
+        function hideCopyToast() {
+            if (!copyToast) return;
+            copyToast.classList.remove('show');
+        }
+
+        function showCopyToast(url) {
+            if (!copyToast || !copyToastUrl) return;
+            copyToastUrl.textContent = url;
+            copyToast.classList.add('show');
+            if (copyToastTimer) clearTimeout(copyToastTimer);
+            copyToastTimer = setTimeout(hideCopyToast, 2600);
+        }
+
+        if (copyToastClose) {
+            copyToastClose.addEventListener('click', () => {
+                if (copyToastTimer) clearTimeout(copyToastTimer);
+                hideCopyToast();
+            });
+        }
 
         function setPadState(state) {
             clickPad.classList.remove('idle', 'counting', 'running');
@@ -1658,7 +1765,7 @@
                 document.execCommand('copy');
                 temp.remove();
             }
-            alert(t('copiedAlert'));
+            showCopyToast(shareUrl);
         }
 
         function animateValue(el, from, to, durationMs, formatValue) {
