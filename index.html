@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional CPS Speed Test Tool. Measure your click speed accurately.">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
     <title>NEON SPEED TEST | Global CPS Utility</title>
@@ -74,11 +74,19 @@
             min-height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
-            user-select: none;
-            -webkit-user-select: none;
             touch-action: pan-y;
             transition: background 0.4s ease, color 0.4s ease;
             padding-bottom: 60px;
+        }
+        .click-pad,
+        .btn-start,
+        .time-btn,
+        .btn-copy,
+        .btn-restart,
+        .info-tab,
+        .topbar-card {
+            user-select: none;
+            -webkit-user-select: none;
         }
         body.lang-ko [data-lang="ko"] { display: block; }
         body.lang-en [data-lang="en"] { display: block; }
@@ -392,6 +400,10 @@
         .click-pad.idle .pad-overlay,
         .click-pad.counting .pad-overlay { opacity: 1; pointer-events: auto; }
         .btn-start {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
             min-width: min(72%, 320px);
             padding: 16px 24px;
             border: 2px solid var(--neon-green);
@@ -420,6 +432,11 @@
             box-shadow: none;
         }
         .start-countdown {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             text-align: center;
             font-family: 'Black Ops One', cursive;
@@ -531,6 +548,9 @@
                 white-space: nowrap;
                 flex: 0 0 auto;
             }
+            .click-pad,
+            .modal-overlay { backdrop-filter: none; }
+            .slime-container { display: none; }
         }
         @media (max-height: 720px) {
             body { padding-bottom: 24px; }
@@ -1058,10 +1078,10 @@
     </div>
 
     <div class="time-selector">
-        <button class="time-btn" onclick="setTimeMode(1)">1s</button>
-        <button class="time-btn active" onclick="setTimeMode(5)">5s</button>
-        <button class="time-btn" onclick="setTimeMode(10)">10s</button>
-        <button class="time-btn" onclick="setTimeMode(60)">60s</button>
+        <button class="time-btn" onclick="setTimeMode(1, this)">1s</button>
+        <button class="time-btn active" onclick="setTimeMode(5, this)">5s</button>
+        <button class="time-btn" onclick="setTimeMode(10, this)">10s</button>
+        <button class="time-btn" onclick="setTimeMode(60, this)">60s</button>
     </div>
 
     <div class="test-container">
@@ -1369,8 +1389,10 @@
             const rect = clickPad.getBoundingClientRect();
             const posX = x || rect.left + rect.width / 2;
             const posY = y || rect.top + rect.height / 2;
+            const particleCount = lowPerfMode ? 2 : 5;
+            const spread = lowPerfMode ? 110 : 200;
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 document.body.appendChild(particle);
@@ -1380,8 +1402,8 @@
                 particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.left = `${posX}px`;
                 particle.style.top = `${posY}px`;
-                const tx = (Math.random() - 0.5) * 200;
-                const ty = (Math.random() - 0.5) * 200;
+                const tx = (Math.random() - 0.5) * spread;
+                const ty = (Math.random() - 0.5) * spread;
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
                 setTimeout(() => particle.remove(), 600);
@@ -1393,10 +1415,13 @@
         let selectedTime = 5; 
         let timeLeft = 5.00;
         let isRunning = false;
-        let timerInterval;
+        let timerRafId = null;
         let startTimeMs = 0;
         let countdownInterval;
         let isCountingDown = false;
+        const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const lowPerfMode = isCoarsePointer || prefersReducedMotion;
         
         const clickPad = document.getElementById('clickPad');
         const scoreEl = document.getElementById('score');
@@ -1441,13 +1466,13 @@
         }
 
         // 시간 설정
-        function setTimeMode(seconds) {
+        function setTimeMode(seconds, btnEl) {
             if (isRunning) return;
             selectedTime = seconds;
             timeLeft = seconds;
             
             timeBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btnEl) btnEl.classList.add('active');
             
             resetTest();
         }
@@ -1457,19 +1482,23 @@
             if (e.pointerType === 'mouse' && e.button !== 0) return;
             if (!isRunning) return;
             e.preventDefault(); 
-            playSound('click');
-            vibratePhone();
             createParticle(e.clientX, e.clientY);
+            if (!lowPerfMode) {
+                playSound('click');
+                vibratePhone();
+            }
 
-            // Slime jump effect
-            slime.classList.remove('jump');
-            void slime.offsetWidth;
-            slime.classList.add('jump');
-            if (slime.classList.contains('glow-advanced')) {
-                slime.classList.remove('glow-hit');
+            if (!lowPerfMode) {
+                // Slime jump effect
+                slime.classList.remove('jump');
                 void slime.offsetWidth;
-                slime.classList.add('glow-hit');
-                setTimeout(() => slime.classList.remove('glow-hit'), 300);
+                slime.classList.add('jump');
+                if (slime.classList.contains('glow-advanced')) {
+                    slime.classList.remove('glow-hit');
+                    void slime.offsetWidth;
+                    slime.classList.add('glow-hit');
+                    setTimeout(() => slime.classList.remove('glow-hit'), 300);
+                }
             }
 
             if (isRunning) {
@@ -1484,7 +1513,7 @@
                 const currentCps = (score / Math.max(0.1, elapsed)).toFixed(1);
                 updateRankEmoji(currentCps);
 
-                if (score % 5 === 0) {
+                if (!lowPerfMode && score % 5 === 0) {
                     clickPad.classList.remove('shake');
                     void clickPad.offsetWidth;
                     clickPad.classList.add('shake');
@@ -1536,13 +1565,18 @@
             scoreEl.innerText = score;
             startTimeMs = performance.now();
 
-            timerInterval = setInterval(() => {
+            const tick = () => {
                 const elapsed = (performance.now() - startTimeMs) / 1000;
                 timeLeft = Math.max(0, selectedTime - elapsed);
                 timerEl.innerText = timeLeft.toFixed(2) + "s";
 
-                if (timeLeft <= 0) endTest();
-            }, 10);
+                if (timeLeft <= 0) {
+                    endTest();
+                    return;
+                }
+                timerRafId = requestAnimationFrame(tick);
+            };
+            timerRafId = requestAnimationFrame(tick);
         }
 
         async function copyResultLink() {
@@ -1573,7 +1607,10 @@
 
         function endTest() {
             if (!isRunning) return;
-            clearInterval(timerInterval);
+            if (timerRafId !== null) {
+                cancelAnimationFrame(timerRafId);
+                timerRafId = null;
+            }
             isRunning = false;
             timeLeft = 0;
             timerEl.innerText = "0.00s";
@@ -1606,14 +1643,17 @@
         }
 
         function resetTest() {
-            clearInterval(timerInterval);
+            if (timerRafId !== null) {
+                cancelAnimationFrame(timerRafId);
+                timerRafId = null;
+            }
             clearInterval(countdownInterval);
             isRunning = false;
             isCountingDown = false;
             startCountdown.style.visibility = 'hidden';
             startCountdown.innerText = "";
             startBtn.disabled = false;
-            startBtn.style.display = 'inline-flex';
+            startBtn.style.display = 'flex';
             padOverlay.style.pointerEvents = 'auto';
             setPadState('idle');
             lastResult = null;
