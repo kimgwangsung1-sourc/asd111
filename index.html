@@ -1217,12 +1217,37 @@
     </div>
 
     <script>
+        function getCanonicalPageUrl() {
+            return `https://neoncps.com${window.location.pathname}${window.location.search}`;
+        }
+
+        function refreshDisqusTheme() {
+            const disqusThread = document.getElementById('disqus_thread');
+            if (!disqusThread) return;
+            if (!window.DISQUS || typeof window.DISQUS.reset !== 'function') return;
+
+            window.DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.url = getCanonicalPageUrl();
+                    this.page.identifier = "neon-speed-test";
+                }
+            });
+        }
+
+        function scheduleDisqusThemeRefresh() {
+            requestAnimationFrame(() => {
+                setTimeout(refreshDisqusTheme, 60);
+            });
+        }
+
         // 테마 관리
         function toggleTheme() {
             document.body.classList.toggle('light');
             const isLight = document.body.classList.contains('light');
             localStorage.setItem('neon_theme', isLight ? 'light' : 'dark');
             updateThemeIcon();
+            scheduleDisqusThemeRefresh();
         }
 
         function updateThemeIcon() {
@@ -1363,7 +1388,7 @@
 
         // Disqus
         var disqus_config = function () {
-            this.page.url = `https://neoncps.com${window.location.pathname}${window.location.search}`;
+            this.page.url = getCanonicalPageUrl();
             this.page.identifier = "neon-speed-test";
         };
         (function() {
