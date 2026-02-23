@@ -1577,25 +1577,12 @@
             this.page.identifier = "neon-speed-test";
         };
 
-        function loadDisqusEmbed(shortname, onError) {
+        (function() {
             var d = document, s = d.createElement('script');
-            s.src = `https://${shortname}.disqus.com/embed.js`;
+            s.src = 'https://https-asd111-pages-dev.disqus.com/embed.js';
             s.async = true;
             s.setAttribute('data-timestamp', +new Date());
-            if (typeof onError === 'function') {
-                s.onerror = onError;
-            }
             (d.head || d.body).appendChild(s);
-        }
-
-        (function() {
-            var primaryShortname = 'neoncps';
-            var fallbackShortname = 'https-asd111-pages-dev';
-            loadDisqusEmbed(primaryShortname, function () {
-                if (fallbackShortname !== primaryShortname) {
-                    loadDisqusEmbed(fallbackShortname);
-                }
-            });
         })();
 
         // 오디오 시스템
