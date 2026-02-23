@@ -580,9 +580,9 @@
             box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2);
         }
         body.light #disqus_thread {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(8, 8, 8, 0.8);
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(0, 136, 255, 0.28);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 248, 255, 0.94));
+            box-shadow: 0 10px 26px rgba(0, 80, 170, 0.12);
         }
 
         /* Neon Slime Character */
@@ -814,8 +814,9 @@
         body.light .summary-label { color: #334155; }
         body.light .summary-value { color: #0f172a; text-shadow: none; }
         body.light .summary-item.cps-item .summary-value {
-            color: #0b6b3f;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+            color: #00a86b;
+            -webkit-text-stroke: 0.8px rgba(8, 55, 38, 0.45);
+            text-shadow: 0 0 6px rgba(0, 168, 107, 0.28), 0 1px 0 rgba(255, 255, 255, 0.65);
         }
         .btn-copy {
             width: 100%;
@@ -1389,6 +1390,22 @@
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.04);
+            } else if (type === 'countdown') {
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(620, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(480, audioCtx.currentTime + 0.08);
+                gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.08);
+            } else if (type === 'go') {
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(900, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1300, audioCtx.currentTime + 0.12);
+                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.12);
             } else if (type === 'end') {
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
@@ -1558,15 +1575,18 @@
             let count = 3;
             startCountdown.innerText = String(count);
             startCountdown.style.visibility = 'visible';
+            playSound('countdown');
 
             countdownInterval = setInterval(() => {
                 count -= 1;
                 if (count > 0) {
                     startCountdown.innerText = String(count);
+                    playSound('countdown');
                     return;
                 }
                 clearInterval(countdownInterval);
                 startCountdown.innerText = t('countdownGo');
+                playSound('go');
                 setTimeout(() => {
                     startCountdown.style.visibility = 'hidden';
                     startCountdown.innerText = "";
