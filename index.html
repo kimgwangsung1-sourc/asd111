@@ -21,7 +21,6 @@
     <meta name="twitter:description" content="Free CPS test for desktop and mobile. Measure clicks per second with repeatable, easy-to-read results.">
     <meta name="twitter:image" content="https://neoncps.com/favicon.svg">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
-    <meta name="kakao-js-key" content="">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.svg">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
@@ -113,7 +112,6 @@
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXBYS7FWMH"></script>
-    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -907,35 +905,6 @@
             gap: 6px;
             text-align: center;
         }
-        .share-buttons {
-            margin-top: 12px;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px;
-        }
-        .btn-share {
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 800;
-            padding: 10px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            min-height: 44px;
-            transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
-        }
-        .btn-share:hover {
-            transform: translateY(-1px);
-            border-color: var(--neon-blue);
-            box-shadow: 0 6px 16px rgba(0, 243, 255, 0.16);
-        }
-        .btn-share:active { transform: scale(0.98); }
-        .btn-share.native {
-            grid-column: 1 / -1;
-            border-color: rgba(0, 255, 157, 0.45);
-            background: rgba(0, 255, 157, 0.14);
-        }
         .result-action {
             font-size: 14px;
             font-weight: 700;
@@ -990,8 +959,6 @@
         @media (max-width: 430px) {
             .result-guide,
             .result-action { white-space: normal; }
-            .share-buttons { grid-template-columns: 1fr; }
-            .btn-share.native { grid-column: auto; }
         }
         .copy-toast {
             position: fixed;
@@ -1435,17 +1402,6 @@
                 <div class="result-action" data-i18n="retryHint">🔁 Try again to improve your speed</div>
             </div>
 
-            <div class="share-buttons" aria-label="Social share buttons">
-                <button class="btn-share native" type="button" onclick="shareNative()" data-i18n="shareNative">📲 Share</button>
-                <button class="btn-share" type="button" onclick="shareTo('kakao')" data-i18n="shareKakao">💛 KakaoTalk</button>
-                <button class="btn-share" type="button" onclick="shareTo('x')" data-i18n="shareX">𝕏 X</button>
-                <button class="btn-share" type="button" onclick="shareTo('facebook')" data-i18n="shareFacebook">f Facebook</button>
-                <button class="btn-share" type="button" onclick="shareTo('threads')" data-i18n="shareThreads">@ Threads</button>
-                <button class="btn-share" type="button" onclick="shareTo('whatsapp')" data-i18n="shareWhatsapp">💬 WhatsApp</button>
-                <button class="btn-share" type="button" onclick="shareTo('instagram')" data-i18n="shareInstagram">📸 Instagram</button>
-                <button class="btn-share" type="button" onclick="shareTo('reddit')" data-i18n="shareReddit">👽 Reddit</button>
-            </div>
-
             <div class="result-footnote">
                 <div data-i18n="privacyNote">No personal data is collected.</div>
                 <div data-i18n="autoclickerNote">Auto-clickers are not supported.</div>
@@ -1549,14 +1505,6 @@
                 share: "📤 Share your result",
                 comment: "💬 Drop your record in the comments",
                 retryHint: "🔁 Try again to improve your speed",
-                shareNative: "📲 Share",
-                shareKakao: "💛 Share on KakaoTalk",
-                shareX: "𝕏 Share on X",
-                shareFacebook: "f Share on Facebook",
-                shareThreads: "@ Share on Threads",
-                shareWhatsapp: "💬 Share on WhatsApp",
-                shareInstagram: "📸 Instagram (copy text)",
-                shareReddit: "👽 Share on Reddit",
                 privacyNote: "No personal data is collected.",
                 autoclickerNote: "Auto-clickers are not supported.",
                 copyResultLink: "📤 Copy Result Link",
@@ -1590,14 +1538,6 @@
                 share: "📤 결과 공유",
                 comment: "💬 댓글에 네 기록을 남겨보세요",
                 retryHint: "🔁 다시 시도해 속도를 높여보세요",
-                shareNative: "📲 공유하기",
-                shareKakao: "💛 카카오톡 공유",
-                shareX: "𝕏 X 공유",
-                shareFacebook: "f 페이스북 공유",
-                shareThreads: "@ 스레드 공유",
-                shareWhatsapp: "💬 왓츠앱 공유",
-                shareInstagram: "📸 인스타그램 (문구 복사)",
-                shareReddit: "👽 레딧 공유",
                 privacyNote: "개인정보는 수집하지 않습니다.",
                 autoclickerNote: "오토클리커는 지원하지 않습니다.",
                 copyResultLink: "📤 결과 링크 복사",
@@ -1956,7 +1896,7 @@
         }
 
         async function copyResultLink() {
-            const shareUrl = getResultShareUrl();
+            const shareUrl = getCanonicalPageUrl();
             try {
                 await navigator.clipboard.writeText(shareUrl);
             } catch (err) {
@@ -1968,130 +1908,6 @@
                 temp.remove();
             }
             showCopyToast(shareUrl);
-        }
-
-        function getResultShareUrl() {
-            const baseUrl = getCanonicalPageUrl();
-            if (!lastResult) return baseUrl;
-            const url = new URL(baseUrl);
-            url.searchParams.set('cps', lastResult.cps.toFixed(2));
-            url.searchParams.set('clicks', String(lastResult.clicks));
-            url.searchParams.set('time', String(lastResult.time));
-            return url.toString();
-        }
-
-        function getShareText() {
-            if (!lastResult) {
-                return currentLang === 'ko'
-                    ? "NEONCPS에서 CPS 테스트 해보세요!"
-                    : "Try the CPS test on NEONCPS!";
-            }
-            const cps = lastResult.cps.toFixed(2);
-            if (currentLang === 'ko') {
-                return `내 NEONCPS 기록: ${cps} CPS (${lastResult.clicks}클릭 / ${lastResult.time}초). 너도 도전해봐!`;
-            }
-            return `My NEONCPS result: ${cps} CPS (${lastResult.clicks} clicks / ${lastResult.time}s). Can you beat this?`;
-        }
-
-        function openShareWindow(url) {
-            const features = "width=620,height=640,noopener,noreferrer";
-            window.open(url, "_blank", features);
-        }
-
-        async function copyTextToClipboard(text) {
-            try {
-                await navigator.clipboard.writeText(text);
-            } catch (err) {
-                const temp = document.createElement('textarea');
-                temp.value = text;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                temp.remove();
-            }
-        }
-
-        function getKakaoJsKey() {
-            const meta = document.querySelector('meta[name="kakao-js-key"]');
-            return (meta && meta.content ? meta.content.trim() : "");
-        }
-
-        function shareTo(platform) {
-            const shareUrl = getResultShareUrl();
-            const text = getShareText();
-            const encodedUrl = encodeURIComponent(shareUrl);
-            const encodedText = encodeURIComponent(text);
-            let targetUrl = "";
-
-            if (platform === "x") {
-                targetUrl = `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-            } else if (platform === "facebook") {
-                targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
-            } else if (platform === "threads") {
-                targetUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(`${text} ${shareUrl}`)}`;
-            } else if (platform === "whatsapp") {
-                targetUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${shareUrl}`)}`;
-            } else if (platform === "instagram") {
-                copyTextToClipboard(`${text} ${shareUrl}`).then(() => showCopyToast(shareUrl));
-                targetUrl = "https://www.instagram.com/";
-            } else if (platform === "kakao") {
-                const kakaoKey = getKakaoJsKey();
-                if (window.Kakao && kakaoKey) {
-                    try {
-                        if (!window.Kakao.isInitialized()) {
-                            window.Kakao.init(kakaoKey);
-                        }
-                        window.Kakao.Share.sendDefault({
-                            objectType: "feed",
-                            content: {
-                                title: "NEONCPS",
-                                description: text,
-                                imageUrl: "https://neoncps.com/favicon.svg",
-                                link: {
-                                    mobileWebUrl: shareUrl,
-                                    webUrl: shareUrl
-                                }
-                            },
-                            buttons: [
-                                {
-                                    title: currentLang === "ko" ? "결과 보기" : "View Result",
-                                    link: {
-                                        mobileWebUrl: shareUrl,
-                                        webUrl: shareUrl
-                                    }
-                                }
-                            ]
-                        });
-                        return;
-                    } catch (err) {
-                        // Fall back to web sharer below.
-                    }
-                }
-                targetUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodedUrl}&text=${encodedText}`;
-            } else if (platform === "reddit") {
-                targetUrl = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`;
-            }
-
-            if (!targetUrl) return;
-            openShareWindow(targetUrl);
-        }
-
-        async function shareNative() {
-            const shareUrl = getResultShareUrl();
-            const text = getShareText();
-            try {
-                if (navigator.share) {
-                    await navigator.share({
-                        title: "NEONCPS",
-                        text,
-                        url: shareUrl
-                    });
-                    return;
-                }
-            } catch (err) {
-                // User canceled or share failed; fall back to copy.
-            }
-            copyResultLink();
         }
 
         function animateValue(el, from, to, durationMs, formatValue) {
