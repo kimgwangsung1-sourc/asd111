@@ -652,13 +652,20 @@
                 flex: 0 0 auto;
             }
             .test-container {
-                position: sticky;
-                top: 92px;
-                z-index: 15;
+                position: relative;
+                top: auto;
+                z-index: 5;
             }
             .click-pad,
             .modal-overlay { backdrop-filter: none; }
-            .slime-container { display: none; }
+            .slime-container {
+                display: block;
+                right: 14px;
+                bottom: 18px;
+                width: 58px;
+                height: 50px;
+                opacity: 0.95;
+            }
         }
         @media (max-height: 720px) {
             body { padding-bottom: 24px; }
