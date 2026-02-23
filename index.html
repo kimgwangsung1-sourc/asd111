@@ -85,6 +85,9 @@
             transition: background 0.4s ease, color 0.4s ease;
             padding-bottom: 60px;
         }
+        body.game-active {
+            overflow: hidden;
+        }
         .click-pad,
         .btn-start,
         .time-btn,
@@ -554,6 +557,11 @@
             .info-tab {
                 white-space: nowrap;
                 flex: 0 0 auto;
+            }
+            .test-container {
+                position: sticky;
+                top: 92px;
+                z-index: 15;
             }
             .click-pad,
             .modal-overlay { backdrop-filter: none; }
@@ -1654,10 +1662,8 @@
             if (!isRunning) return;
             e.preventDefault(); 
             createParticle(e.clientX, e.clientY);
-            if (!lowPerfMode) {
-                playSound('click');
-                vibratePhone();
-            }
+            playSound('click');
+            if (!lowPerfMode) vibratePhone();
 
             if (!lowPerfMode) {
                 // Slime jump effect
@@ -1696,6 +1702,7 @@
             if (isRunning || isCountingDown || timeLeft <= 0) return;
             clearInterval(countdownInterval);
             isCountingDown = true;
+            document.body.classList.add('game-active');
             startBtn.disabled = true;
             startBtn.style.display = 'none';
             setPadState('counting');
@@ -1809,6 +1816,7 @@
             };
 
             setTimeout(() => {
+                document.body.classList.remove('game-active');
                 document.body.classList.add('modal-open');
                 modal.style.display = 'flex';
                 animateValue(finalTimeEl, 0, selectedTime, 800, (v) => `${Math.round(v)}${t('timeUnit')}`);
@@ -1837,6 +1845,7 @@
             document.getElementById('finalCps').innerText = "0.0";
             modal.style.display = 'none';
             document.body.classList.remove('modal-open');
+            document.body.classList.remove('game-active');
             idleMsg.style.visibility = 'visible';
             score = 0;
             timeLeft = selectedTime;
