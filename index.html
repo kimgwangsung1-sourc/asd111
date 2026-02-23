@@ -660,11 +660,22 @@
             .modal-overlay { backdrop-filter: none; }
             .slime-container {
                 display: block;
-                right: 14px;
-                bottom: 18px;
-                width: 58px;
-                height: 50px;
-                opacity: 0.95;
+                right: max(10px, env(safe-area-inset-right));
+                bottom: calc(10px + env(safe-area-inset-bottom));
+                width: 52px;
+                height: 44px;
+                opacity: 0.72;
+            }
+            body.game-active .slime-container {
+                opacity: 0.45;
+                transform: scale(0.92);
+            }
+        }
+        @media (max-width: 480px), (max-height: 700px) {
+            .slime-container {
+                width: 46px;
+                height: 40px;
+                opacity: 0.62;
             }
         }
         @media (max-height: 720px) {
@@ -1066,6 +1077,9 @@
         body.modal-open iframe[src*="googleads"],
         body.modal-open iframe[id^="google_ads_iframe"] {
             display: none !important;
+        }
+        body.modal-open .slime-container {
+            opacity: 0 !important;
         }
     </style>
 </head>
