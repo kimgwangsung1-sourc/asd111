@@ -130,7 +130,7 @@
       window.Userback = window.Userback || {};
       Userback.access_token = "A-x0LP1Po7w47QqEih47n8PkP0m";
       Userback.widget_settings = {
-        position: "left"
+        position: "sw"
       };
       (function(d) {
         var s = d.createElement('script');
@@ -731,11 +731,6 @@
             pointer-events: none;
             transition: transform 0.1s ease, opacity 0.5s ease;
         }
-        #userback_button_container {
-            left: max(12px, env(safe-area-inset-left)) !important;
-            right: auto !important;
-            bottom: calc(12px + env(safe-area-inset-bottom)) !important;
-        }
         .slime-container::after {
             content: "";
             position: absolute;
@@ -1053,15 +1048,36 @@
             background: rgba(0, 136, 255, 0.1);
             color: #0f172a;
         }
-        .disqus-cta {
+        .disqus-actions {
             width: 92%;
             max-width: 720px;
             margin: 26px auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .disqus-cta {
             text-align: center;
             color: var(--text);
             font-weight: 800;
             font-size: 16px;
             letter-spacing: 0.3px;
+        }
+        .feedback-btn {
+            border: 1px solid var(--border);
+            background: var(--panel-bg);
+            color: var(--text);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            min-height: 44px;
+        }
+        #userback_button_container {
+            display: none !important;
         }
 
         .btn-restart {
@@ -1374,7 +1390,10 @@
 
     
 
-    <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
+    <div class="disqus-actions">
+        <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
+        <button class="feedback-btn" type="button" onclick="openFeedbackWidget()" data-i18n="feedbackCta">📝 Send Feedback</button>
+    </div>
 
     <div id="disqus_thread"></div>
 
@@ -1534,6 +1553,8 @@
                 timeUnit: " s",
                 clickUnit: " clicks",
                 countdownGo: "GO"
+                ,
+                feedbackCta: "📝 Send Feedback"
             },
             ko: {
                 langButton: "언어",
@@ -1567,6 +1588,8 @@
                 timeUnit: "초",
                 clickUnit: "회",
                 countdownGo: "시작"
+                ,
+                feedbackCta: "📝 피드백 보내기"
             }
         };
 
@@ -1928,6 +1951,24 @@
                 temp.remove();
             }
             showCopyToast(shareUrl);
+        }
+
+        function openFeedbackWidget() {
+            const openNow = () => {
+                if (window.Userback && typeof window.Userback.open === 'function') {
+                    window.Userback.open();
+                    return true;
+                }
+                const launcher = document.querySelector('#userback_button_container button, #userback_button_container a');
+                if (launcher) {
+                    launcher.click();
+                    return true;
+                }
+                return false;
+            };
+            if (!openNow()) {
+                setTimeout(openNow, 500);
+            }
         }
 
         function animateValue(el, from, to, durationMs, formatValue) {
