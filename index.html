@@ -1052,45 +1052,12 @@
             width: 92%;
             max-width: 720px;
             margin: 26px auto 10px;
+            display: block;
             text-align: center;
             color: var(--text);
             font-weight: 800;
             font-size: 16px;
             letter-spacing: 0.3px;
-        }
-        .feedback-nav {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 44px;
-            padding: 6px 10px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--panel-bg);
-        }
-        .feedback-label {
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            color: var(--text);
-            white-space: nowrap;
-        }
-        .feedback-launcher-slot {
-            min-height: 44px;
-            min-width: 52px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #feedbackLauncherSlot #userback_button_container {
-            position: static !important;
-            left: auto !important;
-            right: auto !important;
-            top: auto !important;
-            bottom: auto !important;
-            transform: none !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
         }
 
         .btn-restart {
@@ -1154,10 +1121,6 @@
                 <span id="themeIcon">🌙</span>
                 <span data-i18n="theme">THEME</span>
             </button>
-            <div class="feedback-nav" aria-label="Feedback">
-                <span class="feedback-label" data-i18n="feedbackCta">📝 Send Feedback</span>
-                <div class="feedback-launcher-slot" id="feedbackLauncherSlot" aria-label="Feedback launcher"></div>
-            </div>
         </div>
     </div>
 
@@ -1567,8 +1530,6 @@
                 timeUnit: " s",
                 clickUnit: " clicks",
                 countdownGo: "GO"
-                ,
-                feedbackCta: "📝 Send Feedback"
             },
             ko: {
                 langButton: "언어",
@@ -1602,8 +1563,6 @@
                 timeUnit: "초",
                 clickUnit: "회",
                 countdownGo: "시작"
-                ,
-                feedbackCta: "📝 피드백 보내기"
             }
         };
 
@@ -1966,25 +1925,6 @@
             }
             showCopyToast(shareUrl);
         }
-
-        function mountUserbackLauncher() {
-            const slot = document.getElementById('feedbackLauncherSlot');
-            if (!slot) return;
-            let tries = 0;
-            const timer = setInterval(() => {
-                const launcher = document.getElementById('userback_button_container');
-                if (launcher) {
-                    slot.appendChild(launcher);
-                    clearInterval(timer);
-                    return;
-                }
-                tries += 1;
-                if (tries >= 40) {
-                    clearInterval(timer);
-                }
-            }, 250);
-        }
-        mountUserbackLauncher();
 
         function animateValue(el, from, to, durationMs, formatValue) {
             const start = performance.now();
