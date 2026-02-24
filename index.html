@@ -1048,26 +1048,36 @@
             background: rgba(0, 136, 255, 0.1);
             color: #0f172a;
         }
-        .disqus-actions {
+        .disqus-cta {
             width: 92%;
             max-width: 720px;
             margin: 26px auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .disqus-cta {
             text-align: center;
             color: var(--text);
             font-weight: 800;
             font-size: 16px;
             letter-spacing: 0.3px;
         }
+        .feedback-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--panel-bg);
+        }
+        .feedback-label {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            color: var(--text);
+            white-space: nowrap;
+        }
         .feedback-launcher-slot {
             min-height: 44px;
-            min-width: 132px;
+            min-width: 52px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1144,6 +1154,10 @@
                 <span id="themeIcon">🌙</span>
                 <span data-i18n="theme">THEME</span>
             </button>
+            <div class="feedback-nav" aria-label="Feedback">
+                <span class="feedback-label" data-i18n="feedbackCta">📝 Send Feedback</span>
+                <div class="feedback-launcher-slot" id="feedbackLauncherSlot" aria-label="Feedback launcher"></div>
+            </div>
         </div>
     </div>
 
@@ -1393,10 +1407,7 @@
 
     
 
-    <div class="disqus-actions">
-        <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
-        <div class="feedback-launcher-slot" id="feedbackLauncherSlot" aria-label="Feedback launcher"></div>
-    </div>
+    <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
 
     <div id="disqus_thread"></div>
 
