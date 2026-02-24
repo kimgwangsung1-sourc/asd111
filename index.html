@@ -129,6 +129,9 @@
     <script>
       window.Userback = window.Userback || {};
       Userback.access_token = "A-x0LP1Po7w47QqEih47n8PkP0m";
+      Userback.widget_settings = {
+        position: "left"
+      };
       (function(d) {
         var s = d.createElement('script');
         s.async = true;
@@ -670,8 +673,8 @@
             .modal-overlay { backdrop-filter: none; }
             .slime-container {
                 display: block;
-                left: max(10px, env(safe-area-inset-left));
-                right: auto;
+                right: max(10px, env(safe-area-inset-right));
+                left: auto;
                 bottom: calc(10px + env(safe-area-inset-bottom));
                 width: 52px;
                 height: 44px;
@@ -720,13 +723,18 @@
         .slime-container {
             position: fixed;
             bottom: 30px;
-            left: 40px;
-            right: auto;
+            right: 40px;
+            left: auto;
             width: 70px;
             height: 60px;
             z-index: 1;
             pointer-events: none;
             transition: transform 0.1s ease, opacity 0.5s ease;
+        }
+        #userback_button_container {
+            left: max(12px, env(safe-area-inset-left)) !important;
+            right: auto !important;
+            bottom: calc(12px + env(safe-area-inset-bottom)) !important;
         }
         .slime-container::after {
             content: "";
