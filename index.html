@@ -1065,23 +1065,22 @@
             font-size: 16px;
             letter-spacing: 0.3px;
         }
-        .feedback-btn {
-            border: 1px solid var(--border);
-            background: var(--panel-bg);
-            color: var(--text);
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 13px;
-            font-weight: 800;
-            cursor: pointer;
+        .feedback-launcher-slot {
             min-height: 44px;
+            min-width: 132px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        #userback_button_container {
-            position: fixed !important;
-            left: -9999px !important;
-            bottom: -9999px !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
+        #feedbackLauncherSlot #userback_button_container {
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            transform: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         .btn-restart {
@@ -1396,7 +1395,7 @@
 
     <div class="disqus-actions">
         <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
-        <button class="feedback-btn" type="button" onclick="openFeedbackWidget()" data-i18n="feedbackCta">📝 Send Feedback</button>
+        <div class="feedback-launcher-slot" id="feedbackLauncherSlot" aria-label="Feedback launcher"></div>
     </div>
 
     <div id="disqus_thread"></div>
@@ -1957,42 +1956,24 @@
             showCopyToast(shareUrl);
         }
 
-        function openFeedbackWidget() {
-            const tryOpen = () => {
-                const ub = window.Userback;
-                try {
-                    if (ub && typeof ub.open === 'function') {
-                        ub.open();
-                        return true;
-                    }
-                    if (ub && typeof ub.show === 'function') {
-                        ub.show();
-                        return true;
-                    }
-                    if (typeof ub === 'function') {
-                        ub('open');
-                        return true;
-                    }
-                } catch (err) {
-                    // Ignore and continue to launcher fallback.
-                }
-
-                const launcher = document.querySelector('#userback_button_container button, #userback_button_container a, [data-userback-launcher]');
-                if (launcher) {
-                    launcher.click();
-                    return true;
-                }
-                return false;
-            };
-
+        function mountUserbackLauncher() {
+            const slot = document.getElementById('feedbackLauncherSlot');
+            if (!slot) return;
             let tries = 0;
             const timer = setInterval(() => {
+                const launcher = document.getElementById('userback_button_container');
+                if (launcher) {
+                    slot.appendChild(launcher);
+                    clearInterval(timer);
+                    return;
+                }
                 tries += 1;
-                if (tryOpen() || tries >= 20) {
+                if (tries >= 40) {
                     clearInterval(timer);
                 }
-            }, 200);
+            }, 250);
         }
+        mountUserbackLauncher();
 
         function animateValue(el, from, to, durationMs, formatValue) {
             const start = performance.now();
