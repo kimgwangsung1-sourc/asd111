@@ -670,7 +670,8 @@
             .modal-overlay { backdrop-filter: none; }
             .slime-container {
                 display: block;
-                right: max(10px, env(safe-area-inset-right));
+                left: max(10px, env(safe-area-inset-left));
+                right: auto;
                 bottom: calc(10px + env(safe-area-inset-bottom));
                 width: 52px;
                 height: 44px;
@@ -719,7 +720,8 @@
         .slime-container {
             position: fixed;
             bottom: 30px;
-            right: 40px;
+            left: 40px;
+            right: auto;
             width: 70px;
             height: 60px;
             z-index: 1;
