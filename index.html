@@ -1077,7 +1077,11 @@
             min-height: 44px;
         }
         #userback_button_container {
-            display: none !important;
+            position: fixed !important;
+            left: -9999px !important;
+            bottom: -9999px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
         }
 
         .btn-restart {
@@ -1954,21 +1958,40 @@
         }
 
         function openFeedbackWidget() {
-            const openNow = () => {
-                if (window.Userback && typeof window.Userback.open === 'function') {
-                    window.Userback.open();
-                    return true;
+            const tryOpen = () => {
+                const ub = window.Userback;
+                try {
+                    if (ub && typeof ub.open === 'function') {
+                        ub.open();
+                        return true;
+                    }
+                    if (ub && typeof ub.show === 'function') {
+                        ub.show();
+                        return true;
+                    }
+                    if (typeof ub === 'function') {
+                        ub('open');
+                        return true;
+                    }
+                } catch (err) {
+                    // Ignore and continue to launcher fallback.
                 }
-                const launcher = document.querySelector('#userback_button_container button, #userback_button_container a');
+
+                const launcher = document.querySelector('#userback_button_container button, #userback_button_container a, [data-userback-launcher]');
                 if (launcher) {
                     launcher.click();
                     return true;
                 }
                 return false;
             };
-            if (!openNow()) {
-                setTimeout(openNow, 500);
-            }
+
+            let tries = 0;
+            const timer = setInterval(() => {
+                tries += 1;
+                if (tryOpen() || tries >= 20) {
+                    clearInterval(timer);
+                }
+            }, 200);
         }
 
         function animateValue(el, from, to, durationMs, formatValue) {
