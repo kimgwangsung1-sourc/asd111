@@ -126,19 +126,23 @@
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "vk5zr5rhoj");
     </script>
+    <!-- Userback disabled by request.
     <script>
       window.Userback = window.Userback || {};
-      Userback.access_token = "A-x0LP1Po7w47QqEih47n8PkP0m";
-      Userback.widget_settings = {
-        position: "sw"
-      };
-      (function(d) {
-        var s = d.createElement('script');
-        s.async = true;
-        s.src = 'https://static.userback.io/widget/v1.js';
-        (d.head || d.body).appendChild(s);
-      })(document);
+      if (window.__USERBACK_TOKEN__) {
+        Userback.access_token = window.__USERBACK_TOKEN__;
+        Userback.widget_settings = {
+          position: "sw"
+        };
+        (function(d) {
+          var s = d.createElement('script');
+          s.async = true;
+          s.src = 'https://static.userback.io/widget/v1.js';
+          (d.head || d.body).appendChild(s);
+        })(document);
+      }
     </script>
+    -->
     
     <style>
         :root {
