@@ -701,24 +701,6 @@
             .btn-start { font-size: clamp(20px, 4.8vw, 28px); }
         }
 
-        #disqus_thread {
-            width: 92%;
-            max-width: 720px;
-            margin: 40px auto;
-            min-height: 280px;
-            padding: 14px 14px 6px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: rgba(10, 10, 10, 0.55);
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2);
-        }
-        body.light #disqus_thread {
-            border: 1px solid var(--border);
-            background: var(--panel-bg);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            color: var(--muted);
-        }
-
         /* Neon Slime Character */
         .slime-container {
             position: fixed;
@@ -1048,18 +1030,6 @@
             background: rgba(0, 136, 255, 0.1);
             color: #0f172a;
         }
-        .disqus-cta {
-            width: 92%;
-            max-width: 720px;
-            margin: 26px auto 10px;
-            display: block;
-            text-align: center;
-            color: var(--text);
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 0.3px;
-        }
-
         .btn-restart {
             background: linear-gradient(135deg, var(--neon-pink), #ff5e00);
             border: none;
@@ -1264,11 +1234,9 @@
         <div class="info-panel" id="panel-policy">
             <p data-lang="ko">
                 이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 저장되는 개인 식별 정보는 없습니다.
-                댓글 기능은 Disqus를 통해 제공되며, Disqus의 개인정보처리방침이 적용됩니다.
             </p>
             <p data-lang="en">
                 This site uses input events (click/touch) for speed testing. No personally identifiable data is stored.
-                Comments are provided via Disqus and follow Disqus privacy policy.
             </p>
             <p data-lang="ko">
                 광고는 Google AdSense를 통해 제공될 수 있으며, 광고 제공을 위해 쿠키 또는 유사 기술이 사용될 수 있습니다.
@@ -1277,11 +1245,11 @@
                 Ads may be served by Google AdSense, which can use cookies or similar technologies.
             </p>
             <p data-lang="ko">
-                이 사이트는 댓글 및 광고 기능을 위해 쿠키를 사용할 수 있습니다. 쿠키는 서비스 제공과 사용 환경 개선에 사용됩니다.
+                이 사이트는 광고 기능을 위해 쿠키를 사용할 수 있습니다. 쿠키는 서비스 제공과 사용 환경 개선에 사용됩니다.
                 브라우저 설정에서 쿠키 차단/삭제가 가능하며, 일부 기능이 제한될 수 있습니다.
             </p>
             <p data-lang="en">
-                This site may use cookies for comments and ads. You can block/delete cookies in browser settings; some features may be limited.
+                This site may use cookies for ads. You can block/delete cookies in browser settings; some features may be limited.
             </p>
         </div>
 
@@ -1370,10 +1338,6 @@
 
     
 
-    <div class="disqus-cta" data-i18n="disqusCta">💬 Share your record in the comments</div>
-
-    <div id="disqus_thread"></div>
-
     <div class="slime-container" id="slime">
         <div class="slime">
             <div class="slime-eyes">
@@ -1414,7 +1378,6 @@
 
             <div class="result-actions">
                 <div class="result-action" data-i18n="share">📤 Share your result</div>
-                <div class="result-action" data-i18n="comment">💬 Drop your record in the comments</div>
                 <div class="result-action" data-i18n="retryHint">🔁 Try again to improve your speed</div>
             </div>
 
@@ -1442,26 +1405,6 @@
             return `https://neoncps.com${window.location.pathname}${window.location.search}`;
         }
 
-        function refreshDisqusTheme() {
-            const disqusThread = document.getElementById('disqus_thread');
-            if (!disqusThread) return;
-            if (!window.DISQUS || typeof window.DISQUS.reset !== 'function') return;
-
-            window.DISQUS.reset({
-                reload: true,
-                config: function () {
-                    this.page.url = getCanonicalPageUrl();
-                    this.page.identifier = "neon-speed-test";
-                }
-            });
-        }
-
-        function scheduleDisqusThemeRefresh() {
-            requestAnimationFrame(() => {
-                setTimeout(refreshDisqusTheme, 60);
-            });
-        }
-
         function safeStorageGet(key, fallbackValue) {
             try {
                 const value = window.localStorage.getItem(key);
@@ -1485,7 +1428,6 @@
             const isLight = document.body.classList.contains('light');
             safeStorageSet('neon_theme', isLight ? 'light' : 'dark');
             updateThemeIcon();
-            scheduleDisqusThemeRefresh();
         }
 
         function updateThemeIcon() {
@@ -1509,7 +1451,6 @@
                 navPolicy: "POLICY",
                 start: "START",
                 idleMsg: "PRESS START, THEN TAP THE PAD",
-                disqusCta: "💬 Share your record in the comments",
                 resultTitle: "🎯 YOUR RESULT",
                 resultSub: "Click Speed Performance",
                 time: "⏱ Time (seconds)",
@@ -1519,7 +1460,6 @@
                 fastInfo: "🎯 9+ CPS is considered fast",
                 veryFastInfo: "🚀 15+ CPS is very fast",
                 share: "📤 Share your result",
-                comment: "💬 Drop your record in the comments",
                 retryHint: "🔁 Try again to improve your speed",
                 privacyNote: "No personal data is collected.",
                 autoclickerNote: "Auto-clickers are not supported.",
@@ -1542,7 +1482,6 @@
                 navPolicy: "이용 정책",
                 start: "시작",
                 idleMsg: "START 버튼을 누른 뒤 패드를 탭하세요",
-                disqusCta: "💬 댓글에 기록을 남겨보세요",
                 resultTitle: "🎯 결과",
                 resultSub: "클릭 속도 측정 결과",
                 time: "⏱ 측정 시간(초)",
@@ -1552,7 +1491,6 @@
                 fastInfo: "🎯 9 CPS 이상이면 빠른 편입니다",
                 veryFastInfo: "🚀 15 CPS 이상은 매우 빠른 수준입니다",
                 share: "📤 결과 공유",
-                comment: "💬 댓글에 네 기록을 남겨보세요",
                 retryHint: "🔁 다시 시도해 속도를 높여보세요",
                 privacyNote: "개인정보는 수집하지 않습니다.",
                 autoclickerNote: "오토클리커는 지원하지 않습니다.",
@@ -1625,20 +1563,6 @@
                 }
             });
         });
-
-        // Disqus
-        var disqus_config = function () {
-            this.page.url = getCanonicalPageUrl();
-            this.page.identifier = "neon-speed-test";
-        };
-
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://https-asd111-pages-dev.disqus.com/embed.js';
-            s.async = true;
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
 
         // 오디오 시스템
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
