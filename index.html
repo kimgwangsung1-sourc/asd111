@@ -1369,27 +1369,27 @@
                 <li>Update rule: when the measurement logic changes, the guide text is revised too.</li>
                 <li>Corrections: use the contact form if you find unclear or inaccurate explanations.</li>
             </ul>
-            <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm">
+            <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm" autocomplete="on">
                 <div class="field">
                     <label for="contactName">
                         <span data-lang="ko" class="lang-inline">이름</span>
                         <span data-lang="en" class="lang-inline">Name</span>
                     </label>
-                    <input id="contactName" name="name" type="text" data-placeholder-key="contactNamePlaceholder" placeholder="Enter your name" required>
+                    <input id="contactName" name="name" type="text" data-placeholder-key="contactNamePlaceholder" placeholder="Enter your name" autocomplete="name" required>
                 </div>
                 <div class="field">
                     <label for="contactEmail">
                         <span data-lang="ko" class="lang-inline">이메일</span>
                         <span data-lang="en" class="lang-inline">Email</span>
                     </label>
-                    <input id="contactEmail" name="email" type="email" placeholder="reply@example.com" required>
+                    <input id="contactEmail" name="email" type="email" placeholder="reply@example.com" autocomplete="email" required>
                 </div>
                 <div class="field">
                     <label for="contactMessage">
                         <span data-lang="ko" class="lang-inline">문의 내용</span>
                         <span data-lang="en" class="lang-inline">Message</span>
                     </label>
-                    <textarea id="contactMessage" name="message" rows="4" data-placeholder-key="contactMessagePlaceholder" placeholder="Enter your message" required></textarea>
+                    <textarea id="contactMessage" name="message" rows="4" data-placeholder-key="contactMessagePlaceholder" placeholder="Enter your message" autocomplete="off" required></textarea>
                 </div>
                 <div class="actions">
                     <button class="btn-restart" type="submit">
