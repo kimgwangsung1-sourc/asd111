@@ -65,7 +65,7 @@
           "about": { "@id": "https://neoncps.com/#app" },
           "publisher": { "@id": "https://neoncps.com/#organization" },
           "inLanguage": "en",
-          "dateModified": "2026-03-11"
+          "dateModified": "2026-03-12"
         },
         {
           "@type": "SoftwareApplication",
@@ -1534,10 +1534,12 @@
                 <li>CPS란 무엇인가요? CPS는 초당 클릭 수이며, 총 클릭 수를 선택한 측정 시간으로 나눠 계산합니다.</li>
                 <li>왜 시도할 때마다 결과가 달라지나요? 기기 입력 지연, 브라우저 성능, 손 피로도, 클릭 리듬 차이로 결과가 달라질 수 있습니다.</li>
                 <li>모바일에서도 사용할 수 있나요? 네. NEONCPS는 반응형 UI로 PC와 모바일 모두 지원합니다.</li>
-                <li>더 일관된 CPS 결과를 얻으려면? 같은 기기, 같은 브라우저, 같은 자세로 반복 측정하고 시작 전 짧게 손을 풀어주세요.</li>
+                <li>더 일관된 CPS 결과를 얻으려면? 같은 기기, 같은 브라우저, 같은 손가락, 같은 자세로 반복 측정하고 시작 전 짧게 손을 풀어주세요.</li>
                 <li>의료 진단용 도구인가요? 아니요. 이 도구는 일상적인 반응 속도 체크용이며 의료 또는 진단 목적이 아닙니다.</li>
                 <li>1초 모드와 60초 모드는 무엇이 다른가요? 1초는 순간 폭발력 확인에 가깝고, 60초는 리듬 유지력과 피로 영향을 보기 좋습니다.</li>
+                <li>왜 60초 기록은 점점 떨어지나요? 긴 모드에서는 손가락 피로와 리듬 붕괴가 누적되기 쉬워 자연스럽게 내려갈 수 있습니다.</li>
                 <li>마우스와 터치 기록을 바로 비교해도 되나요? 권장하지 않습니다. 입력 하드웨어와 브라우저 조건이 달라 점수 해석 기준도 달라질 수 있습니다.</li>
+                <li>브라우저 탭이나 백그라운드 앱이 많으면 영향이 있나요? 네. 메인 스레드 부하와 입력 처리 지연 때문에 기록이 덜 안정적일 수 있습니다.</li>
                 <li>왜 우클릭이나 키보드는 점수에 포함되지 않나요? 이 도구는 클릭/터치 기반 비교를 위해 기본 포인터 입력만 같은 규칙으로 집계합니다.</li>
                 <li>점수는 서버에 저장되나요? 아니요. 이 페이지는 결과를 화면에 계산해 보여주며, 사용자가 직접 링크를 복사하지 않는 한 기록을 저장하지 않습니다.</li>
                 <li>연습은 어떻게 하는 게 좋나요? 같은 모드에서 3회 측정 후 중간값을 보고, 5초와 10초 모드를 중심으로 리듬과 자세를 먼저 맞추는 것이 좋습니다.</li>
@@ -1546,10 +1548,12 @@
                 <li>What is CPS? CPS means clicks per second. It is calculated as total clicks divided by the selected test time.</li>
                 <li>Why do results change each attempt? Results vary by device latency, browser performance, hand fatigue, and click rhythm.</li>
                 <li>Is this mobile-friendly? Yes. NEONCPS supports both desktop and mobile interactions with responsive UI.</li>
-                <li>How can I get more consistent CPS results? Use the same device, browser, and posture, warm up briefly, and repeat tests under matching conditions.</li>
+                <li>How can I get more consistent CPS results? Use the same device, browser, finger, and posture, warm up briefly, and repeat tests under matching conditions.</li>
                 <li>Is this tool for medical diagnosis? No. This is a casual reaction-speed utility and is not intended for medical or diagnostic use.</li>
                 <li>What is the difference between 1s and 60s modes? A 1s test favors burst speed, while 60s is better for checking rhythm control and fatigue over time.</li>
+                <li>Why do 60s scores often drop? Longer runs naturally expose finger fatigue and rhythm breakdown, so the score may fall even when you start fast.</li>
                 <li>Can I compare mouse and touch scores directly? Not reliably. Different input hardware and browser conditions change how scores should be interpreted.</li>
+                <li>Do many open tabs or background apps matter? Yes. Main-thread load and input-event delay can make timing less stable.</li>
                 <li>Why are right-click and keyboard presses not counted? This tool uses one simple rule for comparison and counts only primary pointer input.</li>
                 <li>Are results stored on the server? No. The score is calculated on the page and shown to you unless you choose to copy the result link yourself.</li>
                 <li>How should I practice? Run three attempts in the same mode, look at the middle result, and use 5s or 10s modes first to improve rhythm and posture.</li>
@@ -1597,13 +1601,12 @@
                 <span data-lang="ko">이 도구가 하는 일</span>
             </h2>
             <p data-lang="ko">
-                NEON SPEED TEST는 <strong>누가 써야 하나?</strong>라는 질문에 대해,
-                게임 반응 속도나 모바일 입력 반응을 빠르게 확인하려는 사용자에게 적합한 도구입니다.
-                짧은 시간 안에 클릭 일관성을 확인하고 싶을 때 바로 사용할 수 있습니다.
+                NEON SPEED TEST는 게임 반응 속도, 입력 리듬, 짧은 시간의 반복 탭 안정성을 확인하려는 사용자에게 맞는 도구입니다.
+                빠른 손가락 탭 과제처럼 짧은 시간 안에 얼마나 일정하게 입력할 수 있는지를 보는 데 유용합니다.
             </p>
             <p data-lang="en">
-                NEON SPEED TEST is best for people who want a quick, repeatable way to check click speed and rhythm.
-                It is useful for game reflex checks, mobile input response, and consistency practice.
+                NEON SPEED TEST is for visitors who want to check click speed, tapping rhythm, and short-burst consistency.
+                It works like a simple finger-tapping task on the web: useful for game reflex checks, mobile input response, and repeatability practice.
             </p>
             <p data-lang="ko">
                 <strong>어떻게 계산되나?</strong> CPS(초당 클릭 수)는
@@ -1618,20 +1621,20 @@
             <ul data-lang="ko">
                 <li><strong>언제 쓰면 좋은가?</strong> 1~10초 모드는 순간 반응 확인에 유리합니다.</li>
                 <li>60초 모드는 리듬 유지력과 피로 영향을 확인하기 좋습니다.</li>
-                <li><strong>정확도 팁:</strong> 동일 기기, 동일 브라우저, 동일 자세로 반복 측정하세요.</li>
+                <li><strong>정확도 팁:</strong> 동일 기기, 동일 브라우저, 동일 손가락, 동일 자세로 반복 측정하세요.</li>
             </ul>
             <ul data-lang="en">
                 <li><strong>When to use it:</strong> 1–10s modes are best for quick reflex checks.</li>
                 <li>60s mode helps evaluate rhythm stability and fatigue effects.</li>
-                <li><strong>Accuracy tip:</strong> repeat with the same device, browser, and posture.</li>
+                <li><strong>Accuracy tip:</strong> repeat with the same device, browser, finger, and posture.</li>
             </ul>
             <p data-lang="ko">
                 이 사이트의 핵심 목적은 한 가지입니다. 사용자가 같은 조건에서 자신의 클릭 속도와 리듬을 다시 측정하고 비교할 수 있게 돕는 것입니다.
-                그래서 점수만 보여주는 데서 끝내지 않고, 왜 점수가 달라지는지와 어떻게 해석해야 하는지도 함께 설명합니다.
+                그래서 점수만 보여주는 데서 끝내지 않고, 왜 점수가 달라지는지, 웹에서 무엇이 흔들림을 만드는지, 어떻게 더 공정하게 비교해야 하는지도 함께 설명합니다.
             </p>
             <p data-lang="en">
                 This site has one main purpose: help visitors measure and compare click speed under repeatable conditions.
-                That is why the page includes not only the score tool, but also context on why scores change and how to read them.
+                That is why the page explains not only the score, but also why web results move, what makes them unstable, and how to compare attempts more fairly.
             </p>
         </div>
     </section>
@@ -1663,12 +1666,12 @@
                 <li>60s: better for rhythm endurance, focus, and fatigue effects.</li>
             </ul>
             <p data-lang="ko">
-                점수 구간은 어디까지나 대략적인 해석용입니다. 같은 사람이라도 마우스, 터치, 브라우저, 화면 주사율이 달라지면 체감 난이도가 크게 달라질 수 있습니다.
-                그래서 가장 좋은 비교 방법은 <strong>같은 기기, 같은 브라우저, 같은 자세</strong>로 여러 번 측정하는 것입니다.
+                점수 구간은 어디까지나 대략적인 해석용입니다. 1초 기록은 시작 타이밍과 경계 밀리초에 특히 민감하고,
+                60초 기록은 피로 누적으로 자연스럽게 내려갈 수 있습니다. 그래서 가장 좋은 비교 방법은 <strong>같은 기기, 같은 브라우저, 같은 자세</strong>로 여러 번 측정하는 것입니다.
             </p>
             <p data-lang="en">
-                Score bands are only rough interpretation aids. The same person can feel very different on a mouse, touch screen, browser, or refresh rate.
-                The most reliable comparison is to repeat tests on <strong>the same device, in the same browser, with the same posture</strong>.
+                Score bands are only rough interpretation aids. A 1-second run is especially sensitive to start timing and tiny boundary differences,
+                while a 60-second run may naturally fall as fatigue builds. The most reliable comparison is to repeat tests on <strong>the same device, in the same browser, with the same posture</strong>.
             </p>
         </div>
     </section>
@@ -1680,25 +1683,35 @@
                 <span data-lang="ko">기록이 시도마다 달라지는 이유</span>
             </h2>
             <p data-lang="ko">
-                CPS는 손만의 문제가 아닙니다. 클릭 스위치 반응, 터치 샘플링 빈도, 브라우저 부하, 배터리 절약 모드, 백그라운드 앱, 손가락 피로가 모두 결과에 영향을 줍니다.
+                CPS는 손만의 문제가 아닙니다. 클릭 스위치 반응, 터치 샘플링 빈도, 화면 주사율, 브라우저 메인 스레드 부하, 배터리 절약 모드, 백그라운드 앱, 손가락 피로가 모두 결과에 영향을 줍니다.
                 즉, 기록이 조금 달라지는 것은 이상한 일이 아니라 매우 자연스러운 일입니다.
             </p>
             <p data-lang="en">
-                CPS is not only about your hand. Click-switch response, touch sampling, browser load, battery saver, background apps, and finger fatigue can all move the result.
+                CPS is not only about your hand. Click-switch response, touch sampling, display refresh rate, browser main-thread load, battery saver, background apps, and finger fatigue can all move the result.
                 Small score changes are normal and should not be treated as measurement errors by default.
             </p>
             <ul data-lang="ko">
                 <li>마우스와 터치는 입력 방식 자체가 달라서 직접 비교가 어렵습니다.</li>
-                <li>브라우저 탭을 많이 띄우면 타이밍과 애니메이션이 덜 안정적일 수 있습니다.</li>
+                <li>브라우저 탭을 많이 띄우거나 긴 작업이 돌면 입력 이벤트 처리가 늦어질 수 있습니다.</li>
                 <li>손이 피곤하거나 자세가 흔들리면 10초 이상 모드에서 점수가 더 빨리 떨어질 수 있습니다.</li>
+                <li>모바일은 터치 지연과 샘플링 조건이 달라 마우스 점수와 바로 비교하면 안 됩니다.</li>
                 <li>같은 모드로 3회 측정한 뒤 중간값을 보는 방식이 가장 실용적입니다.</li>
             </ul>
             <ul data-lang="en">
                 <li>Mouse and touch use different input paths, so direct comparison is weak.</li>
-                <li>Many open tabs can make timing and animation less stable.</li>
+                <li>Many open tabs or long tasks can delay input-event handling on the browser main thread.</li>
                 <li>Fatigue or posture changes tend to show up faster in 10-second or longer modes.</li>
+                <li>Mobile touch latency and sampling conditions make direct mouse-vs-touch comparison weak.</li>
                 <li>Running three attempts and using the middle score is a practical way to compare yourself.</li>
             </ul>
+            <p data-lang="ko">
+                웹 기반 CPS는 “순수한 손가락 속도” 하나만 재는 것이 아니라 사람의 리듬 조절과 기기·브라우저의 입력 처리 조건이 함께 섞인 결과입니다.
+                그래서 NEONCPS는 절대 순위표보다 <strong>같은 환경에서의 반복 비교</strong>에 더 적합합니다.
+            </p>
+            <p data-lang="en">
+                A web CPS score is not pure finger speed. It mixes your motor rhythm with device and browser input handling.
+                For that reason, NEONCPS is better for <strong>repeatable comparison in the same setup</strong> than for absolute ranking across all hardware.
+            </p>
         </div>
     </section>
 
@@ -1729,6 +1742,14 @@
                 <li>No sign-in or account creation is required to use the tool.</li>
             </ul>
             <p data-lang="ko">
+                실제 구현에서는 기본 포인터 입력만 집계하고, 시간 계산에는 브라우저의 고해상도 타이밍을 사용합니다.
+                다만 입력 이벤트는 브라우저 작업 큐와 메인 스레드 상태의 영향을 받기 때문에, 무거운 탭이나 백그라운드 부하는 측정 흔들림을 만들 수 있습니다.
+            </p>
+            <p data-lang="en">
+                In practice, the page counts primary pointer input and uses the browser's high-resolution timing for the clock.
+                Input events still depend on the browser task queue and main-thread state, so heavy tabs or background load can add instability.
+            </p>
+            <p data-lang="ko">
                 이 방식은 짧고 일관된 테스트를 만들기에는 좋지만, 모든 기기와 앱 환경을 완전히 같은 조건으로 맞추지는 못합니다.
                 그래서 NEONCPS는 “절대 순위”보다 “같은 환경에서의 반복 비교”에 더 적합합니다.
             </p>
@@ -1736,6 +1757,39 @@
                 This method is good for short, consistent tests, but it cannot make every device or app environment equal.
                 For that reason, NEONCPS is better for <strong>repeatable comparison in the same setup</strong> than for universal ranking across all hardware.
             </p>
+        </div>
+    </section>
+
+    <section class="content-section" aria-label="Consistency protocol">
+        <div class="content-card">
+            <h2>
+                <span data-lang="en">HOW TO GET MORE CONSISTENT RESULTS</span>
+                <span data-lang="ko">더 일관된 기록을 얻는 실전 방법</span>
+            </h2>
+            <p data-lang="ko">
+                참고자료를 기준으로 보면, 가장 공정한 비교는 “세게 한 번”보다 “같은 조건으로 여러 번”입니다.
+                특히 5초와 10초 모드는 시작 반응과 피로 영향 사이 균형이 좋아 기본 비교 모드로 쓰기 좋습니다.
+            </p>
+            <p data-lang="en">
+                Based on the reference material, the fairest comparison is not one heroic run, but repeated runs under matching conditions.
+                In practice, 5-second and 10-second modes are the best baseline because they balance fast starts and fatigue better than the extremes.
+            </p>
+            <ul data-lang="ko">
+                <li>같은 기기, 같은 브라우저, 같은 손가락, 같은 자세를 유지하세요.</li>
+                <li>시작 전 손을 짧게 풀고, 5초 또는 10초 모드로 3회 측정하세요.</li>
+                <li>최고점보다 3회 기록의 중간값을 기준으로 보는 것이 더 안정적입니다.</li>
+                <li>배터리 절약 모드, 무거운 백그라운드 앱, 많은 브라우저 탭은 가능하면 줄이세요.</li>
+                <li>60초 모드는 유지력 확인용으로 보고, 짧은 모드 기록과 직접 같은 뜻으로 해석하지 마세요.</li>
+                <li>손목이나 손가락에 불편함이 느껴지면 즉시 중단하고 쉬세요.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Keep the same device, browser, finger, and posture.</li>
+                <li>Warm up briefly, then run three attempts in 5s or 10s mode.</li>
+                <li>Use the middle score of the three runs, not only the best score.</li>
+                <li>Reduce battery saver, heavy background apps, and extra browser tabs when possible.</li>
+                <li>Treat 60s as an endurance check, not as the same kind of score as a short burst test.</li>
+                <li>Stop immediately if your wrist or fingers feel uncomfortable.</li>
+            </ul>
         </div>
     </section>
 
@@ -1756,20 +1810,22 @@
             <ul data-lang="ko">
                 <li>콘텐츠 목적: 점수만 보여주지 않고 해석과 사용법까지 함께 제공하기.</li>
                 <li>업데이트 기준: 측정 로직, 정책, 설명 품질이 바뀌면 텍스트도 함께 수정하기.</li>
+                <li>근거 기준: 입력 처리, 타이밍, 피로, 안전성에 관한 참고자료를 바탕으로 설명 다듬기.</li>
                 <li>신뢰 기준: 과장된 다운로드 유도, 없는 콘텐츠 링크, 헷갈리는 탐색 요소를 사용하지 않기.</li>
                 <li>피드백 채널: 문의 폼으로 오류 제보와 정정 요청 받기.</li>
             </ul>
             <ul data-lang="en">
                 <li>Content goal: provide not just a score, but interpretation and usage guidance.</li>
                 <li>Update rule: revise the text when the measurement logic, policies, or explanation quality changes.</li>
+                <li>Evidence rule: refine guidance against references on input handling, timing, fatigue, and safety.</li>
                 <li>Trust rule: avoid fake download prompts, dead links, and navigation that could confuse visitors.</li>
                 <li>Feedback path: receive correction requests through the contact form.</li>
             </ul>
             <p data-lang="ko">
-                마지막 점검일: 2026년 3월 11일 UTC.
+                마지막 점검일: 2026년 3월 12일 UTC.
             </p>
             <p data-lang="en">
-                Last reviewed: March 11, 2026 UTC.
+                Last reviewed: March 12, 2026 UTC.
             </p>
         </div>
     </section>
