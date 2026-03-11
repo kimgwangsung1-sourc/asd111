@@ -619,6 +619,55 @@
             margin: 30px auto 20px;
             line-height: 1.6;
         }
+        .guide-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            text-align: left;
+            font: inherit;
+            font-weight: 800;
+        }
+        .guide-toggle-label {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .guide-toggle-label span {
+            font-size: 17px;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+        }
+        .guide-toggle-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            flex: 0 0 auto;
+        }
+        .guide-accordion-ready .content-card {
+            display: none;
+            margin-top: 12px;
+        }
+        .guide-accordion-ready.open .content-card {
+            display: block;
+        }
+        .guide-accordion-ready .content-card > h2 {
+            display: none;
+        }
         .content-card {
             background: var(--panel-bg);
             border: 1px solid var(--border);
@@ -1320,43 +1369,22 @@
 
         <div class="info-panel" id="panel-policy">
             <p data-lang="ko">
-                이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 저장되는 개인 식별 정보는 없습니다.
+                이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 자세한 개인정보, 쿠키, 광고 안내는 <a href="/privacy/">개인정보처리방침 페이지</a>에서 확인할 수 있습니다.
             </p>
             <p data-lang="en">
-                This site uses input events (click/touch) for speed testing. No personally identifiable data is stored.
+                This site uses input events (click/touch) for speed testing. Detailed information about privacy, cookies, and advertising is available on the <a href="/privacy/">Privacy Policy page</a>.
             </p>
             <p data-lang="ko">
-                광고는 Google AdSense를 통해 제공될 수 있으며, 광고 제공을 위해 쿠키 또는 유사 기술이 사용될 수 있습니다.
+                이 페이지의 주요 버튼은 테스트 시작, 결과 링크 복사, 문의 전송처럼 실제 기능을 수행하기 위한 것입니다.
             </p>
             <p data-lang="en">
-                Ads may be served by Google AdSense, which can use cookies or similar technologies.
+                The primary buttons on this page are for real actions such as starting the test, copying a result link, or sending a contact form.
             </p>
             <p data-lang="ko">
-                이 사이트는 광고 기능을 위해 쿠키를 사용할 수 있습니다. 쿠키는 서비스 제공과 사용 환경 개선에 사용됩니다.
-                브라우저 설정에서 쿠키 차단/삭제가 가능하며, 일부 기능이 제한될 수 있습니다.
+                다운로드를 가장한 버튼, 존재하지 않는 페이지로 보내는 링크, 메뉴처럼 보이게 만든 광고 배치는 사용하지 않습니다.
             </p>
             <p data-lang="en">
-                This site may use cookies for ads. You can block/delete cookies in browser settings; some features may be limited.
-            </p>
-            <p data-lang="ko">
-                자세한 개인정보 안내는 <a href="/privacy/">개인정보처리방침 페이지</a>에서 확인할 수 있습니다.
-            </p>
-            <p data-lang="en">
-                More details are available in the <a href="/privacy/">Privacy Policy page</a>.
-            </p>
-            <p data-lang="ko">
-                이 페이지의 주요 버튼은 테스트 실행, 결과 복사, 문의 전송처럼 실제 기능을 수행하기 위한 것입니다.
-                다운로드를 가장하거나, 존재하지 않는 콘텐츠로 유도하거나, 광고를 메뉴처럼 보이게 만드는 방식은 사용하지 않습니다.
-            </p>
-            <p data-lang="en">
-                The primary buttons on this page perform actual actions such as starting the test, copying a result link, or sending a contact form.
                 We do not use fake download buttons, dead-end links, or ad placements designed to look like navigation.
-            </p>
-            <p data-lang="ko">
-                유럽, 영국, 스위스 방문자에 대한 동의 메시지는 AdSense의 Privacy &amp; messaging 설정과 Google 인증 CMP 요건에 맞춰 운영해야 합니다.
-            </p>
-            <p data-lang="en">
-                Consent messaging for visitors in Europe, the UK, and Switzerland should be managed through AdSense Privacy &amp; messaging with a Google-certified CMP setup.
             </p>
         </div>
 
@@ -1837,6 +1865,54 @@
             });
         }
         setLanguage(currentLang);
+
+        function setupGuideAccordions() {
+            const guideSections = document.querySelectorAll('.content-section');
+
+            guideSections.forEach((section, index) => {
+                const card = section.querySelector('.content-card');
+                const heading = card ? card.querySelector('h2') : null;
+
+                if (!card || !heading) return;
+
+                section.classList.add('guide-accordion-ready');
+                card.id = card.id || `guide-panel-${index + 1}`;
+
+                const toggle = document.createElement('button');
+                toggle.type = 'button';
+                toggle.className = 'guide-toggle';
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-controls', card.id);
+                toggle.innerHTML = `
+                    <span class="guide-toggle-label">${heading.innerHTML}</span>
+                    <span class="guide-toggle-icon" aria-hidden="true">+</span>
+                `;
+
+                toggle.addEventListener('click', () => {
+                    const isOpen = section.classList.contains('open');
+
+                    guideSections.forEach((otherSection) => {
+                        otherSection.classList.remove('open');
+                        const otherToggle = otherSection.querySelector('.guide-toggle');
+                        const otherIcon = otherToggle ? otherToggle.querySelector('.guide-toggle-icon') : null;
+
+                        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                        if (otherIcon) otherIcon.textContent = '+';
+                    });
+
+                    if (!isOpen) {
+                        section.classList.add('open');
+                        toggle.setAttribute('aria-expanded', 'true');
+                        const icon = toggle.querySelector('.guide-toggle-icon');
+                        if (icon) icon.textContent = '-';
+                    }
+                });
+
+                section.insertBefore(toggle, card);
+            });
+        }
+
+        setupGuideAccordions();
 
         // 정보 탭 토글
         const infoTabs = document.querySelectorAll('.info-tab');
