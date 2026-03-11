@@ -1,5 +1,6 @@
 const CANONICAL_ORIGIN = "https://neoncps.com";
 const KOREAN_ORIGIN = `${CANONICAL_ORIGIN}/ko/`;
+const STABLE_CSP = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms https://static.cloudflareinsights.com https://ep2.adtrafficquality.google; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://ep2.adtrafficquality.google https://www.google.com; form-action 'self' https://formspree.io; upgrade-insecure-requests";
 
 const koreanStructuredData = {
   "@context": "https://schema.org",
@@ -157,6 +158,7 @@ export async function onRequest(context) {
   const headers = new Headers(response.headers);
   headers.set("content-type", "text/html; charset=UTF-8");
   headers.set("content-language", "ko");
+  headers.set("content-security-policy", STABLE_CSP);
 
   return new Response(html, {
     status: response.status,
