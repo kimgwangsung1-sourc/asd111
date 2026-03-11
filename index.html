@@ -2577,12 +2577,22 @@
         }
 
         function hideResultModal() {
+            const activeElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            const restoreTarget = lastFocusedBeforeModal && document.contains(lastFocusedBeforeModal)
+                ? lastFocusedBeforeModal
+                : startBtn;
+
+            if (activeElement && modal.contains(activeElement)) {
+                if (restoreTarget && restoreTarget !== activeElement) {
+                    restoreTarget.focus();
+                } else {
+                    activeElement.blur();
+                }
+            }
+
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
-            if (lastFocusedBeforeModal && document.contains(lastFocusedBeforeModal)) {
-                lastFocusedBeforeModal.focus();
-            }
         }
 
         function setPadState(state) {
