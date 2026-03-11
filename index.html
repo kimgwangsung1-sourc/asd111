@@ -748,12 +748,22 @@
             .info-panels { max-width: 720px; }
         }
         @media (max-width: 768px) {
+            .topbar {
+                width: 94%;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .topbar-group.utilities {
+                width: 100%;
+                justify-content: flex-end;
+            }
             .info-tabs {
                 display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 overflow-y: hidden;
                 gap: 8px;
+                width: 100%;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
@@ -762,13 +772,33 @@
                 white-space: nowrap;
                 flex: 0 0 auto;
             }
+            .time-selector {
+                width: min(94%, 420px);
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 22px;
+            }
+            .time-btn {
+                flex: 1 1 84px;
+                padding: 10px 16px;
+            }
             .test-container {
                 position: relative;
                 top: auto;
                 z-index: 5;
+                width: min(94%, 520px);
             }
             .click-pad,
             .modal-overlay { backdrop-filter: none; }
+            .modal-overlay {
+                padding: 16px;
+            }
+            .result-box {
+                width: min(100%, 460px);
+                max-height: calc(100vh - 32px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
             .slime-container {
                 display: block;
                 right: max(10px, env(safe-area-inset-right));
@@ -784,6 +814,30 @@
             }
         }
         @media (max-width: 480px), (max-height: 700px) {
+            h1 {
+                letter-spacing: 0.5px;
+            }
+            .subtitle,
+            .meta-note {
+                width: 92%;
+                letter-spacing: 1.5px;
+            }
+            .guide-toggle {
+                padding: 14px 14px;
+                gap: 12px;
+            }
+            .guide-toggle-label span {
+                font-size: 15px;
+                letter-spacing: 0.2px;
+            }
+            .guide-toggle-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+            .content-card {
+                padding: 16px 16px;
+            }
             .slime-container {
                 width: 46px;
                 height: 40px;
