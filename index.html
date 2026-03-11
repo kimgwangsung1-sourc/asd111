@@ -20,11 +20,15 @@
     <meta property="og:url" content="https://neoncps.com/">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="ko_KR">
-    <meta property="og:image" content="https://neoncps.com/favicon.svg">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://neoncps.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="NEONCPS click speed test preview image">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NEONCPS | CPS Click Speed Test and Guide (1s, 5s, 10s, 60s)">
     <meta name="twitter:description" content="Free CPS click speed test for desktop and mobile with clicks per second scoring, guides, FAQs, and repeatable results.">
-    <meta name="twitter:image" content="https://neoncps.com/favicon.svg">
+    <meta name="twitter:image" content="https://neoncps.com/og-image.png">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
     <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
@@ -1082,6 +1086,61 @@
             color: var(--text);
             white-space: nowrap;
         }
+        .share-primary-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .share-primary-row .btn-share-primary,
+        .share-primary-row .btn-copy {
+            flex: 1 1 0;
+            width: auto;
+            margin-top: 0;
+        }
+        .btn-share-primary {
+            border: 1px solid var(--neon-green);
+            background: rgba(0, 255, 157, 0.12);
+            color: var(--text);
+            font-size: 16px;
+            font-weight: 800;
+            padding: 13px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            min-height: 44px;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .btn-share-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 255, 157, 0.18);
+        }
+        .btn-share-primary:active { transform: scale(0.99); }
+        .share-grid {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+        .share-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--panel-bg);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .share-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        }
+        .share-link:active { transform: scale(0.99); }
         .result-footnote {
             margin-top: 12px;
             padding-top: 10px;
@@ -1130,6 +1189,12 @@
         @media (max-width: 430px) {
             .result-guide,
             .result-action { white-space: normal; }
+            .share-primary-row {
+                flex-direction: column;
+            }
+            .share-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
         .copy-toast {
             position: fixed;
@@ -1755,12 +1820,24 @@
                 <div class="result-action" data-i18n="retryHint">🔁 Try again to improve your speed</div>
             </div>
 
+            <div class="share-primary-row">
+                <button class="btn-share-primary" type="button" id="shareResultBtn" onclick="shareResult()" data-i18n="shareNow">📱 Share Now</button>
+                <button class="btn-copy" type="button" onclick="copyResultLink()" data-i18n="copyResultLink">📤 Copy Result Link</button>
+            </div>
+
+            <div class="share-grid" aria-label="Global share links">
+                <a class="share-link" id="shareX" href="#" target="_blank" rel="noopener noreferrer">X</a>
+                <a class="share-link" id="shareWhatsApp" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a class="share-link" id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a class="share-link" id="shareReddit" href="#" target="_blank" rel="noopener noreferrer">Reddit</a>
+                <a class="share-link" id="shareTelegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a class="share-link" id="shareEmail" href="#">Email</a>
+            </div>
+
             <div class="result-footnote">
                 <div data-i18n="privacyNote">No personal data is collected.</div>
                 <div data-i18n="autoclickerNote">Auto-clickers are not supported.</div>
             </div>
-
-            <button class="btn-copy" type="button" onclick="copyResultLink()" data-i18n="copyResultLink">📤 Copy Result Link</button>
             
             <button class="btn-restart" onclick="resetTest()" data-i18n="retry">RETRY</button>
         </div>
@@ -1835,6 +1912,7 @@
                 fastInfo: "🎯 9+ CPS is considered fast",
                 veryFastInfo: "🚀 15+ CPS is very fast",
                 share: "📤 Share your result",
+                shareNow: "📱 Share Now",
                 retryHint: "🔁 Try again to improve your speed",
                 privacyNote: "No personal data is collected.",
                 autoclickerNote: "Auto-clickers are not supported.",
@@ -1872,6 +1950,7 @@
                 fastInfo: "🎯 9 CPS 이상이면 빠른 편입니다",
                 veryFastInfo: "🚀 15 CPS 이상은 매우 빠른 수준입니다",
                 share: "📤 결과 공유",
+                shareNow: "📱 지금 공유",
                 retryHint: "🔁 다시 시도해 속도를 높여보세요",
                 privacyNote: "개인정보는 수집하지 않습니다.",
                 autoclickerNote: "오토클리커는 지원하지 않습니다.",
@@ -2122,6 +2201,13 @@
         const copyToast = document.getElementById('copyToast');
         const copyToastUrl = document.getElementById('copyToastUrl');
         const copyToastClose = document.getElementById('copyToastClose');
+        const shareResultBtn = document.getElementById('shareResultBtn');
+        const shareX = document.getElementById('shareX');
+        const shareWhatsApp = document.getElementById('shareWhatsApp');
+        const shareFacebook = document.getElementById('shareFacebook');
+        const shareReddit = document.getElementById('shareReddit');
+        const shareTelegram = document.getElementById('shareTelegram');
+        const shareEmail = document.getElementById('shareEmail');
         let copyToastTimer = null;
 
         function hideCopyToast() {
@@ -2144,11 +2230,68 @@
             });
         }
 
+        function getSharePayload() {
+            const shareUrl = getCanonicalPageUrl();
+
+            if (!lastResult) {
+                return {
+                    shareUrl,
+                    title: "NEONCPS | CPS Click Speed Test",
+                    text: currentLang === 'ko'
+                        ? "NEONCPS에서 CPS를 측정해보세요."
+                        : "Test your click speed on NEONCPS."
+                };
+            }
+
+            const cpsText = lastResult.cps.toFixed(2);
+            const title = currentLang === 'ko'
+                ? `NEONCPS 결과: ${cpsText} CPS`
+                : `My NEONCPS result: ${cpsText} CPS`;
+            const text = currentLang === 'ko'
+                ? `NEONCPS에서 ${lastResult.time}초 동안 ${lastResult.clicks}번 클릭해서 ${cpsText} CPS가 나왔어요. 직접 테스트해보세요:`
+                : `I scored ${cpsText} CPS with ${lastResult.clicks} clicks in ${lastResult.time} seconds on NEONCPS. Test your click speed:`;
+
+            return { shareUrl, title, text };
+        }
+
+        function updateShareLinks() {
+            const { shareUrl, title, text } = getSharePayload();
+            const encodedUrl = encodeURIComponent(shareUrl);
+            const encodedTitle = encodeURIComponent(title);
+            const encodedText = encodeURIComponent(text);
+
+            if (shareResultBtn) shareResultBtn.disabled = !lastResult;
+            if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+            if (shareWhatsApp) shareWhatsApp.href = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
+            if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
+            if (shareReddit) shareReddit.href = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+            if (shareTelegram) shareTelegram.href = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
+            if (shareEmail) shareEmail.href = `mailto:?subject=${encodedTitle}&body=${encodedText}%20${encodedUrl}`;
+        }
+
+        async function shareResult() {
+            if (!lastResult) return;
+
+            const { shareUrl, title, text } = getSharePayload();
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title, text, url: shareUrl });
+                    return;
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return;
+                }
+            }
+
+            await copyResultLink();
+        }
+
         function setPadState(state) {
             clickPad.classList.remove('idle', 'counting', 'running');
             clickPad.classList.add(state);
         }
         setPadState('idle');
+        updateShareLinks();
 
         function updateSlimeMode(cpsValue) {
             slime.classList.remove('glow-advanced', 'glow-elite');
@@ -2344,6 +2487,7 @@
                 clicks: score,
                 cps: cpsValue
             };
+            updateShareLinks();
 
             setTimeout(() => {
                 document.body.classList.remove('game-active');
@@ -2376,6 +2520,7 @@
             modal.style.display = 'none';
             document.body.classList.remove('modal-open');
             document.body.classList.remove('game-active');
+            updateShareLinks();
             idleMsg.style.visibility = 'visible';
             score = 0;
             timeLeft = selectedTime;
