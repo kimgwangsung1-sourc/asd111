@@ -147,7 +147,11 @@
     }
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap"></noscript>
     <script>
       if (window.location.hostname === 'neoncps.com') {
         const adsenseScript = document.createElement('script');
@@ -167,11 +171,21 @@
       gtag('config', 'G-QXBYS7FWMH');
     </script>
     <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "vk5zr5rhoj");
+      window.clarity = window.clarity || function(){(window.clarity.q = window.clarity.q || []).push(arguments);};
+      function loadClarityWhenIdle() {
+        if (window.__clarityLoaded) return;
+        window.__clarityLoaded = true;
+        const clarityScript = document.createElement("script");
+        clarityScript.async = true;
+        clarityScript.src = "https://www.clarity.ms/tag/vk5zr5rhoj";
+        document.head.appendChild(clarityScript);
+      }
+
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadClarityWhenIdle, { timeout: 2500 });
+      } else {
+        window.addEventListener("load", () => setTimeout(loadClarityWhenIdle, 1200), { once: true });
+      }
     </script>
     <!-- Userback disabled by request.
     <script>
@@ -244,6 +258,12 @@
         }
         body.game-active {
             overflow: hidden;
+        }
+        .page-main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .click-pad,
         .btn-start,
@@ -1224,15 +1244,15 @@
     </style>
 </head>
 <body class="lang-en">
-
+    <main class="page-main" id="mainContent">
     <div class="topbar">
         <div class="info-tabs" role="tablist" aria-label="Info tabs">
-            <button class="info-tab" data-target="panel-how" data-i18n="navHow">HOW IT WORKS</button>
-            <button class="info-tab" data-target="panel-usage" data-i18n="navUsage">USAGE</button>
-            <button class="info-tab" data-target="panel-health" data-i18n="navSafety">SAFETY</button>
-            <button class="info-tab" data-target="panel-faq" data-i18n="navFaq">FAQ</button>
-            <button class="info-tab" data-target="panel-contact" data-i18n="navContact">CONTACT</button>
-            <button class="info-tab" data-target="panel-policy" data-i18n="navPolicy">POLICY</button>
+            <button class="info-tab" id="tab-how" role="tab" aria-controls="panel-how" aria-selected="false" data-target="panel-how" data-i18n="navHow">HOW IT WORKS</button>
+            <button class="info-tab" id="tab-usage" role="tab" aria-controls="panel-usage" aria-selected="false" data-target="panel-usage" data-i18n="navUsage">USAGE</button>
+            <button class="info-tab" id="tab-health" role="tab" aria-controls="panel-health" aria-selected="false" data-target="panel-health" data-i18n="navSafety">SAFETY</button>
+            <button class="info-tab" id="tab-faq" role="tab" aria-controls="panel-faq" aria-selected="false" data-target="panel-faq" data-i18n="navFaq">FAQ</button>
+            <button class="info-tab" id="tab-contact" role="tab" aria-controls="panel-contact" aria-selected="false" data-target="panel-contact" data-i18n="navContact">CONTACT</button>
+            <button class="info-tab" id="tab-policy" role="tab" aria-controls="panel-policy" aria-selected="false" data-target="panel-policy" data-i18n="navPolicy">POLICY</button>
         </div>
         <div class="topbar-group utilities">
             <div class="lang-selector">
@@ -1249,7 +1269,7 @@
     </div>
 
     <div class="info-panels" id="infoPanels">
-        <div class="info-panel" id="panel-contact">
+        <div class="info-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" aria-hidden="true">
             <p data-lang="ko">
                 본 사이트는 반응 속도 측정 유틸리티를 제공하며, 사용자에게 명확하고 유용한 정보를 제공하는 것을 목표로 합니다.
                 정책 준수와 사용자 경험 향상을 위해 지속적으로 콘텐츠를 개선하고 있습니다.
@@ -1316,7 +1336,7 @@
             </form>
         </div>
 
-        <div class="info-panel" id="panel-how">
+        <div class="info-panel" id="panel-how" role="tabpanel" aria-labelledby="tab-how" aria-hidden="true">
             <p data-lang="ko">
                 이 도구는 선택한 시간 동안의 총 클릭 수를 기반으로 CPS(초당 클릭 수)를 계산합니다.
                 기록은 “측정 시간”과 “총 클릭 수”를 함께 보여 사용자에게 가장 직관적인 결과를 제공합니다.
@@ -1362,7 +1382,7 @@
             </ul>
         </div>
 
-        <div class="info-panel" id="panel-usage">
+        <div class="info-panel" id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" aria-hidden="true">
             <p data-lang="ko">
                 이 도구는 “짧은 시간 동안 얼마나 안정적으로 탭/클릭할 수 있는지”를 확인하기 위한 반응 속도 테스트입니다.
                 모바일에서는 연속 터치가 끊기지 않도록 화면을 한 손으로 고정하고, 엄지 또는 검지로 동일한 리듬을 유지해보세요.
@@ -1397,7 +1417,7 @@
             </p>
         </div>
 
-        <div class="info-panel" id="panel-health">
+        <div class="info-panel" id="panel-health" role="tabpanel" aria-labelledby="tab-health" aria-hidden="true">
             <p data-lang="ko">
                 과도한 반복 탭은 손목과 손가락에 부담을 줄 수 있습니다.
                 불편함이 느껴질 경우 즉시 중단하고 충분히 휴식하세요.
@@ -1423,7 +1443,7 @@
             </p>
         </div>
 
-        <div class="info-panel" id="panel-policy">
+        <div class="info-panel" id="panel-policy" role="tabpanel" aria-labelledby="tab-policy" aria-hidden="true">
             <p data-lang="ko">
                 이 사이트는 클릭 속도 측정을 위해 입력 이벤트(클릭/터치)를 사용합니다. 자세한 개인정보, 쿠키, 광고 안내는 <a href="/privacy/">개인정보처리방침 페이지</a>에서 확인할 수 있습니다.
             </p>
@@ -1444,7 +1464,7 @@
             </p>
         </div>
 
-        <div class="info-panel" id="panel-faq">
+        <div class="info-panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq" aria-hidden="true">
             <ul data-lang="ko">
                 <li>CPS란 무엇인가요? CPS는 초당 클릭 수이며, 총 클릭 수를 선택한 측정 시간으로 나눠 계산합니다.</li>
                 <li>왜 시도할 때마다 결과가 달라지나요? 기기 입력 지연, 브라우저 성능, 손 피로도, 클릭 리듬 차이로 결과가 달라질 수 있습니다.</li>
@@ -1688,6 +1708,7 @@
             </p>
         </div>
     </section>
+    </main>
 
     
 
@@ -1974,8 +1995,14 @@
         const infoTabs = document.querySelectorAll('.info-tab');
         const infoPanels = document.querySelectorAll('.info-panel');
         function closeAllPanels() {
-            infoPanels.forEach((panel) => panel.classList.remove('open'));
-            infoTabs.forEach((tab) => tab.classList.remove('active'));
+            infoPanels.forEach((panel) => {
+                panel.classList.remove('open');
+                panel.setAttribute('aria-hidden', 'true');
+            });
+            infoTabs.forEach((tab) => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
         }
         infoTabs.forEach((tab) => {
             tab.addEventListener('click', () => {
@@ -1985,7 +2012,9 @@
                 closeAllPanels();
                 if (target && !isOpen) {
                     target.classList.add('open');
+                    target.setAttribute('aria-hidden', 'false');
                     tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
                 }
             });
         });
