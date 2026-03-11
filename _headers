@@ -4,3 +4,9 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+/
+  Content-Language: en
+
+/ko/
+  Content-Language: ko

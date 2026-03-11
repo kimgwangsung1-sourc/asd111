@@ -6,7 +6,13 @@ export function onRequest(context) {
 
   if (url.hostname === REDIRECT_HOST) {
     const redirectUrl = new URL(`${url.pathname}${url.search}`, CANONICAL_ORIGIN);
-    return Response.redirect(redirectUrl.toString(), 301);
+    return new Response(null, {
+      status: 301,
+      headers: {
+        Location: redirectUrl.toString(),
+        "X-Robots-Tag": "noindex, nofollow, noarchive"
+      }
+    });
   }
 
   return context.next();

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>NEONCPS | Free CPS Test Updates</title>
+    <title>NEONCPS | Free CPS Test and Guide Updates</title>
     <link>https://neoncps.com/</link>
-    <description>Updates for NEONCPS free CPS test on desktop and mobile, including clicks per second guides and test improvements.</description>
+    <description>Updates for NEONCPS free CPS test and guide on desktop and mobile, including score interpretation, methodology notes, and test improvements.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>NEONCPS | Free CPS Test (1s, 5s, 10s, 60s)</title>
+      <title>NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)</title>
       <link>https://neoncps.com/</link>
       <guid>https://neoncps.com/</guid>
-      <pubDate>Mon, 23 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Free CPS test for desktop and mobile. Measure clicks per second in 1s, 5s, 10s, and 60s modes with repeatable results.</description>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Free CPS test and guide for desktop and mobile with score interpretation, methodology notes, repeatability tips, and safety guidance.</description>
     </item>
   </channel>
 </rss>

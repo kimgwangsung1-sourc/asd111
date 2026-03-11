@@ -7,30 +7,41 @@
     <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
     <meta name="theme-color" content="#050505">
     <meta name="author" content="NEONCPS">
-    <meta name="description" content="Free CPS test for desktop and mobile. Measure clicks per second in 1s, 5s, 10s, and 60s modes, then compare results with practical accuracy tips.">
+    <meta name="description" content="Free CPS test for desktop and mobile with a practical guide to score meaning, test methodology, accuracy tips, safety notes, and FAQ.">
     <meta name="keywords" content="CPS test, click speed test, clicks per second, CPS calculator, mobile CPS test, reaction speed test, NEONCPS">
     <link rel="canonical" href="https://neoncps.com/">
-    <meta property="og:title" content="NEONCPS | Free CPS Test (1s, 5s, 10s, 60s)">
-    <meta property="og:description" content="Free CPS test for desktop and mobile. Measure clicks per second in 1s, 5s, 10s, and 60s modes with clear, repeatable results.">
+    <link rel="alternate" hreflang="en" href="https://neoncps.com/">
+    <link rel="alternate" hreflang="ko" href="https://neoncps.com/ko/">
+    <link rel="alternate" hreflang="x-default" href="https://neoncps.com/">
+    <meta property="og:title" content="NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)">
+    <meta property="og:description" content="Free CPS test for desktop and mobile with a score guide, methodology notes, accuracy tips, and clear repeatable results.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="NEONCPS">
     <meta property="og:url" content="https://neoncps.com/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ko_KR">
     <meta property="og:image" content="https://neoncps.com/favicon.svg">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="NEONCPS | Free CPS Test (1s, 5s, 10s, 60s)">
-    <meta name="twitter:description" content="Free CPS test for desktop and mobile. Measure clicks per second with repeatable, easy-to-read results.">
+    <meta name="twitter:title" content="NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)">
+    <meta name="twitter:description" content="Free CPS test for desktop and mobile with a score guide, methodology notes, and repeatable results.">
     <meta name="twitter:image" content="https://neoncps.com/favicon.svg">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.svg">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <link rel="alternate" type="application/rss+xml" title="NEONCPS RSS" href="/rss.xml">
-    <title>NEONCPS | Free CPS Test (1s, 5s, 10s, 60s)</title>
+    <title>NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)</title>
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://neoncps.com/#organization",
+          "name": "NEONCPS",
+          "url": "https://neoncps.com/"
+        },
         {
           "@type": "WebSite",
           "@id": "https://neoncps.com/#website",
@@ -42,11 +53,13 @@
           "@type": "WebPage",
           "@id": "https://neoncps.com/#webpage",
           "url": "https://neoncps.com/",
-          "name": "NEONCPS | Free CPS Test (1s, 5s, 10s, 60s)",
-          "description": "Free CPS test for desktop and mobile. Measure clicks per second in 1s, 5s, 10s, and 60s modes, then compare results with practical tips.",
+          "name": "NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)",
+          "description": "Free CPS test for desktop and mobile with score interpretation, methodology, repeatability tips, and safety guidance.",
           "isPartOf": { "@id": "https://neoncps.com/#website" },
           "about": { "@id": "https://neoncps.com/#app" },
-          "inLanguage": "en"
+          "publisher": { "@id": "https://neoncps.com/#organization" },
+          "inLanguage": "en",
+          "dateModified": "2026-03-11"
         },
         {
           "@type": "SoftwareApplication",
@@ -55,7 +68,8 @@
           "applicationCategory": "GameApplication",
           "operatingSystem": "Web",
           "url": "https://neoncps.com/",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "publisher": { "@id": "https://neoncps.com/#organization" }
         },
         {
           "@type": "FAQPage",
@@ -100,6 +114,30 @@
                 "@type": "Answer",
                 "text": "No. This is a casual reaction-speed utility and is not intended for medical or diagnostic use."
               }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between 1-second and 60-second CPS tests?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A 1-second test favors burst speed, while a 60-second test better shows rhythm control and fatigue over time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I compare mouse and touch results directly?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not reliably. Input hardware, touch sampling, browser performance, and posture can change results, so comparisons are most useful on the same device and browser."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does this page count clicks?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The page counts primary pointer-down inputs during the selected duration and calculates CPS as total counted inputs divided by the chosen test time."
+              }
             }
           ]
         }
@@ -108,8 +146,15 @@
     </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Manrope:wght@400;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9418686584056529"
-     crossorigin="anonymous"></script>
+    <script>
+      if (window.location.hostname === 'neoncps.com') {
+        const adsenseScript = document.createElement('script');
+        adsenseScript.async = true;
+        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9418686584056529';
+        adsenseScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adsenseScript);
+      }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXBYS7FWMH"></script>
     <script>
@@ -1073,7 +1118,7 @@
         }
     </style>
 </head>
-<body oncontextmenu="return false" class="lang-en">
+<body class="lang-en">
 
     <div class="topbar">
         <div class="info-tabs" role="tablist" aria-label="Info tabs">
@@ -1109,6 +1154,14 @@
                 We continuously improve content to comply with policies and enhance user experience.
             </p>
             <p data-lang="ko">
+                이 페이지의 글은 NEONCPS 운영 기준에 따라 정리되며, 도구가 실제로 어떻게 입력을 계산하는지에 맞춰 설명합니다.
+                사이트 목적은 검색 트래픽만 모으는 것이 아니라, 사용자가 직접 방문했을 때 바로 도움이 되는 CPS 측정과 해설을 제공하는 것입니다.
+            </p>
+            <p data-lang="en">
+                The written guidance on this page is maintained to match how the tool actually counts input.
+                The goal is not just search traffic, but to give direct visitors a useful CPS test and practical explanation.
+            </p>
+            <p data-lang="ko">
                 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.
             </p>
             <p data-lang="en">
@@ -1117,10 +1170,14 @@
             <ul data-lang="ko">
                 <li>문의 방법: 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.</li>
                 <li>운영 범위: 반응 속도 테스트/유틸리티 제공 및 관련 안내 콘텐츠</li>
+                <li>수정 기준: 측정 방식이 바뀌면 안내 문구도 함께 갱신합니다.</li>
+                <li>정정 요청: 잘못된 설명이나 오해를 부를 표현은 문의 폼으로 제보할 수 있습니다.</li>
             </ul>
             <ul data-lang="en">
                 <li>Contact method: we accept inquiries only via the form below.</li>
                 <li>Scope: reaction speed testing utility and related guidance content.</li>
+                <li>Update rule: when the measurement logic changes, the guide text is revised too.</li>
+                <li>Corrections: use the contact form if you find unclear or inaccurate explanations.</li>
             </ul>
             <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm">
                 <div class="field">
@@ -1128,7 +1185,7 @@
                         <span data-lang="ko" class="lang-inline">이름</span>
                         <span data-lang="en" class="lang-inline">Name</span>
                     </label>
-                    <input id="contactName" name="name" type="text" placeholder="이름을 입력하세요" required>
+                    <input id="contactName" name="name" type="text" data-placeholder-key="contactNamePlaceholder" placeholder="Enter your name" required>
                 </div>
                 <div class="field">
                     <label for="contactEmail">
@@ -1142,7 +1199,7 @@
                         <span data-lang="ko" class="lang-inline">문의 내용</span>
                         <span data-lang="en" class="lang-inline">Message</span>
                     </label>
-                    <textarea id="contactMessage" name="message" rows="4" placeholder="문의 내용을 입력하세요" required></textarea>
+                    <textarea id="contactMessage" name="message" rows="4" data-placeholder-key="contactMessagePlaceholder" placeholder="Enter your message" required></textarea>
                 </div>
                 <div class="actions">
                     <button class="btn-restart" type="submit">
@@ -1180,6 +1237,24 @@
             <p data-lang="en">
                 We count all clicks/taps during the selected duration. CPS is total inputs divided by time, shown to two decimals.
             </p>
+            <p data-lang="ko">
+                측정 로직은 이 페이지의 실제 입력 처리 코드에 맞춰 작성되었습니다.
+                3초 카운트다운 뒤에 측정이 시작되고, 선택된 시간 동안 기록된 기본 포인터 입력만 최종 점수에 반영됩니다.
+            </p>
+            <p data-lang="en">
+                The methodology text here matches the actual input logic used on this page.
+                Measurement starts after a 3-second countdown, and only primary pointer input during the selected duration is counted.
+            </p>
+            <ul data-lang="ko">
+                <li>시작 전: 3초 카운트다운이 끝난 뒤 측정이 시작됩니다.</li>
+                <li>입력 기준: 기본 포인터 입력만 집계되며 우클릭은 제외됩니다.</li>
+                <li>최종 점수: 총 입력 수를 선택한 시간으로 나눈 값이 CPS입니다.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Before start: the test begins after a visible 3-second countdown.</li>
+                <li>Input rule: only primary pointer input is counted and right-click is ignored.</li>
+                <li>Final score: CPS equals total counted inputs divided by the selected time.</li>
+            </ul>
         </div>
 
         <div class="info-panel" id="panel-usage">
@@ -1206,6 +1281,14 @@
             </p>
             <p data-lang="en">
                 CPS varies by device input latency, display refresh rate, and browser performance.
+            </p>
+            <p data-lang="ko">
+                공정하게 비교하려면 같은 조건을 유지하는 것이 중요합니다.
+                기기, 브라우저, 배터리 절약 모드, 화면 주사율, 손 상태가 다르면 숫자가 달라질 수 있으므로 다른 환경의 기록을 바로 우열 비교하면 안 됩니다.
+            </p>
+            <p data-lang="en">
+                Fair comparison depends on keeping conditions stable.
+                Device type, browser, battery saver, display refresh rate, and even hand fatigue can change scores, so results from different setups should not be treated as equal benchmarks.
             </p>
         </div>
 
@@ -1255,6 +1338,26 @@
             <p data-lang="en">
                 This site may use cookies for ads. You can block/delete cookies in browser settings; some features may be limited.
             </p>
+            <p data-lang="ko">
+                자세한 개인정보 안내는 <a href="/privacy/">개인정보처리방침 페이지</a>에서 확인할 수 있습니다.
+            </p>
+            <p data-lang="en">
+                More details are available in the <a href="/privacy/">Privacy Policy page</a>.
+            </p>
+            <p data-lang="ko">
+                이 페이지의 주요 버튼은 테스트 실행, 결과 복사, 문의 전송처럼 실제 기능을 수행하기 위한 것입니다.
+                다운로드를 가장하거나, 존재하지 않는 콘텐츠로 유도하거나, 광고를 메뉴처럼 보이게 만드는 방식은 사용하지 않습니다.
+            </p>
+            <p data-lang="en">
+                The primary buttons on this page perform actual actions such as starting the test, copying a result link, or sending a contact form.
+                We do not use fake download buttons, dead-end links, or ad placements designed to look like navigation.
+            </p>
+            <p data-lang="ko">
+                유럽, 영국, 스위스 방문자에 대한 동의 메시지는 AdSense의 Privacy &amp; messaging 설정과 Google 인증 CMP 요건에 맞춰 운영해야 합니다.
+            </p>
+            <p data-lang="en">
+                Consent messaging for visitors in Europe, the UK, and Switzerland should be managed through AdSense Privacy &amp; messaging with a Google-certified CMP setup.
+            </p>
         </div>
 
         <div class="info-panel" id="panel-faq">
@@ -1264,6 +1367,11 @@
                 <li>모바일에서도 사용할 수 있나요? 네. NEONCPS는 반응형 UI로 PC와 모바일 모두 지원합니다.</li>
                 <li>더 일관된 CPS 결과를 얻으려면? 같은 기기, 같은 브라우저, 같은 자세로 반복 측정하고 시작 전 짧게 손을 풀어주세요.</li>
                 <li>의료 진단용 도구인가요? 아니요. 이 도구는 일상적인 반응 속도 체크용이며 의료 또는 진단 목적이 아닙니다.</li>
+                <li>1초 모드와 60초 모드는 무엇이 다른가요? 1초는 순간 폭발력 확인에 가깝고, 60초는 리듬 유지력과 피로 영향을 보기 좋습니다.</li>
+                <li>마우스와 터치 기록을 바로 비교해도 되나요? 권장하지 않습니다. 입력 하드웨어와 브라우저 조건이 달라 점수 해석 기준도 달라질 수 있습니다.</li>
+                <li>왜 우클릭이나 키보드는 점수에 포함되지 않나요? 이 도구는 클릭/터치 기반 비교를 위해 기본 포인터 입력만 같은 규칙으로 집계합니다.</li>
+                <li>점수는 서버에 저장되나요? 아니요. 이 페이지는 결과를 화면에 계산해 보여주며, 사용자가 직접 링크를 복사하지 않는 한 기록을 저장하지 않습니다.</li>
+                <li>연습은 어떻게 하는 게 좋나요? 같은 모드에서 3회 측정 후 중간값을 보고, 5초와 10초 모드를 중심으로 리듬과 자세를 먼저 맞추는 것이 좋습니다.</li>
             </ul>
             <ul data-lang="en">
                 <li>What is CPS? CPS means clicks per second. It is calculated as total clicks divided by the selected test time.</li>
@@ -1271,13 +1379,21 @@
                 <li>Is this mobile-friendly? Yes. NEONCPS supports both desktop and mobile interactions with responsive UI.</li>
                 <li>How can I get more consistent CPS results? Use the same device, browser, and posture, warm up briefly, and repeat tests under matching conditions.</li>
                 <li>Is this tool for medical diagnosis? No. This is a casual reaction-speed utility and is not intended for medical or diagnostic use.</li>
+                <li>What is the difference between 1s and 60s modes? A 1s test favors burst speed, while 60s is better for checking rhythm control and fatigue over time.</li>
+                <li>Can I compare mouse and touch scores directly? Not reliably. Different input hardware and browser conditions change how scores should be interpreted.</li>
+                <li>Why are right-click and keyboard presses not counted? This tool uses one simple rule for comparison and counts only primary pointer input.</li>
+                <li>Are results stored on the server? No. The score is calculated on the page and shown to you unless you choose to copy the result link yourself.</li>
+                <li>How should I practice? Run three attempts in the same mode, look at the middle result, and use 5s or 10s modes first to improve rhythm and posture.</li>
             </ul>
         </div>
     </div>
 
     <div class="rank-emoji" id="rankEmoji">🐢</div>
-    <h1>NEON SPEED TEST</h1>
-    <div class="subtitle">FREE CLICKS PER SECOND TEST</div>
+    <h1>NEON CPS TEST</h1>
+    <div class="subtitle">
+        <span data-lang="en">FREE CLICKS PER SECOND TEST &amp; GUIDE</span>
+        <span data-lang="ko">무료 CPS 테스트와 가이드</span>
+    </div>
     <div class="meta-note">
         <span data-lang="ko">PC와 모바일에서 CPS(초당 클릭 수)를 측정하고, 같은 조건으로 반복 비교할 수 있는 무료 테스트입니다.</span>
         <span data-lang="en">A free CPS test for desktop and mobile to measure clicks per second and compare repeat results under the same conditions.</span>
@@ -1307,7 +1423,10 @@
 
     <section class="content-section" aria-label="About the tool">
         <div class="content-card">
-            <h2>WHAT THIS TOOL IS FOR</h2>
+            <h2>
+                <span data-lang="en">WHAT THIS TOOL IS FOR</span>
+                <span data-lang="ko">이 도구가 하는 일</span>
+            </h2>
             <p data-lang="ko">
                 NEON SPEED TEST는 <strong>누가 써야 하나?</strong>라는 질문에 대해,
                 게임 반응 속도나 모바일 입력 반응을 빠르게 확인하려는 사용자에게 적합한 도구입니다.
@@ -1337,6 +1456,152 @@
                 <li>60s mode helps evaluate rhythm stability and fatigue effects.</li>
                 <li><strong>Accuracy tip:</strong> repeat with the same device, browser, and posture.</li>
             </ul>
+            <p data-lang="ko">
+                이 사이트의 핵심 목적은 한 가지입니다. 사용자가 같은 조건에서 자신의 클릭 속도와 리듬을 다시 측정하고 비교할 수 있게 돕는 것입니다.
+                그래서 점수만 보여주는 데서 끝내지 않고, 왜 점수가 달라지는지와 어떻게 해석해야 하는지도 함께 설명합니다.
+            </p>
+            <p data-lang="en">
+                This site has one main purpose: help visitors measure and compare click speed under repeatable conditions.
+                That is why the page includes not only the score tool, but also context on why scores change and how to read them.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section" aria-label="Score guide">
+        <div class="content-card">
+            <h2>
+                <span data-lang="en">HOW TO READ YOUR CPS SCORE</span>
+                <span data-lang="ko">CPS 점수 읽는 법</span>
+            </h2>
+            <p data-lang="ko">
+                같은 숫자라도 모드에 따라 의미가 달라집니다. 1초 기록은 시작 반응과 순간 폭발력에 가깝고,
+                5초와 10초 기록은 사용자가 제어 가능한 실제 클릭 리듬을 더 잘 보여줍니다. 60초 기록은 손 피로가 생긴 뒤에도 속도를 유지하는지 확인하는 데 유용합니다.
+            </p>
+            <p data-lang="en">
+                The same number means different things in different modes. A 1-second score leans toward start reaction and burst speed,
+                while 5-second and 10-second scores usually better reflect controllable rhythm. A 60-second score is useful for checking whether you can hold speed after fatigue starts.
+            </p>
+            <ul data-lang="ko">
+                <li>1초: 순간 폭발력과 시작 반응을 빠르게 확인할 때 적합합니다.</li>
+                <li>5초: 대부분의 사용자에게 가장 비교하기 쉬운 기본 모드입니다.</li>
+                <li>10초: 속도와 안정성을 함께 보기에 좋습니다.</li>
+                <li>60초: 리듬 유지력, 집중력, 피로 영향을 확인하기 좋습니다.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>1s: best for quick burst checks and fast starts.</li>
+                <li>5s: the easiest baseline mode for most visitors to compare.</li>
+                <li>10s: useful when you want both speed and steadiness.</li>
+                <li>60s: better for rhythm endurance, focus, and fatigue effects.</li>
+            </ul>
+            <p data-lang="ko">
+                점수 구간은 어디까지나 대략적인 해석용입니다. 같은 사람이라도 마우스, 터치, 브라우저, 화면 주사율이 달라지면 체감 난이도가 크게 달라질 수 있습니다.
+                그래서 가장 좋은 비교 방법은 <strong>같은 기기, 같은 브라우저, 같은 자세</strong>로 여러 번 측정하는 것입니다.
+            </p>
+            <p data-lang="en">
+                Score bands are only rough interpretation aids. The same person can feel very different on a mouse, touch screen, browser, or refresh rate.
+                The most reliable comparison is to repeat tests on <strong>the same device, in the same browser, with the same posture</strong>.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section" aria-label="Accuracy guide">
+        <div class="content-card">
+            <h2>
+                <span data-lang="en">WHY RESULTS CHANGE BETWEEN ATTEMPTS</span>
+                <span data-lang="ko">기록이 시도마다 달라지는 이유</span>
+            </h2>
+            <p data-lang="ko">
+                CPS는 손만의 문제가 아닙니다. 클릭 스위치 반응, 터치 샘플링 빈도, 브라우저 부하, 배터리 절약 모드, 백그라운드 앱, 손가락 피로가 모두 결과에 영향을 줍니다.
+                즉, 기록이 조금 달라지는 것은 이상한 일이 아니라 매우 자연스러운 일입니다.
+            </p>
+            <p data-lang="en">
+                CPS is not only about your hand. Click-switch response, touch sampling, browser load, battery saver, background apps, and finger fatigue can all move the result.
+                Small score changes are normal and should not be treated as measurement errors by default.
+            </p>
+            <ul data-lang="ko">
+                <li>마우스와 터치는 입력 방식 자체가 달라서 직접 비교가 어렵습니다.</li>
+                <li>브라우저 탭을 많이 띄우면 타이밍과 애니메이션이 덜 안정적일 수 있습니다.</li>
+                <li>손이 피곤하거나 자세가 흔들리면 10초 이상 모드에서 점수가 더 빨리 떨어질 수 있습니다.</li>
+                <li>같은 모드로 3회 측정한 뒤 중간값을 보는 방식이 가장 실용적입니다.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Mouse and touch use different input paths, so direct comparison is weak.</li>
+                <li>Many open tabs can make timing and animation less stable.</li>
+                <li>Fatigue or posture changes tend to show up faster in 10-second or longer modes.</li>
+                <li>Running three attempts and using the middle score is a practical way to compare yourself.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section" aria-label="Methodology">
+        <div class="content-card">
+            <h2>
+                <span data-lang="en">HOW THIS PAGE MEASURES CLICKS</span>
+                <span data-lang="ko">이 페이지가 클릭을 재는 방법</span>
+            </h2>
+            <p data-lang="ko">
+                이 안내는 페이지에 실제 들어 있는 측정 코드 기준으로 작성되었습니다. 테스트는 시작 버튼을 누른 뒤 3초 카운트다운이 끝나면 시작되고,
+                사용자가 선택한 시간 동안 기록된 기본 포인터 입력 수를 셉니다. 최종 CPS는 <strong>총 입력 수 ÷ 선택한 시간</strong>입니다.
+            </p>
+            <p data-lang="en">
+                This guide is written from the actual measurement logic on the page. After you press Start, the test begins when the 3-second countdown finishes,
+                and the page counts primary pointer input during the selected duration. Final CPS is <strong>total counted inputs divided by selected time</strong>.
+            </p>
+            <ul data-lang="ko">
+                <li>우클릭은 점수에 포함되지 않습니다.</li>
+                <li>남은 시간 표시는 브라우저의 고해상도 시간 기준으로 업데이트됩니다.</li>
+                <li>결과 화면에는 시간, 총 클릭 수, CPS를 함께 보여 해석이 쉽도록 했습니다.</li>
+                <li>로그인이나 계정 생성 없이 바로 사용할 수 있습니다.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Right-click is not included in the score.</li>
+                <li>The remaining time display updates using the browser's high-resolution clock.</li>
+                <li>The result view shows time, total clicks, and CPS together for easier reading.</li>
+                <li>No sign-in or account creation is required to use the tool.</li>
+            </ul>
+            <p data-lang="ko">
+                이 방식은 짧고 일관된 테스트를 만들기에는 좋지만, 모든 기기와 앱 환경을 완전히 같은 조건으로 맞추지는 못합니다.
+                그래서 NEONCPS는 “절대 순위”보다 “같은 환경에서의 반복 비교”에 더 적합합니다.
+            </p>
+            <p data-lang="en">
+                This method is good for short, consistent tests, but it cannot make every device or app environment equal.
+                For that reason, NEONCPS is better for <strong>repeatable comparison in the same setup</strong> than for universal ranking across all hardware.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section" aria-label="Editorial standards">
+        <div class="content-card">
+            <h2>
+                <span data-lang="en">WHO WRITES THIS PAGE AND WHY IT EXISTS</span>
+                <span data-lang="ko">누가 이 페이지를 만들고 왜 운영하는가</span>
+            </h2>
+            <p data-lang="ko">
+                NEONCPS는 클릭 속도 측정이라는 하나의 주제에 집중한 페이지입니다. 이 페이지의 설명은 도구가 실제로 어떻게 작동하는지에 맞춰 작성되며,
+                사용자가 검색만 타고 들어와도 “이 도구가 무엇을 재고, 어떻게 봐야 하는지”를 바로 이해할 수 있게 하는 것이 목표입니다.
+            </p>
+            <p data-lang="en">
+                NEONCPS is focused on one topic: click-speed measurement. The written explanations are aligned with how the tool actually works,
+                and the goal is to let visitors understand what the tool measures and how to read the result without needing another site.
+            </p>
+            <ul data-lang="ko">
+                <li>콘텐츠 목적: 점수만 보여주지 않고 해석과 사용법까지 함께 제공하기.</li>
+                <li>업데이트 기준: 측정 로직, 정책, 설명 품질이 바뀌면 텍스트도 함께 수정하기.</li>
+                <li>신뢰 기준: 과장된 다운로드 유도, 없는 콘텐츠 링크, 헷갈리는 탐색 요소를 사용하지 않기.</li>
+                <li>피드백 채널: 문의 폼으로 오류 제보와 정정 요청 받기.</li>
+            </ul>
+            <ul data-lang="en">
+                <li>Content goal: provide not just a score, but interpretation and usage guidance.</li>
+                <li>Update rule: revise the text when the measurement logic, policies, or explanation quality changes.</li>
+                <li>Trust rule: avoid fake download prompts, dead links, and navigation that could confuse visitors.</li>
+                <li>Feedback path: receive correction requests through the contact form.</li>
+            </ul>
+            <p data-lang="ko">
+                마지막 점검일: 2026년 3월 11일 UTC.
+            </p>
+            <p data-lang="en">
+                Last reviewed: March 11, 2026 UTC.
+            </p>
         </div>
     </section>
 
@@ -1439,8 +1704,9 @@
             document.getElementById('themeIcon').innerText = isLight ? '☀️' : '🌙';
         }
 
-        // 첫 진입은 항상 다크 모드로 시작
-        document.body.classList.remove('light');
+        // 저장된 테마가 있으면 복원하고, 없으면 기존처럼 다크 모드로 시작
+        const savedTheme = safeStorageGet('neon_theme', 'dark');
+        document.body.classList.toggle('light', savedTheme === 'light');
         updateThemeIcon();
 
         const translations = {
@@ -1471,6 +1737,12 @@
                 retry: "RETRY",
                 copiedAlert: "Link copied",
                 toastClose: "Close",
+                contactNamePlaceholder: "Enter your name",
+                contactMessagePlaceholder: "Enter your message",
+                contactSending: "Sending...",
+                contactSuccess: "Your message was sent successfully. Thank you.",
+                contactError: "Sending failed. Please try again later.",
+                contactNetwork: "A network error occurred. Please try again.",
                 timeUnit: " s",
                 clickUnit: " clicks",
                 countdownGo: "GO"
@@ -1502,13 +1774,20 @@
                 retry: "다시하기",
                 copiedAlert: "링크가 복사되었습니다",
                 toastClose: "닫기",
+                contactNamePlaceholder: "이름을 입력하세요",
+                contactMessagePlaceholder: "문의 내용을 입력하세요",
+                contactSending: "전송 중입니다...",
+                contactSuccess: "문의가 정상적으로 전송되었습니다. 감사합니다.",
+                contactError: "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+                contactNetwork: "네트워크 오류가 발생했습니다. 다시 시도해 주세요.",
                 timeUnit: "초",
                 clickUnit: "회",
                 countdownGo: "시작"
             }
         };
 
-        let currentLang = safeStorageGet('neon_lang', 'en');
+        const defaultLang = document.documentElement.lang.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+        let currentLang = defaultLang;
         let lastResult = null;
 
         function t(key) {
@@ -1519,6 +1798,10 @@
             document.querySelectorAll('[data-i18n]').forEach((el) => {
                 const key = el.getAttribute('data-i18n');
                 el.textContent = t(key);
+            });
+            document.querySelectorAll('[data-placeholder-key]').forEach((el) => {
+                const key = el.getAttribute('data-placeholder-key');
+                el.setAttribute('placeholder', t(key));
             });
             if (lastResult) {
                 document.getElementById('finalTime').innerText = `${lastResult.time}${t('timeUnit')}`;
@@ -1540,10 +1823,17 @@
             applyTranslations();
         }
 
+        function getLanguagePageUrl(lang) {
+            const suffix = `${window.location.search}${window.location.hash}`;
+            return lang === 'ko' ? `https://neoncps.com/ko/${suffix}` : `https://neoncps.com/${suffix}`;
+        }
+
         const langToggle = document.getElementById('langToggle');
         if (langToggle) {
             langToggle.addEventListener('click', () => {
-                setLanguage(currentLang === 'en' ? 'ko' : 'en');
+                const targetLang = currentLang === 'en' ? 'ko' : 'en';
+                safeStorageSet('neon_lang', targetLang);
+                window.location.href = getLanguagePageUrl(targetLang);
             });
         }
         setLanguage(currentLang);
@@ -1941,7 +2231,7 @@
             contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 contactStatus.className = 'contact-status';
-                contactStatus.textContent = '전송 중입니다...';
+                contactStatus.textContent = t('contactSending');
                 try {
                     const res = await fetch(contactForm.action, {
                         method: 'POST',
@@ -1950,15 +2240,15 @@
                     });
                     if (res.ok) {
                         contactStatus.classList.add('success');
-                        contactStatus.textContent = '문의가 정상적으로 전송되었습니다. 감사합니다.';
+                        contactStatus.textContent = t('contactSuccess');
                         contactForm.reset();
                     } else {
                         contactStatus.classList.add('error');
-                        contactStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+                        contactStatus.textContent = t('contactError');
                     }
                 } catch (err) {
                     contactStatus.classList.add('error');
-                    contactStatus.textContent = '네트워크 오류가 발생했습니다. 다시 시도해 주세요.';
+                    contactStatus.textContent = t('contactNetwork');
                 }
             });
         }
