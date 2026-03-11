@@ -1073,6 +1073,24 @@
             opacity: 0.95;
             white-space: nowrap;
         }
+        .result-context {
+            margin-top: 10px;
+            padding: 12px 12px 10px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+        .result-mode-note,
+        .recent-runs {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--muted);
+            font-weight: 700;
+        }
         .result-actions {
             margin-top: 10px;
             display: flex;
@@ -1141,6 +1159,10 @@
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
         }
         .share-link:active { transform: scale(0.99); }
+        .share-link[aria-disabled="true"] {
+            opacity: 0.45;
+            pointer-events: none;
+        }
         .result-footnote {
             margin-top: 12px;
             padding-top: 10px;
@@ -1160,6 +1182,10 @@
             background: rgba(255,255,255,0.92);
             border: 1px solid rgba(0,0,0,0.12);
             box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        body.light .result-context {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.1);
         }
         body.light .summary-label { color: #334155; }
         body.light .summary-value { color: #0f172a; text-shadow: none; }
@@ -1188,7 +1214,9 @@
         .btn-copy:active { transform: scale(0.99); }
         @media (max-width: 430px) {
             .result-guide,
-            .result-action { white-space: normal; }
+            .result-action,
+            .result-mode-note,
+            .recent-runs { white-space: normal; }
             .share-primary-row {
                 flex-direction: column;
             }
@@ -1297,6 +1325,9 @@
             box-shadow: 0 0 14px rgba(0, 255, 157, 0.35), 0 0 28px rgba(0, 245, 196, 0.25);
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
         /* 결과 모달이 열릴 때 광고 노출 차단 (알림/전환 화면 정책 대응) */
         body.modal-open ins.adsbygoogle,
         body.modal-open iframe[src*="googleads"],
@@ -1843,11 +1874,11 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="modal">
-        <div class="result-box">
+    <div class="modal-overlay" id="modal" aria-hidden="true">
+        <div class="result-box" role="dialog" aria-modal="true" aria-labelledby="resultTitleText" aria-describedby="resultSubText resultModeNote recentRuns" tabindex="-1">
             <div class="result-header">
-                <h2 class="result-title"><span data-i18n="resultTitle">🎯 YOUR RESULT</span></h2>
-                <div class="result-subtitle" data-i18n="resultSub">Click Speed Performance</div>
+                <h2 class="result-title" id="resultTitleText"><span data-i18n="resultTitle">🎯 YOUR RESULT</span></h2>
+                <div class="result-subtitle" id="resultSubText" data-i18n="resultSub">Click Speed Performance</div>
             </div>
 
             <div class="result-summary">
@@ -1871,6 +1902,11 @@
                 <div class="result-guide" data-i18n="veryFastInfo">🚀 Around 15+ CPS is often treated as very fast</div>
             </div>
 
+            <div class="result-context" aria-live="polite">
+                <div class="result-mode-note" id="resultModeNote" data-i18n="resultModeDefault">Compare this result only with runs from the same mode and device.</div>
+                <div class="recent-runs" id="recentRuns" data-i18n="recentRunsEmpty">Recent 3 in this mode: no saved runs yet.</div>
+            </div>
+
             <div class="result-actions">
                 <div class="result-action" data-i18n="share">📤 Share your result</div>
                 <div class="result-action" data-i18n="retryHint">🔁 Try again to improve your speed</div>
@@ -1878,7 +1914,7 @@
 
             <div class="share-primary-row">
                 <button class="btn-share-primary" type="button" id="shareResultBtn" onclick="shareResult()" data-i18n="shareNow">📱 Share Now</button>
-                <button class="btn-copy" type="button" onclick="copyResultLink()" data-i18n="copyResultLink">📤 Copy Result Link</button>
+                <button class="btn-copy" type="button" id="copyResultBtn" onclick="copyResultLink()" data-i18n="copyResultLink">📤 Copy Result Link</button>
             </div>
 
             <div class="share-grid" aria-label="Global share links">
@@ -1908,8 +1944,21 @@
     </div>
 	
     <script>
-        function getCanonicalPageUrl() {
-            return `https://neoncps.com${window.location.pathname}${window.location.search}`;
+        function getCanonicalPageUrl(result = null) {
+            const url = new URL(`https://neoncps.com${window.location.pathname}${window.location.search}`);
+            url.searchParams.delete('fc');
+            url.searchParams.delete('fctype');
+            url.searchParams.delete('result_time');
+            url.searchParams.delete('result_clicks');
+            url.searchParams.delete('result_cps');
+
+            if (result) {
+                url.searchParams.set('result_time', String(result.time));
+                url.searchParams.set('result_clicks', String(result.clicks));
+                url.searchParams.set('result_cps', result.cps.toFixed(2));
+            }
+
+            return url.toString();
         }
 
         function safeStorageGet(key, fallbackValue) {
@@ -1967,6 +2016,13 @@
                 avgInfo: "ℹ Casual scores often fall around 6-8 CPS",
                 fastInfo: "🎯 Around 9+ CPS is often treated as fast",
                 veryFastInfo: "🚀 Around 15+ CPS is often treated as very fast",
+                resultModeDefault: "Compare this result only with runs from the same mode and device.",
+                resultMode1: "1s mode is burst-heavy. Compare it only with other 1s runs.",
+                resultMode5: "5s mode is the most practical baseline for repeat comparison.",
+                resultMode10: "10s mode balances speed and steadiness better than very short bursts.",
+                resultMode60: "60s mode reflects endurance and fatigue more than burst speed.",
+                recentRunsLabel: "Recent 3 in this mode:",
+                recentRunsEmpty: "Recent 3 in this mode: no saved runs yet.",
                 share: "📤 Share your result",
                 shareNow: "📱 Share Now",
                 retryHint: "🔁 Try again to improve your speed",
@@ -2005,6 +2061,13 @@
                 avgInfo: "ℹ 가벼운 참고 기준으로는 6~8 CPS가 자주 보입니다",
                 fastInfo: "🎯 보통 9 CPS 이상은 빠른 편으로 봅니다",
                 veryFastInfo: "🚀 보통 15 CPS 이상은 매우 빠른 편으로 봅니다",
+                resultModeDefault: "이 결과는 같은 모드와 같은 기기에서 나온 기록끼리 비교하는 것이 좋습니다.",
+                resultMode1: "1초 모드는 순간 폭발력 영향이 큽니다. 1초 기록끼리만 비교하는 것이 좋습니다.",
+                resultMode5: "5초 모드는 반복 비교용 기준 모드로 가장 실용적입니다.",
+                resultMode10: "10초 모드는 짧은 폭발력보다 속도와 안정성을 함께 보기 좋습니다.",
+                resultMode60: "60초 모드는 순간 속도보다 리듬 유지와 피로 영향이 더 크게 반영됩니다.",
+                recentRunsLabel: "같은 모드 최근 3회:",
+                recentRunsEmpty: "같은 모드 최근 3회: 아직 저장된 기록이 없습니다.",
                 share: "📤 결과 공유",
                 shareNow: "📱 지금 공유",
                 retryHint: "🔁 다시 시도해 속도를 높여보세요",
@@ -2029,9 +2092,73 @@
         const defaultLang = document.documentElement.lang.toLowerCase().startsWith('ko') ? 'ko' : 'en';
         let currentLang = defaultLang;
         let lastResult = null;
+        let lastFocusedBeforeModal = null;
+        const RESULT_TIME_OPTIONS = [1, 5, 10, 60];
 
         function t(key) {
             return (translations[currentLang] && translations[currentLang][key]) || key;
+        }
+
+        function getStoredRuns() {
+            const raw = safeStorageGet('neon_recent_runs', '{}');
+            try {
+                const parsed = JSON.parse(raw);
+                return parsed && typeof parsed === 'object' ? parsed : {};
+            } catch (err) {
+                return {};
+            }
+        }
+
+        function setStoredRuns(data) {
+            safeStorageSet('neon_recent_runs', JSON.stringify(data));
+        }
+
+        function rememberRun(result) {
+            if (!result || !RESULT_TIME_OPTIONS.includes(result.time)) return;
+            const runs = getStoredRuns();
+            const modeKey = String(result.time);
+            const modeRuns = Array.isArray(runs[modeKey]) ? runs[modeKey] : [];
+            modeRuns.unshift({
+                cps: Number(result.cps.toFixed(2)),
+                clicks: result.clicks,
+                time: result.time
+            });
+            runs[modeKey] = modeRuns.slice(0, 3);
+            setStoredRuns(runs);
+        }
+
+        function getRecentRunsForMode(mode) {
+            const runs = getStoredRuns();
+            const modeRuns = runs[String(mode)];
+            return Array.isArray(modeRuns) ? modeRuns : [];
+        }
+
+        function getModeNoteKey(mode) {
+            if (mode === 1) return 'resultMode1';
+            if (mode === 5) return 'resultMode5';
+            if (mode === 10) return 'resultMode10';
+            if (mode === 60) return 'resultMode60';
+            return 'resultModeDefault';
+        }
+
+        function renderResultContext(mode) {
+            const resultModeNote = document.getElementById('resultModeNote');
+            const recentRuns = document.getElementById('recentRuns');
+            const targetMode = RESULT_TIME_OPTIONS.includes(mode) ? mode : selectedTime;
+
+            if (resultModeNote) {
+                resultModeNote.textContent = t(getModeNoteKey(targetMode));
+            }
+
+            if (recentRuns) {
+                const entries = getRecentRunsForMode(targetMode);
+                if (!entries.length) {
+                    recentRuns.textContent = t('recentRunsEmpty');
+                } else {
+                    const formatted = entries.map((entry) => `${Number(entry.cps).toFixed(1)} CPS`);
+                    recentRuns.textContent = `${t('recentRunsLabel')} ${formatted.join(' / ')}`;
+                }
+            }
         }
 
         function applyTranslations() {
@@ -2258,13 +2385,22 @@
         const copyToastUrl = document.getElementById('copyToastUrl');
         const copyToastClose = document.getElementById('copyToastClose');
         const shareResultBtn = document.getElementById('shareResultBtn');
+        const copyResultBtn = document.getElementById('copyResultBtn');
         const shareX = document.getElementById('shareX');
         const shareWhatsApp = document.getElementById('shareWhatsApp');
         const shareFacebook = document.getElementById('shareFacebook');
         const shareReddit = document.getElementById('shareReddit');
         const shareTelegram = document.getElementById('shareTelegram');
         const shareEmail = document.getElementById('shareEmail');
+        const resultBox = modal.querySelector('.result-box');
         let copyToastTimer = null;
+
+        function syncTimeButtons() {
+            timeBtns.forEach((btn) => {
+                const btnSeconds = Number((btn.textContent || '').replace('s', '').trim());
+                btn.classList.toggle('active', btnSeconds === selectedTime);
+            });
+        }
 
         function hideCopyToast() {
             if (!copyToast) return;
@@ -2286,8 +2422,28 @@
             });
         }
 
+        function getSharedResultFromUrl() {
+            const url = new URL(window.location.href);
+            const time = Number(url.searchParams.get('result_time'));
+            const clicks = Number(url.searchParams.get('result_clicks'));
+            const cps = Number(url.searchParams.get('result_cps'));
+
+            if (!RESULT_TIME_OPTIONS.includes(time)) return null;
+            if (!Number.isFinite(clicks) || clicks < 0 || clicks > 10000) return null;
+            if (!Number.isFinite(cps) || cps < 0 || cps > 50) return null;
+
+            const expectedCps = Number((clicks / time).toFixed(2));
+            if (Math.abs(expectedCps - cps) > 0.15) return null;
+
+            return {
+                time,
+                clicks: Math.round(clicks),
+                cps: expectedCps
+            };
+        }
+
         function getSharePayload() {
-            const shareUrl = getCanonicalPageUrl();
+            const shareUrl = getCanonicalPageUrl(lastResult);
 
             if (!lastResult) {
                 return {
@@ -2299,7 +2455,7 @@
                 };
             }
 
-            const cpsText = lastResult.cps.toFixed(2);
+            const cpsText = lastResult.cps.toFixed(1);
             const title = currentLang === 'ko'
                 ? `NEONCPS 결과: ${cpsText} CPS`
                 : `My NEONCPS result: ${cpsText} CPS`;
@@ -2315,8 +2471,24 @@
             const encodedUrl = encodeURIComponent(shareUrl);
             const encodedTitle = encodeURIComponent(title);
             const encodedText = encodeURIComponent(text);
+            const shareLinks = [shareX, shareWhatsApp, shareFacebook, shareReddit, shareTelegram, shareEmail];
 
             if (shareResultBtn) shareResultBtn.disabled = !lastResult;
+            if (copyResultBtn) copyResultBtn.disabled = !lastResult;
+
+            shareLinks.forEach((link) => {
+                if (!link) return;
+                if (!lastResult) {
+                    link.setAttribute('aria-disabled', 'true');
+                    link.tabIndex = -1;
+                    link.href = '#';
+                } else {
+                    link.removeAttribute('aria-disabled');
+                    link.tabIndex = 0;
+                }
+            });
+
+            if (!lastResult) return;
             if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
             if (shareWhatsApp) shareWhatsApp.href = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
             if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
@@ -2342,12 +2514,40 @@
             await copyResultLink();
         }
 
+        function getModalFocusableElements() {
+            return Array.from(resultBox.querySelectorAll('button:not([disabled]), a[href]:not([aria-disabled="true"])')).filter((el) => !el.hasAttribute('disabled'));
+        }
+
+        function openResultModal() {
+            lastFocusedBeforeModal = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            renderResultContext(lastResult ? lastResult.time : selectedTime);
+            document.body.classList.remove('game-active');
+            document.body.classList.add('modal-open');
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+
+            requestAnimationFrame(() => {
+                const focusTarget = shareResultBtn && !shareResultBtn.disabled ? shareResultBtn : resultBox;
+                focusTarget.focus();
+            });
+        }
+
+        function hideResultModal() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            if (lastFocusedBeforeModal && document.contains(lastFocusedBeforeModal)) {
+                lastFocusedBeforeModal.focus();
+            }
+        }
+
         function setPadState(state) {
             clickPad.classList.remove('idle', 'counting', 'running');
             clickPad.classList.add(state);
         }
         setPadState('idle');
         updateShareLinks();
+        renderResultContext(selectedTime);
 
         function updateSlimeMode(cpsValue) {
             slime.classList.remove('glow-advanced', 'glow-elite');
@@ -2490,7 +2690,7 @@
         }
 
         async function copyResultLink() {
-            const shareUrl = getCanonicalPageUrl();
+            const shareUrl = getCanonicalPageUrl(lastResult);
             try {
                 await navigator.clipboard.writeText(shareUrl);
             } catch (err) {
@@ -2543,12 +2743,12 @@
                 clicks: score,
                 cps: cpsValue
             };
+            rememberRun(lastResult);
             updateShareLinks();
+            renderResultContext(selectedTime);
 
             setTimeout(() => {
-                document.body.classList.remove('game-active');
-                document.body.classList.add('modal-open');
-                modal.style.display = 'flex';
+                openResultModal();
                 animateValue(finalTimeEl, 0, selectedTime, 800, (v) => `${Math.round(v)}${t('timeUnit')}`);
                 animateValue(finalClicksEl, 0, score, 800, (v) => `${Math.round(v)}${t('clickUnit')}`);
                 animateValue(finalCpsEl, 0, cpsValue, 800, (v) => v.toFixed(1));
@@ -2573,10 +2773,10 @@
             document.getElementById('finalTime').innerText = `0${t('timeUnit')}`;
             document.getElementById('finalClicks').innerText = `0${t('clickUnit')}`;
             document.getElementById('finalCps').innerText = "0.0";
-            modal.style.display = 'none';
-            document.body.classList.remove('modal-open');
+            hideResultModal();
             document.body.classList.remove('game-active');
             updateShareLinks();
+            renderResultContext(selectedTime);
             idleMsg.style.visibility = 'visible';
             score = 0;
             timeLeft = selectedTime;
@@ -2584,6 +2784,48 @@
             scoreEl.innerText = "0";
             rankEmojiEl.innerText = "🐢";
             slime.classList.remove('glow-advanced', 'glow-elite', 'glow-hit');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display !== 'flex') return;
+
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                resetTest();
+                return;
+            }
+
+            if (e.key !== 'Tab') return;
+
+            const focusable = getModalFocusableElements();
+            if (!focusable.length) {
+                e.preventDefault();
+                resultBox.focus();
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey && (document.activeElement === first || document.activeElement === resultBox)) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
+
+        const sharedResult = getSharedResultFromUrl();
+        if (sharedResult) {
+            selectedTime = sharedResult.time;
+            timeLeft = sharedResult.time;
+            lastResult = sharedResult;
+            syncTimeButtons();
+            timerEl.innerText = selectedTime.toFixed(2) + "s";
+            updateShareLinks();
+            applyTranslations();
+            openResultModal();
         }
 
         // 문의 폼(Formspree) 제출 처리
