@@ -30,6 +30,7 @@
     <meta name="twitter:description" content="Free CPS click speed test for desktop and mobile with clicks per second scoring, guides, FAQs, and repeatable results.">
     <meta name="twitter:image" content="https://neoncps.com/og-image.png">
     <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+    <meta name="naver-site-verification" content="72c7936bd1e193f1609f082f2ee301ebf7b5bbae">
     <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/favicon.png">
@@ -2582,10 +2583,20 @@
                 ? lastFocusedBeforeModal
                 : startBtn;
 
+            let focusMoved = false;
+
             if (activeElement && modal.contains(activeElement)) {
                 if (restoreTarget && restoreTarget !== activeElement) {
                     restoreTarget.focus();
-                } else {
+                    focusMoved = document.activeElement === restoreTarget;
+                }
+
+                if (!focusMoved && startBtn && startBtn !== activeElement && !startBtn.disabled) {
+                    startBtn.focus();
+                    focusMoved = document.activeElement === startBtn;
+                }
+
+                if (!focusMoved) {
                     activeElement.blur();
                 }
             }
@@ -2593,6 +2604,7 @@
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
+            lastFocusedBeforeModal = null;
         }
 
         function setPadState(state) {
