@@ -289,7 +289,17 @@
         .btn-copy,
         .btn-restart,
         .info-tab,
-        .topbar-card {
+        .topbar-card,
+        .idle-msg,
+        .rank-emoji,
+        .subtitle,
+        .meta-note,
+        .result-box,
+        .result-header,
+        .result-summary,
+        .result-context,
+        .result-actions,
+        .result-footnote {
             user-select: none;
             -webkit-user-select: none;
         }
@@ -554,6 +564,10 @@
             line-height: 0.8;
             font-family: 'Black Ops One', cursive;
             transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .click-pad.instant-hide .score-text,
+        .click-pad.instant-hide .timer-text {
+            transition: none;
         }
 
         .timer-text {
@@ -1049,22 +1063,28 @@
         .summary-item {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
             gap: 4px;
+            width: 100%;
             white-space: nowrap;
         }
         .summary-label {
+            display: block;
+            width: 100%;
             color: var(--muted);
             font-size: clamp(16px, 3.6vw, 20px);
             font-weight: 700;
             text-align: center;
         }
         .summary-value {
+            display: block;
+            width: 100%;
             color: var(--text);
             font-size: clamp(30px, 7vw, 42px);
             font-weight: 900;
             font-family: 'Roboto Mono', monospace;
             line-height: 1;
+            text-align: center;
         }
         .summary-item.cps-item .summary-value {
             font-size: clamp(54px, 12.5vw, 76px);
@@ -2820,12 +2840,15 @@
             startBtn.disabled = false;
             startBtn.style.display = 'flex';
             padOverlay.style.pointerEvents = 'auto';
+            clickPad.classList.add('instant-hide');
             setPadState('idle');
+            if (copyToastTimer) clearTimeout(copyToastTimer);
+            hideCopyToast();
+            hideResultModal();
             lastResult = null;
             document.getElementById('finalTime').innerText = `0${t('timeUnit')}`;
             document.getElementById('finalClicks').innerText = `0${t('clickUnit')}`;
             document.getElementById('finalCps').innerText = "0.0";
-            hideResultModal();
             document.body.classList.remove('game-active');
             updateShareLinks();
             renderResultContext(selectedTime);
@@ -2836,6 +2859,9 @@
             scoreEl.innerText = "0";
             rankEmojiEl.innerText = "🐢";
             slime.classList.remove('glow-advanced', 'glow-elite', 'glow-hit');
+            requestAnimationFrame(() => {
+                clickPad.classList.remove('instant-hide');
+            });
         }
 
         document.addEventListener('keydown', (e) => {
