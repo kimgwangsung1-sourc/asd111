@@ -520,10 +520,8 @@
             backdrop-filter: blur(5px);
             touch-action: manipulation;
         }
-        .click-pad.idle .score-text,
-        .click-pad.idle .timer-text,
-        .click-pad.counting .score-text,
-        .click-pad.counting .timer-text {
+        .click-pad .score-text,
+        .click-pad .timer-text {
             opacity: 0;
             transform: translateY(8px);
         }
@@ -1625,7 +1623,7 @@
     </div>
 
     <div class="test-container">
-        <div class="click-pad" id="clickPad">
+        <div class="click-pad idle" id="clickPad">
             <div class="score-text" id="score">0</div>
             <div class="timer-text" id="timer">5.00s</div>
             <div class="pad-overlay" id="padOverlay">
