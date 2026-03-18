@@ -1144,37 +1144,6 @@
             box-shadow: 0 8px 20px rgba(0, 255, 157, 0.18);
         }
         .btn-share-primary:active { transform: scale(0.99); }
-        .share-grid {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 8px;
-        }
-        .share-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 42px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--panel-bg);
-            color: var(--text);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            transition: transform 0.12s ease, box-shadow 0.12s ease;
-        }
-        .share-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-        }
-        .share-link:active { transform: scale(0.99); }
-        .share-link[aria-disabled="true"] {
-            opacity: 0.45;
-            pointer-events: none;
-        }
         .result-footnote {
             margin-top: 12px;
             padding-top: 10px;
@@ -1942,9 +1911,9 @@
             </div>
 
             <div class="result-guides">
-                <div class="result-guide" data-i18n="avgInfo">ℹ Casual scores often fall around 6-8 CPS</div>
-                <div class="result-guide" data-i18n="fastInfo">🎯 Around 9+ CPS is often treated as fast</div>
-                <div class="result-guide" data-i18n="veryFastInfo">🚀 Around 15+ CPS is often treated as very fast</div>
+                <div class="result-guide" data-i18n="avgInfo">ℹ These score bands are general reference only, not site-verified benchmarks.</div>
+                <div class="result-guide" data-i18n="fastInfo">🎯 In casual web CPS tests, scores around 9 CPS are often described as fast.</div>
+                <div class="result-guide" data-i18n="veryFastInfo">🚀 In casual web CPS tests, scores around 15 CPS are often described as very fast.</div>
             </div>
 
             <div class="result-context" aria-live="polite">
@@ -1960,15 +1929,6 @@
             <div class="share-primary-row">
                 <button class="btn-share-primary" type="button" id="shareResultBtn" data-i18n="shareNow">📱 Share Now</button>
                 <button class="btn-copy" type="button" id="copyResultBtn" data-i18n="copyResultLink">📤 Copy Result Link</button>
-            </div>
-
-            <div class="share-grid" aria-label="Global share links">
-                <a class="share-link" id="shareX" href="#" target="_blank" rel="noopener noreferrer">X</a>
-                <a class="share-link" id="shareWhatsApp" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                <a class="share-link" id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a class="share-link" id="shareReddit" href="#" target="_blank" rel="noopener noreferrer">Reddit</a>
-                <a class="share-link" id="shareTelegram" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
-                <a class="share-link" id="shareEmail" href="#">Email</a>
             </div>
 
             <div class="result-footnote">
@@ -2058,9 +2018,9 @@
                 time: "⏱ Time (seconds)",
                 clicks: "🖱 Total Clicks",
                 cps: "⚡ CPS",
-                avgInfo: "ℹ Casual scores often fall around 6-8 CPS",
-                fastInfo: "🎯 Around 9+ CPS is often treated as fast",
-                veryFastInfo: "🚀 Around 15+ CPS is often treated as very fast",
+                avgInfo: "ℹ These score bands are general reference only, not site-verified benchmarks.",
+                fastInfo: "🎯 In casual web CPS tests, scores around 9 CPS are often described as fast.",
+                veryFastInfo: "🚀 In casual web CPS tests, scores around 15 CPS are often described as very fast.",
                 resultModeDefault: "Compare this result only with runs from the same mode and device.",
                 resultMode1: "1s mode is burst-heavy. Compare it only with other 1s runs.",
                 resultMode5: "5s mode is the most practical baseline for repeat comparison.",
@@ -2103,9 +2063,9 @@
                 time: "⏱ 측정 시간(초)",
                 clicks: "🖱 총 클릭 수",
                 cps: "⚡ CPS",
-                avgInfo: "ℹ 가벼운 참고 기준으로는 6~8 CPS가 자주 보입니다",
-                fastInfo: "🎯 보통 9 CPS 이상은 빠른 편으로 봅니다",
-                veryFastInfo: "🚀 보통 15 CPS 이상은 매우 빠른 편으로 봅니다",
+                avgInfo: "ℹ 아래 구간은 사이트 실측으로 검증한 기준이 아니라 일반적인 참고 해석입니다.",
+                fastInfo: "🎯 웹 CPS 테스트에서는 보통 9 CPS 안팎부터 빠른 편으로 보는 경우가 많습니다.",
+                veryFastInfo: "🚀 웹 CPS 테스트에서는 보통 15 CPS 안팎부터 매우 빠른 편으로 보는 경우가 많습니다.",
                 resultModeDefault: "이 결과는 같은 모드와 같은 기기에서 나온 기록끼리 비교하는 것이 좋습니다.",
                 resultMode1: "1초 모드는 순간 폭발력 영향이 큽니다. 1초 기록끼리만 비교하는 것이 좋습니다.",
                 resultMode5: "5초 모드는 반복 비교용 기준 모드로 가장 실용적입니다.",
@@ -2437,12 +2397,6 @@
         const shareResultBtn = document.getElementById('shareResultBtn');
         const copyResultBtn = document.getElementById('copyResultBtn');
         const retryBtn = document.getElementById('retryBtn');
-        const shareX = document.getElementById('shareX');
-        const shareWhatsApp = document.getElementById('shareWhatsApp');
-        const shareFacebook = document.getElementById('shareFacebook');
-        const shareReddit = document.getElementById('shareReddit');
-        const shareTelegram = document.getElementById('shareTelegram');
-        const shareEmail = document.getElementById('shareEmail');
         const resultBox = modal.querySelector('.result-box');
         let copyToastTimer = null;
 
@@ -2546,34 +2500,8 @@
         }
 
         function updateShareLinks() {
-            const { shareUrl, title, text } = getSharePayload();
-            const encodedUrl = encodeURIComponent(shareUrl);
-            const encodedTitle = encodeURIComponent(title);
-            const encodedText = encodeURIComponent(text);
-            const shareLinks = [shareX, shareWhatsApp, shareFacebook, shareReddit, shareTelegram, shareEmail];
-
             if (shareResultBtn) shareResultBtn.disabled = !lastResult;
             if (copyResultBtn) copyResultBtn.disabled = !lastResult;
-
-            shareLinks.forEach((link) => {
-                if (!link) return;
-                if (!lastResult) {
-                    link.setAttribute('aria-disabled', 'true');
-                    link.tabIndex = -1;
-                    link.href = '#';
-                } else {
-                    link.removeAttribute('aria-disabled');
-                    link.tabIndex = 0;
-                }
-            });
-
-            if (!lastResult) return;
-            if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-            if (shareWhatsApp) shareWhatsApp.href = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
-            if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
-            if (shareReddit) shareReddit.href = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
-            if (shareTelegram) shareTelegram.href = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
-            if (shareEmail) shareEmail.href = `mailto:?subject=${encodedTitle}&body=${encodedText}%20${encodedUrl}`;
         }
 
         async function shareResult() {
