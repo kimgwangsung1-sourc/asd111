@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <meta name="description" content="Mobile versus mouse CPS: why touch and mouse results are not directly equal, what each setup emphasizes, and how to compare runs fairly.">
+  <meta name="author" content="NEONCPS">
+  <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <link rel="canonical" href="https://neoncps.com/guides/mobile-vs-mouse-cps/">
+  <meta property="og:title" content="Mobile Versus Mouse CPS | Fair Comparison Rules for NEONCPS">
+  <meta property="og:description" content="Learn why touch and mouse CPS belong to different comparison contexts and how to interpret each setup more honestly.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://neoncps.com/guides/mobile-vs-mouse-cps/">
+  <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <title>Mobile Versus Mouse CPS | Fair Comparison Rules for NEONCPS</title>
+  <link rel="stylesheet" href="/docs.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Mobile Versus Mouse CPS",
+    "url": "https://neoncps.com/guides/mobile-vs-mouse-cps/",
+    "description": "Device-specific interpretation rules for touch and mouse CPS results.",
+    "dateModified": "2026-03-18",
+    "author": { "@type": "Organization", "name": "NEONCPS" },
+    "publisher": { "@type": "Organization", "name": "NEONCPS" }
+  }
+  </script>
+</head>
+<body>
+  <header class="shell topbar">
+    <div>
+      <p class="eyebrow">Device Comparison Guide</p>
+      <h1>Mobile versus mouse CPS</h1>
+      <p class="sub">A touch score and a mouse score can both be real while still describing different tasks. This guide explains why NEONCPS does not recommend direct cross-device ranking without matching the input category first.</p>
+    </div>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">CPS Test</a>
+      <a href="/guides/" aria-current="page">Guides</a>
+      <a href="/about/">About</a>
+      <a href="/editorial-policy/">Editorial Policy</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="shell article-shell">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Mobile versus mouse CPS</span></div>
+
+    <section class="panel hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">Reviewed March 18, 2026 UTC</span>
+        <h1>The same score can mean different things on different hardware</h1>
+        <p>Mouse input and touch input travel through different physical and software paths. The finger motion is different, the contact surface is different, and the latency profile is different. That means the resulting CPS numbers should be interpreted inside their own context instead of thrown into one mixed bucket.</p>
+        <p>NEONCPS supports both because many visitors want to test on the device they actually use. Supporting both does not mean pretending they are identical.</p>
+      </div>
+      <aside class="hero-meta">
+        <div class="meta-card">
+          <h2>Touch emphasizes</h2>
+          <ul class="meta-list">
+            <li>Grip stability</li>
+            <li>Contact consistency</li>
+            <li>Thumb or finger rhythm on glass</li>
+          </ul>
+        </div>
+        <div class="meta-card">
+          <h2>Mouse emphasizes</h2>
+          <ul class="meta-list">
+            <li>Switch feel</li>
+            <li>Finger strike rhythm</li>
+            <li>Pointer-device posture</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel article-body">
+      <section>
+        <h2>1. Touch is direct contact, mouse is mediated contact</h2>
+        <p>On a phone or tablet, your finger touches the surface that receives the input. On a mouse, your finger presses a switch while the pointer interaction is mediated through separate hardware. That difference changes how rhythm is produced and how fatigue builds.</p>
+        <p>A touch run is more vulnerable to grip instability, slipping, and the physical size of the finger contact area. A mouse run depends more on switch feel, button travel, and how efficiently the finger can cycle through repeated presses. Both are valid forms of input, but they are not interchangeable.</p>
+      </section>
+
+      <section>
+        <h2>2. Latency profiles are different</h2>
+        <p>Touchscreens have their own scan and display pipeline. Mouse input has its own report timing, switch behavior, and desktop-event path. In both cases the browser still has to receive, process, and display the result. The important point is not which one is “better” in the abstract. The important point is that the delay path is not the same.</p>
+        <p>That difference is one reason mixed-device leaderboards become misleading. A device that feels quick in one style of repeated tapping may not behave the same way in another, and the same person may score differently simply because the physical interaction changed.</p>
+      </section>
+
+      <section>
+        <h2>3. What comparison is fair</h2>
+        <table class="metric-table">
+          <tr>
+            <th>Comparison</th>
+            <th>Fair or weak?</th>
+          </tr>
+          <tr>
+            <td>Same phone, same finger, same browser, same mode</td>
+            <td>Fair. This is a useful repeatability comparison.</td>
+          </tr>
+          <tr>
+            <td>Same desktop mouse, same browser, same mode</td>
+            <td>Fair. This is also a useful repeatability comparison.</td>
+          </tr>
+          <tr>
+            <td>Phone thumb score versus gaming mouse score</td>
+            <td>Weak. The motion, hardware path, and latency conditions are too different.</td>
+          </tr>
+          <tr>
+            <td>Touch score versus touch score across different phones</td>
+            <td>Possible, but still weaker than same-device comparison because device conditions change.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>4. Practical advice for mobile runs</h2>
+        <ul>
+          <li>Stabilize the device first. A loose grip creates rhythm breaks that have nothing to do with real tapping ability.</li>
+          <li>Use the same finger across repeated attempts.</li>
+          <li>Keep the screen and finger position consistent so your contact pattern does not drift.</li>
+          <li>Prefer 5-second or 10-second runs when you want a fair baseline.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Practical advice for mouse runs</h2>
+        <ul>
+          <li>Keep the same mouse and browser when comparing results.</li>
+          <li>Use a stable hand position instead of changing grip every attempt.</li>
+          <li>Do not over-interpret tiny score differences across different switch types or system settings.</li>
+          <li>Use repeated attempts rather than a single peak score to judge consistency.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>6. The honest rule NEONCPS follows</h2>
+        <p>NEONCPS supports both touch and mouse because both are real ways people use the web. But the site does not pretend that supporting both means they are the same category. The most honest reading is simple: compare like with like first, then treat cross-device results as rough context instead of proof that one person or one device is universally faster.</p>
+      </section>
+
+      <section>
+        <h2>References used for this explanation</h2>
+        <ul class="reference-list">
+          <li><a href="https://www.w3.org/TR/pointerevents3/" rel="noopener noreferrer">W3C Pointer Events Level 3</a></li>
+          <li><a href="https://developer.chrome.com/blog/300ms-tap-delay-gone-away/" rel="noopener noreferrer">Chrome Developers: 300ms tap delay and mobile input history</a></li>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10843409/" rel="noopener noreferrer">Touch or click friendly: Towards adaptive user interfaces for complex applications</a></li>
+          <li><a href="https://www.yorku.ca/mack/CHI99b.html" rel="noopener noreferrer">Testing Pointing Device Performance with ISO 9241-9</a></li>
+        </ul>
+      </section>
+
+      <section class="article-callout">
+        <p>A mixed-device CPS comparison is tempting because the number looks universal. It is not. The fair rule is simple: first compare runs made with the same kind of input, then treat everything else as loose context.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="shell footer-note">
+    <p>For the lowest-risk training routine, continue to <a href="/guides/safe-cps-practice/">safe CPS practice and improvement</a>, or return to the <a href="/guides/">guide library</a>.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <meta name="description" content="Why CPS scores change: fatigue, timing boundaries, device differences, browser load, and the practical meaning of 1s, 5s, 10s, and 60s modes.">
+  <meta name="author" content="NEONCPS">
+  <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <link rel="canonical" href="https://neoncps.com/guides/why-cps-scores-change/">
+  <meta property="og:title" content="Why CPS Scores Change Between Attempts | NEONCPS Guide">
+  <meta property="og:description" content="Understand why repeated CPS runs move around and how to compare them more fairly on the same setup.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://neoncps.com/guides/why-cps-scores-change/">
+  <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <title>Why CPS Scores Change Between Attempts | NEONCPS Guide</title>
+  <link rel="stylesheet" href="/docs.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why CPS Scores Change Between Attempts",
+    "url": "https://neoncps.com/guides/why-cps-scores-change/",
+    "description": "Practical explanation of score variance in browser-based CPS testing.",
+    "dateModified": "2026-03-18",
+    "author": { "@type": "Organization", "name": "NEONCPS" },
+    "publisher": { "@type": "Organization", "name": "NEONCPS" }
+  }
+  </script>
+</head>
+<body>
+  <header class="shell topbar">
+    <div>
+      <p class="eyebrow">Interpretation Guide</p>
+      <h1>Why CPS scores change between attempts</h1>
+      <p class="sub">The short answer is that a browser-based CPS run is not measuring only your hand. It reflects a changing combination of rhythm, fatigue, input hardware, browser timing, and page load. Small differences are normal. The job is to understand which differences matter.</p>
+    </div>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">CPS Test</a>
+      <a href="/guides/" aria-current="page">Guides</a>
+      <a href="/about/">About</a>
+      <a href="/editorial-policy/">Editorial Policy</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="shell article-shell">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Why CPS scores change between attempts</span></div>
+
+    <section class="panel hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">Reviewed March 18, 2026 UTC</span>
+        <h1>Variation is expected, not suspicious</h1>
+        <p>If two back-to-back runs differ slightly, that does not automatically mean one of them is wrong. CPS is especially sensitive to small timing boundaries, early rhythm changes, fatigue build-up, and device conditions that are easy to overlook.</p>
+        <p>What matters more than one isolated score is the pattern across repeated runs in the same environment. That is why NEONCPS is positioned as a repeatability tool instead of a universal competitive benchmark.</p>
+      </div>
+      <aside class="hero-meta">
+        <div class="meta-card">
+          <h2>Big human factors</h2>
+          <ul class="meta-list">
+            <li>Start rhythm</li>
+            <li>Finger fatigue</li>
+            <li>Posture drift</li>
+          </ul>
+        </div>
+        <div class="meta-card">
+          <h2>Big system factors</h2>
+          <ul class="meta-list">
+            <li>Browser main-thread load</li>
+            <li>Device input latency</li>
+            <li>Background apps and power settings</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel article-body">
+      <section>
+        <h2>1. Human rhythm changes faster than most people think</h2>
+        <p>A burst-style test can feel like one continuous action while actually containing several phases: the first hit, the rhythm lock-in, the stable middle, and the early fatigue drop. Those phases are short, but they are real. A 1-second run exaggerates the start phase, while a longer run makes the fatigue phase more visible.</p>
+        <p>That is why a user can feel “the same” across attempts and still see slightly different numbers. Tiny differences in the first few taps or clicks can shift a short test more than expected, especially when the total duration is only one second.</p>
+      </section>
+
+      <section>
+        <h2>2. Fatigue changes the longer modes</h2>
+        <p>Once a run extends into 10 seconds or 60 seconds, fatigue becomes harder to ignore. The same user who starts strong may lose smoothness, tighten the wrist, or drift off rhythm. The result is not merely fewer clicks. It is a different pattern of movement, and that shows up on the score.</p>
+        <p>This is why NEONCPS treats the 60-second mode as an endurance and rhythm check rather than as the same type of measurement as a 1-second burst. The number still matters, but the interpretation changes with the mode.</p>
+      </section>
+
+      <section>
+        <h2>3. Device and browser conditions change the path to the score</h2>
+        <p>The browser still has to receive your input, queue work, update time, and render the page. A device under load may not feel obviously broken while still becoming a little less stable. Extra tabs, battery-saver modes, heavy background apps, or thermal throttling can all make input timing less consistent.</p>
+        <p>On mobile, the hardware and operating-system path is different again. Touch latency, screen sampling, grip stability, and the difference between thumb and index tapping can all move the result. None of that makes the score invalid. It simply means the score belongs to a specific setup, not to an abstract universal standard.</p>
+      </section>
+
+      <section>
+        <h2>4. Why the modes feel different</h2>
+        <table class="metric-table">
+          <tr>
+            <th>Mode</th>
+            <th>What it tends to emphasize</th>
+          </tr>
+          <tr>
+            <td>1 second</td>
+            <td>Start reaction and burst rhythm. This mode is the most sensitive to tiny timing changes.</td>
+          </tr>
+          <tr>
+            <td>5 seconds</td>
+            <td>A practical baseline for many users because it is short enough to limit fatigue but long enough to reduce random boundary noise.</td>
+          </tr>
+          <tr>
+            <td>10 seconds</td>
+            <td>Useful for seeing whether rhythm stays stable after the initial burst.</td>
+          </tr>
+          <tr>
+            <td>60 seconds</td>
+            <td>Endurance, pacing, and fatigue management rather than pure burst speed.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. The most useful comparison protocol</h2>
+        <ul>
+          <li>Pick one mode, ideally 5 or 10 seconds, and keep it fixed for comparison.</li>
+          <li>Use the same device, same browser, same finger, and same posture.</li>
+          <li>Run three attempts instead of trusting one outlier score.</li>
+          <li>Use the middle run as your practical benchmark when the three values are close.</li>
+          <li>Do not compare a mobile thumb run to a desktop mouse run as if they mean the same thing.</li>
+        </ul>
+        <p>This approach is not flashy, but it is the most honest way to use a tool like NEONCPS. You get a number that is stable enough to be useful without pretending the web can eliminate every timing variable.</p>
+      </section>
+
+      <section>
+        <h2>References used for this explanation</h2>
+        <ul class="reference-list">
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11461208/" rel="noopener noreferrer">Finger-specific effects of age on tapping speed and motor fatigability</a></li>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916091/" rel="noopener noreferrer">Associations Between Smartphone-Based Finger Tapping and Cognitive Performance in Older Adults</a></li>
+          <li><a href="https://w3c.github.io/longtasks/" rel="noopener noreferrer">W3C Long Tasks API</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/High_precision_timing" rel="noopener noreferrer">MDN: High precision timing</a></li>
+        </ul>
+      </section>
+
+      <section class="article-callout">
+        <p>If your CPS changes a little, the first assumption should be “conditions moved” rather than “the page is broken.” The goal is not to freeze every variable. The goal is to keep enough of them fixed that repeated runs mean something.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="shell footer-note">
+    <p>Next, read <a href="/guides/mobile-vs-mouse-cps/">mobile versus mouse CPS</a> for a device-specific comparison rule, or return to the <a href="/guides/">guide library</a>.</p>
+  </footer>
+</body>
+</html>

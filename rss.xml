@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>NEONCPS | Free CPS Test and Guide Updates</title>
+    <title>NEONCPS | CPS Test and Guide Updates</title>
     <link>https://neoncps.com/</link>
-    <description>Updates for NEONCPS free CPS test and guide on desktop and mobile, including score interpretation, methodology notes, and test improvements.</description>
+    <description>Updates for the NEONCPS CPS test, guide library, methodology notes, and site standards.</description>
     <language>en-us</language>
-  <lastBuildDate>Wed, 11 Mar 2026 17:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2026 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>NEONCPS | Free CPS Test and Guide (1s, 5s, 10s, 60s)</title>
+      <title>NEONCPS | CPS Click Speed Test and Guide</title>
       <link>https://neoncps.com/</link>
       <guid>https://neoncps.com/</guid>
-    <pubDate>Wed, 11 Mar 2026 17:00:00 +0000</pubDate>
-      <description>Free CPS test and guide for desktop and mobile with score interpretation, methodology notes, repeatability tips, and safety guidance.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Main CPS test page with updated resource-library links, methodology notes, and review date.</description>
+    </item>
+    <item>
+      <title>NEONCPS Guides | CPS Methodology, Interpretation, and Safety</title>
+      <link>https://neoncps.com/guides/</link>
+      <guid>https://neoncps.com/guides/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <description>New guide library covering methodology, score variance, mobile versus mouse comparison, and safer practice.</description>
+    </item>
+    <item>
+      <title>How NEONCPS Measures CPS</title>
+      <link>https://neoncps.com/guides/how-neoncps-measures-cps/</link>
+      <guid>https://neoncps.com/guides/how-neoncps-measures-cps/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Explanation of the input rule, timing rule, and interpretation limits behind the NEONCPS score.</description>
+    </item>
+    <item>
+      <title>Why CPS Scores Change Between Attempts</title>
+      <link>https://neoncps.com/guides/why-cps-scores-change/</link>
+      <guid>https://neoncps.com/guides/why-cps-scores-change/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Guide explaining fatigue, timing boundaries, device conditions, and fair repeatability rules.</description>
+    </item>
+    <item>
+      <title>Safe CPS Practice and Improvement</title>
+      <link>https://neoncps.com/guides/safe-cps-practice/</link>
+      <guid>https://neoncps.com/guides/safe-cps-practice/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Short-session practice advice focused on repeatability, rest, and avoiding unnecessary strain.</description>
     </item>
   </channel>
 </rss>

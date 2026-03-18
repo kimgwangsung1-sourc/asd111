@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <meta name="description" content="How NEONCPS measures CPS: input rule, timing rule, score formula, and the practical limits of browser-based click speed testing.">
+  <meta name="author" content="NEONCPS">
+  <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <link rel="canonical" href="https://neoncps.com/guides/how-neoncps-measures-cps/">
+  <meta property="og:title" content="How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits">
+  <meta property="og:description" content="Understand what the NEONCPS score counts, how timing works, and why browser-based CPS is best for repeatable comparison in the same setup.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://neoncps.com/guides/how-neoncps-measures-cps/">
+  <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <title>How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits</title>
+  <link rel="stylesheet" href="/docs.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How NEONCPS Measures CPS",
+    "url": "https://neoncps.com/guides/how-neoncps-measures-cps/",
+    "description": "Input rule, timing rule, and interpretation limits for the NEONCPS CPS score.",
+    "dateModified": "2026-03-18",
+    "author": {
+      "@type": "Organization",
+      "name": "NEONCPS"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "NEONCPS"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="shell topbar">
+    <div>
+      <p class="eyebrow">Methodology Guide</p>
+      <h1>How NEONCPS measures CPS</h1>
+      <p class="sub">This page explains the score the way a careful visitor actually needs it explained: what is counted, what is excluded, how time is measured, and why the final number is useful for repeat runs in the same setup rather than a universal ranking across every device.</p>
+    </div>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">CPS Test</a>
+      <a href="/guides/" aria-current="page">Guides</a>
+      <a href="/about/">About</a>
+      <a href="/editorial-policy/">Editorial Policy</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="shell article-shell">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>How NEONCPS measures CPS</span></div>
+
+    <section class="panel hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">Reviewed March 18, 2026 UTC</span>
+        <h1>The score is simple on purpose</h1>
+        <p>NEONCPS calculates CPS as total counted inputs divided by the selected duration. The simplicity is intentional. A short browser utility is most useful when the visitor can see the rule, repeat the test, and interpret the number without hidden weighting or account-based normalization.</p>
+        <p>That simplicity still needs context. A browser score is shaped by human rhythm, device input behavior, and browser timing. Knowing that boundary is part of using the tool correctly.</p>
+      </div>
+      <aside class="hero-meta">
+        <div class="meta-card">
+          <h2>Core formula</h2>
+          <p><strong>CPS = total counted inputs / selected seconds</strong></p>
+        </div>
+        <div class="meta-card">
+          <h2>Input rule</h2>
+          <p>NEONCPS counts primary pointer input during the active test window and ignores right-click input.</p>
+        </div>
+        <div class="meta-card">
+          <h2>Best use</h2>
+          <p>Repeatable comparison on the same device, in the same browser, with the same posture and input style.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel article-body">
+      <section>
+        <h2>1. What gets counted</h2>
+        <p>The page is designed around a narrow rule: count the primary click or tap events that happen during the selected test duration. That rule keeps the test focused on the same type of action across desktop and mobile. It also avoids score inflation from inputs that do not represent the same motion or intent.</p>
+        <p>In practice, this matters because web interfaces can receive input from several directions. A page can react to mouse buttons, touch points, pen input, keyboard activation, accessibility tooling, and synthetic events. If a CPS tool treats every possible activation path as the same thing, the comparison becomes noisy very quickly. NEONCPS therefore keeps the rule deliberately narrower than “anything that can trigger a click-like action.”</p>
+        <ul>
+          <li>Primary pointer input is the target event family because it maps most closely to the real click or tap motion users expect from the test.</li>
+          <li>Right-click is excluded because it is not part of the intended comparison rule.</li>
+          <li>The same rule is used for the score display and the explanatory copy so visitors are not being told one thing while the code does another.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. When counting starts and stops</h2>
+        <p>NEONCPS begins measurement only after the visible countdown finishes. That matters for fairness. Without a clear start boundary, users would be mixing reaction time, anticipation, and warm-up behavior into the score before the test was officially running.</p>
+        <p>Once the countdown ends, the page measures inputs over the selected duration such as 1, 5, 10, or 60 seconds. The remaining-time display is driven by the browser's high-resolution timing APIs, which are more appropriate for a short benchmark than a wall-clock reading. The final score is then calculated with the chosen duration, not with a fuzzy estimate based on animation timing alone.</p>
+        <p>Even so, browser timing is not magic. The browser still runs tasks on the main thread, and heavy page activity can influence how smoothly input and rendering are processed. That is one reason NEONCPS is best used as a repeated self-comparison tool instead of a universal hardware leaderboard.</p>
+      </section>
+
+      <section>
+        <h2>3. Why the score is useful</h2>
+        <p>The value of a CPS score is not that it reveals an absolute truth about your hand. Its value is that it gives you one consistent rule that you can repeat under matching conditions. If you keep the device, browser, posture, and mode stable, the score becomes a practical way to compare your own runs and notice how rhythm or fatigue changes over time.</p>
+        <p>This is why the surrounding guidance on NEONCPS emphasizes repeatability instead of global ranking. A 7 CPS run on a touch device and a 7 CPS run on a gaming mouse may look identical on paper while coming from very different input paths. The number is still useful, but only when interpreted inside the right context.</p>
+      </section>
+
+      <section>
+        <h2>4. What the score does not claim</h2>
+        <table class="metric-table">
+          <tr>
+            <th>Claim</th>
+            <th>Why NEONCPS avoids it</th>
+          </tr>
+          <tr>
+            <td>This number is your universal click-speed rank.</td>
+            <td>Different devices, browsers, and timing conditions can produce different results even for the same person.</td>
+          </tr>
+          <tr>
+            <td>Mouse and touch scores are directly equal.</td>
+            <td>The input path, contact method, and latency profile are different enough that direct comparison is weak.</td>
+          </tr>
+          <tr>
+            <td>One run tells the whole story.</td>
+            <td>Short runs are sensitive to timing boundaries, while long runs expose fatigue and rhythm breakdown.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. Best practice for using the score well</h2>
+        <ul>
+          <li>Use the same mode for repeated comparison instead of jumping between 1-second burst runs and long endurance runs.</li>
+          <li>Keep the device, browser, and posture fixed when you want a fair before-versus-after result.</li>
+          <li>Prefer a small set of repeated attempts over a single best run.</li>
+          <li>Read the result together with total clicks and duration, not as an isolated label.</li>
+        </ul>
+        <p>That last point matters more than it looks. Showing total clicks, duration, and CPS together gives the user enough context to understand where the number came from. A utility page should not make the user guess its scoring rule.</p>
+      </section>
+
+      <section>
+        <h2>References used for this explanation</h2>
+        <ul class="reference-list">
+          <li><a href="https://www.w3.org/TR/pointerevents3/" rel="noopener noreferrer">W3C Pointer Events Level 3</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" rel="noopener noreferrer">MDN: Performance.now()</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame" rel="noopener noreferrer">MDN: requestAnimationFrame()</a></li>
+          <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html" rel="noopener noreferrer">WHATWG HTML Standard: event loop and task processing</a></li>
+        </ul>
+      </section>
+
+      <section class="article-callout">
+        <p>NEONCPS is honest when it says less, not more. The test counts a specific kind of input over a specific window and returns a simple score. The right way to make that useful is to explain the rule clearly and repeat it under matching conditions.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="shell footer-note">
+    <p>Continue with <a href="/guides/why-cps-scores-change/">why CPS scores change between attempts</a> or go back to the <a href="/guides/">guide library</a>.</p>
+  </footer>
+</body>
+</html>
