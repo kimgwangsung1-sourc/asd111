@@ -2146,6 +2146,10 @@
             return (translations[currentLang] && translations[currentLang][key]) || key;
         }
 
+        function formatTimerText(seconds) {
+            return `${Number(seconds).toFixed(2)}${currentLang === 'ko' ? '초' : 's'}`;
+        }
+
         function getStoredRuns() {
             const raw = safeStorageGet('neon_recent_runs', '{}');
             try {
@@ -2736,7 +2740,7 @@
             idleMsg.style.visibility = 'hidden';
             score = 0;
             scoreEl.innerText = "0";
-            timerEl.innerText = selectedTime.toFixed(2) + "s";
+            timerEl.innerText = formatTimerText(selectedTime);
 
             let count = 3;
             startCountdown.innerText = String(count);
@@ -2776,7 +2780,7 @@
             const tick = () => {
                 const elapsed = (performance.now() - startTimeMs) / 1000;
                 timeLeft = Math.max(0, selectedTime - elapsed);
-                timerEl.innerText = timeLeft.toFixed(2) + "s";
+                timerEl.innerText = formatTimerText(timeLeft);
 
                 if (timeLeft <= 0) {
                     endTest();
@@ -2822,7 +2826,7 @@
             }
             isRunning = false;
             timeLeft = 0;
-            timerEl.innerText = "0.00s";
+            timerEl.innerText = formatTimerText(0);
             startBtn.disabled = false;
             playSound('end');
 
@@ -2878,7 +2882,7 @@
             idleMsg.style.visibility = 'visible';
             score = 0;
             timeLeft = selectedTime;
-            timerEl.innerText = selectedTime.toFixed(2) + "s";
+            timerEl.innerText = formatTimerText(selectedTime);
             scoreEl.innerText = "0";
             rankEmojiEl.innerText = "🐢";
             slime.classList.remove('glow-advanced', 'glow-elite', 'glow-hit');
@@ -2920,7 +2924,7 @@
             timeLeft = sharedResult.time;
             lastResult = sharedResult;
             syncTimeButtons();
-            timerEl.innerText = selectedTime.toFixed(2) + "s";
+            timerEl.innerText = formatTimerText(selectedTime);
             updateShareLinks();
             applyTranslations();
             openResultModal();

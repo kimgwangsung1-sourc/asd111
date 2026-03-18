@@ -27,6 +27,7 @@
     }
   };
 
+  const root = document.documentElement;
   const body = document.body;
   const langToggle = document.getElementById('langToggle');
   const themeToggle = document.getElementById('themeToggle');
@@ -46,9 +47,11 @@
 
   function setLanguage(lang) {
     const nextLang = lang === 'ko' ? 'ko' : 'en';
+    root.classList.toggle('lang-ko', nextLang === 'ko');
+    root.classList.toggle('lang-en', nextLang === 'en');
     body.classList.toggle('lang-ko', nextLang === 'ko');
     body.classList.toggle('lang-en', nextLang === 'en');
-    document.documentElement.setAttribute('lang', nextLang);
+    root.setAttribute('lang', nextLang);
     safeStorageSet('neon_lang', nextLang);
     applyTranslations(nextLang);
   }
@@ -68,6 +71,7 @@
 
   function setTheme(theme) {
     const nextTheme = theme === 'light' ? 'light' : 'dark';
+    root.classList.toggle('light', nextTheme === 'light');
     body.classList.toggle('light', nextTheme === 'light');
     safeStorageSet('neon_theme', nextTheme);
     updateThemeIcon();

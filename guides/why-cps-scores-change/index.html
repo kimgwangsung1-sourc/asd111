@@ -23,6 +23,23 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>Why CPS Scores Change Between Attempts | NEONCPS Guide</title>
+  <script>
+  (function () {
+    try {
+      var storedLang = localStorage.getItem('neon_lang');
+      var lang = storedLang === 'ko' || storedLang === 'en'
+        ? storedLang
+        : ((navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en');
+      document.documentElement.classList.add(lang === 'ko' ? 'lang-ko' : 'lang-en');
+      document.documentElement.setAttribute('lang', lang);
+      if ((localStorage.getItem('neon_theme') || 'dark') === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    } catch (err) {
+      document.documentElement.classList.add('lang-en');
+    }
+  })();
+</script>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
 {
@@ -36,7 +53,7 @@
   </script>
   <script defer src="/docs.js"></script>
 </head>
-<body class="lang-en">
+<body class="docs-page">
 <header class="shell topbar">
   <div class="topbar-row">
     <div class="title-block">
@@ -46,8 +63,8 @@
       <p class="sub" data-lang="ko">브라우저 기반 CPS 기록은 리듬, 피로, 하드웨어, 브라우저 타이밍이 함께 섞인 결과입니다. 작은 차이는 자연스럽고, 중요한 것은 그것을 어떻게 올바르게 읽느냐입니다.</p>
     </div>
     <div class="topbar-actions">
-      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
-      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText"><span class="lang-inline" data-lang="en">LANG</span><span class="lang-inline" data-lang="ko">언어</span></span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span><span class="lang-inline" data-lang="en">THEME</span><span class="lang-inline" data-lang="ko">테마</span></span></button>
     </div>
   </div>
   <nav class="site-nav" aria-label="Primary">
@@ -60,7 +77,7 @@
 </header>
 
 <main class="shell article-shell">
-  <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span data-lang="en">Why CPS scores change</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></div>
+  <div class="breadcrumbs"><a href="/"><span class="lang-inline" data-lang="en">Home</span><span class="lang-inline" data-lang="ko">홈</span></a> / <a href="/guides/"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a> / <span data-lang="en">Why CPS scores change</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></div>
 
   <section class="panel hero-grid">
     <div class="hero-copy">

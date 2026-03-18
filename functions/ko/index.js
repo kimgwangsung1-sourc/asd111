@@ -148,6 +148,11 @@ export async function onRequest(context) {
   html = replaceOrThrow(html, /<meta name="twitter:description" content="[^"]+">/, '<meta name="twitter:description" content="PC와 모바일에서 사용할 수 있는 무료 CPS 테스트와 가이드입니다. 점수 해석, 측정 방식, 정확도 팁, 안전 안내를 함께 제공합니다.">', "twitter:description");
   html = replaceOrThrow(html, /<title>[^<]+<\/title>/, '<title>NEONCPS | 무료 CPS 테스트와 가이드 (1초, 5초, 10초, 60초)</title>', "title");
   html = replaceOrThrow(html, /<body class="lang-en">/, '<body class="lang-ko">', "body lang");
+  html = replaceOrThrow(html, '<span id="langToggleText" data-i18n="langButton">LANG</span>', '<span id="langToggleText" data-i18n="langButton">언어</span>', 'lang button');
+  html = replaceOrThrow(html, '<span data-i18n="theme">THEME</span>', '<span data-i18n="theme">테마</span>', 'theme button');
+  html = replaceOrThrow(html, '<span data-i18n="start">START</span>', '<span data-i18n="start">시작</span>', 'start button');
+  html = replaceOrThrow(html, '<div class="timer-text" id="timer">5.00s</div>', '<div class="timer-text" id="timer">5.00초</div>', 'timer default');
+  html = replaceOrThrow(html, '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">PRESS START, THEN TAP THE PAD</div>', '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">START 버튼을 누른 뒤 패드를 탭하세요</div>', 'idle message');
   html = replaceOrThrow(
     html,
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
