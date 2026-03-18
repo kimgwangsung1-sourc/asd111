@@ -7,155 +7,171 @@
   <meta name="description" content="Mobile versus mouse CPS: why touch and mouse results are not directly equal, what each setup emphasizes, and how to compare runs fairly.">
   <meta name="author" content="NEONCPS">
   <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://neoncps.com/guides/mobile-vs-mouse-cps/">
   <meta property="og:title" content="Mobile Versus Mouse CPS | Fair Comparison Rules for NEONCPS">
   <meta property="og:description" content="Learn why touch and mouse CPS belong to different comparison contexts and how to interpret each setup more honestly.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://neoncps.com/guides/mobile-vs-mouse-cps/">
   <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mobile Versus Mouse CPS | Fair Comparison Rules for NEONCPS">
+  <meta name="twitter:description" content="Learn why touch and mouse CPS belong to different comparison contexts and how to interpret each setup more honestly.">
+  <meta name="twitter:image" content="https://neoncps.com/og-image.png">
+  <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>Mobile Versus Mouse CPS | Fair Comparison Rules for NEONCPS</title>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Mobile Versus Mouse CPS",
-    "url": "https://neoncps.com/guides/mobile-vs-mouse-cps/",
-    "description": "Device-specific interpretation rules for touch and mouse CPS results.",
-    "dateModified": "2026-03-18",
-    "author": { "@type": "Organization", "name": "NEONCPS" },
-    "publisher": { "@type": "Organization", "name": "NEONCPS" }
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mobile Versus Mouse CPS",
+  "url": "https://neoncps.com/guides/mobile-vs-mouse-cps/",
+  "description": "Device-specific interpretation rules for touch and mouse CPS results.",
+  "dateModified": "2026-03-18"
+}
   </script>
+  <script defer src="/docs.js"></script>
 </head>
-<body>
-  <header class="shell topbar">
-    <div>
-      <p class="eyebrow">Device Comparison Guide</p>
-      <h1>Mobile versus mouse CPS</h1>
-      <p class="sub">A touch score and a mouse score can both be real while still describing different tasks. This guide explains why NEONCPS does not recommend direct cross-device ranking without matching the input category first.</p>
+<body class="lang-en">
+<header class="shell topbar">
+  <div class="topbar-row">
+    <div class="title-block">
+      <p class="eyebrow"><span class="lang-inline" data-lang="en">Device Comparison Guide</span><span class="lang-inline" data-lang="ko">기기 비교 가이드</span></p>
+      <h1><span data-lang="en">Mobile versus mouse CPS</span><span data-lang="ko">모바일과 마우스 CPS</span></h1>
+      <p class="sub" data-lang="en">A touch score and a mouse score can both be real while still describing different tasks. This guide explains why NEONCPS does not recommend simple mixed-device ranking.</p>
+      <p class="sub" data-lang="ko">터치 점수와 마우스 점수는 모두 실제 기록일 수 있지만 서로 다른 작업을 설명합니다. 이 문서는 NEONCPS가 기기 혼합 순위를 단순하게 권장하지 않는 이유를 설명합니다.</p>
     </div>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/">CPS Test</a>
-      <a href="/guides/" aria-current="page">Guides</a>
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/">Editorial Policy</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
-  </header>
+    <div class="topbar-actions">
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/"><span class="lang-inline" data-lang="en">CPS Test</span><span class="lang-inline" data-lang="ko">CPS 테스트</span></a>
+    <a href="/guides/" aria-current="page"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a>
+    <a href="/about/"><span class="lang-inline" data-lang="en">About</span><span class="lang-inline" data-lang="ko">소개</span></a>
+    <a href="/editorial-policy/"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 기준</span></a>
+    <a href="/privacy/"><span class="lang-inline" data-lang="en">Privacy</span><span class="lang-inline" data-lang="ko">개인정보</span></a>
+  </nav>
+</header>
 
-  <main class="shell article-shell">
-    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Mobile versus mouse CPS</span></div>
+<main class="shell article-shell">
+  <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span data-lang="en">Mobile versus mouse CPS</span><span data-lang="ko">모바일과 마우스 CPS</span></div>
 
-    <section class="panel hero-grid">
-      <div class="hero-copy">
-        <span class="kicker">Reviewed March 18, 2026 UTC</span>
-        <h1>The same score can mean different things on different hardware</h1>
-        <p>Mouse input and touch input travel through different physical and software paths. The finger motion is different, the contact surface is different, and the latency profile is different. That means the resulting CPS numbers should be interpreted inside their own context instead of thrown into one mixed bucket.</p>
-        <p>NEONCPS supports both because many visitors want to test on the device they actually use. Supporting both does not mean pretending they are identical.</p>
+  <section class="panel hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="lang-inline" data-lang="en">Reviewed March 18, 2026 UTC</span><span class="lang-inline" data-lang="ko">2026년 3월 18일 UTC 검토</span></span>
+      <h1><span data-lang="en">The same score can mean different things on different hardware</span><span data-lang="ko">같은 점수라도 하드웨어가 다르면 의미가 달라질 수 있습니다</span></h1>
+      <p data-lang="en">Mouse input and touch input travel through different physical and software paths. The motion is different, the contact surface is different, and the latency profile is different.</p>
+      <p data-lang="ko">마우스 입력과 터치 입력은 물리적·소프트웨어적 경로가 다릅니다. 동작도 다르고, 닿는 표면도 다르고, 지연 특성도 다릅니다.</p>
+    </div>
+    <aside class="hero-meta">
+      <div class="meta-card">
+        <h2><span data-lang="en">Touch emphasizes</span><span data-lang="ko">터치에서 더 크게 보이는 것</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Grip stability</li>
+          <li data-lang="ko">기기 고정력</li>
+          <li data-lang="en">Contact consistency</li>
+          <li data-lang="ko">접촉 일관성</li>
+          <li data-lang="en">Finger rhythm on glass</li>
+          <li data-lang="ko">유리 표면에서의 리듬</li>
+        </ul>
       </div>
-      <aside class="hero-meta">
-        <div class="meta-card">
-          <h2>Touch emphasizes</h2>
-          <ul class="meta-list">
-            <li>Grip stability</li>
-            <li>Contact consistency</li>
-            <li>Thumb or finger rhythm on glass</li>
-          </ul>
-        </div>
-        <div class="meta-card">
-          <h2>Mouse emphasizes</h2>
-          <ul class="meta-list">
-            <li>Switch feel</li>
-            <li>Finger strike rhythm</li>
-            <li>Pointer-device posture</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="meta-card">
+        <h2><span data-lang="en">Mouse emphasizes</span><span data-lang="ko">마우스에서 더 크게 보이는 것</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Switch feel</li>
+          <li data-lang="ko">스위치 감각</li>
+          <li data-lang="en">Finger strike rhythm</li>
+          <li data-lang="ko">손가락 타격 리듬</li>
+          <li data-lang="en">Pointer-device posture</li>
+          <li data-lang="ko">포인팅 장치 자세</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="panel article-body">
+    <section>
+      <h2><span data-lang="en">1. Direct contact versus mediated contact</span><span data-lang="ko">1. 직접 접촉과 간접 접촉의 차이</span></h2>
+      <p data-lang="en">On a phone or tablet, your finger touches the surface that receives the input. On a mouse, your finger presses a switch while the pointer interaction is mediated through separate hardware. That difference changes how rhythm is produced and how fatigue builds.</p>
+      <p data-lang="ko">휴대폰이나 태블릿에서는 손가락이 입력을 받는 표면에 직접 닿습니다. 마우스에서는 손가락이 스위치를 누르고, 실제 포인터 입력은 다른 하드웨어를 거쳐 전달됩니다. 이 차이는 리듬이 만들어지는 방식과 피로가 쌓이는 방식을 바꿉니다.</p>
     </section>
 
-    <section class="panel article-body">
-      <section>
-        <h2>1. Touch is direct contact, mouse is mediated contact</h2>
-        <p>On a phone or tablet, your finger touches the surface that receives the input. On a mouse, your finger presses a switch while the pointer interaction is mediated through separate hardware. That difference changes how rhythm is produced and how fatigue builds.</p>
-        <p>A touch run is more vulnerable to grip instability, slipping, and the physical size of the finger contact area. A mouse run depends more on switch feel, button travel, and how efficiently the finger can cycle through repeated presses. Both are valid forms of input, but they are not interchangeable.</p>
-      </section>
-
-      <section>
-        <h2>2. Latency profiles are different</h2>
-        <p>Touchscreens have their own scan and display pipeline. Mouse input has its own report timing, switch behavior, and desktop-event path. In both cases the browser still has to receive, process, and display the result. The important point is not which one is “better” in the abstract. The important point is that the delay path is not the same.</p>
-        <p>That difference is one reason mixed-device leaderboards become misleading. A device that feels quick in one style of repeated tapping may not behave the same way in another, and the same person may score differently simply because the physical interaction changed.</p>
-      </section>
-
-      <section>
-        <h2>3. What comparison is fair</h2>
-        <table class="metric-table">
-          <tr>
-            <th>Comparison</th>
-            <th>Fair or weak?</th>
-          </tr>
-          <tr>
-            <td>Same phone, same finger, same browser, same mode</td>
-            <td>Fair. This is a useful repeatability comparison.</td>
-          </tr>
-          <tr>
-            <td>Same desktop mouse, same browser, same mode</td>
-            <td>Fair. This is also a useful repeatability comparison.</td>
-          </tr>
-          <tr>
-            <td>Phone thumb score versus gaming mouse score</td>
-            <td>Weak. The motion, hardware path, and latency conditions are too different.</td>
-          </tr>
-          <tr>
-            <td>Touch score versus touch score across different phones</td>
-            <td>Possible, but still weaker than same-device comparison because device conditions change.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2>4. Practical advice for mobile runs</h2>
-        <ul>
-          <li>Stabilize the device first. A loose grip creates rhythm breaks that have nothing to do with real tapping ability.</li>
-          <li>Use the same finger across repeated attempts.</li>
-          <li>Keep the screen and finger position consistent so your contact pattern does not drift.</li>
-          <li>Prefer 5-second or 10-second runs when you want a fair baseline.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>5. Practical advice for mouse runs</h2>
-        <ul>
-          <li>Keep the same mouse and browser when comparing results.</li>
-          <li>Use a stable hand position instead of changing grip every attempt.</li>
-          <li>Do not over-interpret tiny score differences across different switch types or system settings.</li>
-          <li>Use repeated attempts rather than a single peak score to judge consistency.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>6. The honest rule NEONCPS follows</h2>
-        <p>NEONCPS supports both touch and mouse because both are real ways people use the web. But the site does not pretend that supporting both means they are the same category. The most honest reading is simple: compare like with like first, then treat cross-device results as rough context instead of proof that one person or one device is universally faster.</p>
-      </section>
-
-      <section>
-        <h2>References used for this explanation</h2>
-        <ul class="reference-list">
-          <li><a href="https://www.w3.org/TR/pointerevents3/" rel="noopener noreferrer">W3C Pointer Events Level 3</a></li>
-          <li><a href="https://developer.chrome.com/blog/300ms-tap-delay-gone-away/" rel="noopener noreferrer">Chrome Developers: 300ms tap delay and mobile input history</a></li>
-          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10843409/" rel="noopener noreferrer">Touch or click friendly: Towards adaptive user interfaces for complex applications</a></li>
-          <li><a href="https://www.yorku.ca/mack/CHI99b.html" rel="noopener noreferrer">Testing Pointing Device Performance with ISO 9241-9</a></li>
-        </ul>
-      </section>
-
-      <section class="article-callout">
-        <p>A mixed-device CPS comparison is tempting because the number looks universal. It is not. The fair rule is simple: first compare runs made with the same kind of input, then treat everything else as loose context.</p>
-      </section>
+    <section>
+      <h2><span data-lang="en">2. Latency profiles are different</span><span data-lang="ko">2. 지연 경로가 다릅니다</span></h2>
+      <p data-lang="en">Touchscreens have their own scan and display pipeline. Mouse input has its own report timing, switch behavior, and desktop event path. The important point is not which one is universally better. The important point is that the path is not the same.</p>
+      <p data-lang="ko">터치스크린은 자체적인 스캔과 표시 경로를 갖고 있습니다. 마우스 입력은 보고 주기, 스위치 동작, 데스크톱 이벤트 경로가 따로 있습니다. 중요한 것은 어느 쪽이 항상 더 낫다는 결론이 아니라, 경로 자체가 같지 않다는 점입니다.</p>
     </section>
-  </main>
+
+    <section>
+      <h2><span data-lang="en">3. What comparison is fair</span><span data-lang="ko">3. 어떤 비교가 공정한가</span></h2>
+      <table class="metric-table">
+        <tr>
+          <th><span data-lang="en">Comparison</span><span data-lang="ko">비교 방식</span></th>
+          <th><span data-lang="en">Assessment</span><span data-lang="ko">평가</span></th>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Same phone, same finger, same browser, same mode</span><span data-lang="ko">같은 휴대폰, 같은 손가락, 같은 브라우저, 같은 모드</span></td>
+          <td><span data-lang="en">Fair. Good for repeatability.</span><span data-lang="ko">공정합니다. 반복 비교에 좋습니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Same desktop mouse, same browser, same mode</span><span data-lang="ko">같은 데스크톱 마우스, 같은 브라우저, 같은 모드</span></td>
+          <td><span data-lang="en">Fair. Also useful for repeatability.</span><span data-lang="ko">공정합니다. 역시 반복 비교에 유용합니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Phone thumb score versus gaming mouse score</span><span data-lang="ko">휴대폰 엄지 기록과 게이밍 마우스 기록</span></td>
+          <td><span data-lang="en">Weak. The hardware path and motion are too different.</span><span data-lang="ko">약한 비교입니다. 하드웨어 경로와 동작이 너무 다릅니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Touch score across different phones</span><span data-lang="ko">서로 다른 휴대폰 간 터치 기록 비교</span></td>
+          <td><span data-lang="en">Possible, but still weaker than same-device comparison.</span><span data-lang="ko">가능하지만, 같은 기기 비교보다는 약합니다.</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">4. Practical advice for mobile</span><span data-lang="ko">4. 모바일 실전 팁</span></h2>
+      <ul>
+        <li data-lang="en">Stabilize the device first.</li>
+        <li data-lang="ko">먼저 기기를 안정적으로 고정하세요.</li>
+        <li data-lang="en">Use the same finger across repeated attempts.</li>
+        <li data-lang="ko">반복 측정에서는 같은 손가락을 쓰세요.</li>
+        <li data-lang="en">Keep finger position consistent.</li>
+        <li data-lang="ko">손가락 위치를 일정하게 유지하세요.</li>
+        <li data-lang="en">Prefer 5-second or 10-second runs for a fair baseline.</li>
+        <li data-lang="ko">공정한 기준을 위해 5초나 10초 모드를 우선 보세요.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">5. Practical advice for mouse</span><span data-lang="ko">5. 마우스 실전 팁</span></h2>
+      <ul>
+        <li data-lang="en">Keep the same mouse and browser.</li>
+        <li data-lang="ko">같은 마우스와 브라우저를 유지하세요.</li>
+        <li data-lang="en">Use a stable hand position.</li>
+        <li data-lang="ko">손 위치를 안정적으로 유지하세요.</li>
+        <li data-lang="en">Do not over-read tiny differences across switch types or settings.</li>
+        <li data-lang="ko">스위치나 설정 차이에 따른 작은 수치 차이를 과하게 해석하지 마세요.</li>
+        <li data-lang="en">Judge consistency from repeated attempts, not a single peak.</li>
+        <li data-lang="ko">한 번의 최고점보다 반복 기록의 일관성을 보세요.</li>
+      </ul>
+    </section>
+
+    <section class="article-callout">
+      <p data-lang="en">The honest rule is simple: compare like with like first, then treat cross-device scores as rough context only.</p>
+      <p data-lang="ko">정직한 기준은 단순합니다. 먼저 같은 종류의 입력끼리 비교하고, 기기 간 숫자는 참고 수준으로만 보세요.</p>
+    </section>
+  </section>
+</main>
 
   <footer class="shell footer-note">
-    <p>For the lowest-risk training routine, continue to <a href="/guides/safe-cps-practice/">safe CPS practice and improvement</a>, or return to the <a href="/guides/">guide library</a>.</p>
+    <p data-lang="en">For a lower-risk training routine, continue to the safe CPS practice guide.</p>
+    <p data-lang="ko">무리 없는 연습 루틴이 필요하다면 안전한 CPS 연습 가이드를 이어서 보세요.</p>
   </footer>
 </body>
 </html>

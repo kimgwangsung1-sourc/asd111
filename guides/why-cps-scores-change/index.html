@@ -7,148 +7,173 @@
   <meta name="description" content="Why CPS scores change: fatigue, timing boundaries, device differences, browser load, and the practical meaning of 1s, 5s, 10s, and 60s modes.">
   <meta name="author" content="NEONCPS">
   <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://neoncps.com/guides/why-cps-scores-change/">
   <meta property="og:title" content="Why CPS Scores Change Between Attempts | NEONCPS Guide">
   <meta property="og:description" content="Understand why repeated CPS runs move around and how to compare them more fairly on the same setup.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://neoncps.com/guides/why-cps-scores-change/">
   <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why CPS Scores Change Between Attempts | NEONCPS Guide">
+  <meta name="twitter:description" content="Understand why repeated CPS runs move around and how to compare them more fairly on the same setup.">
+  <meta name="twitter:image" content="https://neoncps.com/og-image.png">
+  <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>Why CPS Scores Change Between Attempts | NEONCPS Guide</title>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Why CPS Scores Change Between Attempts",
-    "url": "https://neoncps.com/guides/why-cps-scores-change/",
-    "description": "Practical explanation of score variance in browser-based CPS testing.",
-    "dateModified": "2026-03-18",
-    "author": { "@type": "Organization", "name": "NEONCPS" },
-    "publisher": { "@type": "Organization", "name": "NEONCPS" }
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why CPS Scores Change Between Attempts",
+  "url": "https://neoncps.com/guides/why-cps-scores-change/",
+  "description": "Practical explanation of score variance in browser-based CPS testing.",
+  "dateModified": "2026-03-18"
+}
   </script>
+  <script defer src="/docs.js"></script>
 </head>
-<body>
-  <header class="shell topbar">
-    <div>
-      <p class="eyebrow">Interpretation Guide</p>
-      <h1>Why CPS scores change between attempts</h1>
-      <p class="sub">The short answer is that a browser-based CPS run is not measuring only your hand. It reflects a changing combination of rhythm, fatigue, input hardware, browser timing, and page load. Small differences are normal. The job is to understand which differences matter.</p>
+<body class="lang-en">
+<header class="shell topbar">
+  <div class="topbar-row">
+    <div class="title-block">
+      <p class="eyebrow"><span class="lang-inline" data-lang="en">Interpretation Guide</span><span class="lang-inline" data-lang="ko">해석 가이드</span></p>
+      <h1><span data-lang="en">Why CPS scores change between attempts</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></h1>
+      <p class="sub" data-lang="en">A browser-based CPS run reflects rhythm, fatigue, hardware, and browser timing together. Small differences are normal. The useful question is how to read them correctly.</p>
+      <p class="sub" data-lang="ko">브라우저 기반 CPS 기록은 리듬, 피로, 하드웨어, 브라우저 타이밍이 함께 섞인 결과입니다. 작은 차이는 자연스럽고, 중요한 것은 그것을 어떻게 올바르게 읽느냐입니다.</p>
     </div>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/">CPS Test</a>
-      <a href="/guides/" aria-current="page">Guides</a>
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/">Editorial Policy</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
-  </header>
+    <div class="topbar-actions">
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/"><span class="lang-inline" data-lang="en">CPS Test</span><span class="lang-inline" data-lang="ko">CPS 테스트</span></a>
+    <a href="/guides/" aria-current="page"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a>
+    <a href="/about/"><span class="lang-inline" data-lang="en">About</span><span class="lang-inline" data-lang="ko">소개</span></a>
+    <a href="/editorial-policy/"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 기준</span></a>
+    <a href="/privacy/"><span class="lang-inline" data-lang="en">Privacy</span><span class="lang-inline" data-lang="ko">개인정보</span></a>
+  </nav>
+</header>
 
-  <main class="shell article-shell">
-    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Why CPS scores change between attempts</span></div>
+<main class="shell article-shell">
+  <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span data-lang="en">Why CPS scores change</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></div>
 
-    <section class="panel hero-grid">
-      <div class="hero-copy">
-        <span class="kicker">Reviewed March 18, 2026 UTC</span>
-        <h1>Variation is expected, not suspicious</h1>
-        <p>If two back-to-back runs differ slightly, that does not automatically mean one of them is wrong. CPS is especially sensitive to small timing boundaries, early rhythm changes, fatigue build-up, and device conditions that are easy to overlook.</p>
-        <p>What matters more than one isolated score is the pattern across repeated runs in the same environment. That is why NEONCPS is positioned as a repeatability tool instead of a universal competitive benchmark.</p>
+  <section class="panel hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="lang-inline" data-lang="en">Reviewed March 18, 2026 UTC</span><span class="lang-inline" data-lang="ko">2026년 3월 18일 UTC 검토</span></span>
+      <h1><span data-lang="en">Variation is expected, not suspicious</span><span data-lang="ko">변동은 이상이 아니라 자연스러운 현상입니다</span></h1>
+      <p data-lang="en">If two back-to-back runs differ slightly, that does not automatically mean one is wrong. CPS is sensitive to start rhythm, fatigue, device conditions, and timing boundaries.</p>
+      <p data-lang="ko">연속으로 두 번 재서 점수가 조금 달라도 한쪽이 틀렸다는 뜻은 아닙니다. CPS는 시작 리듬, 피로, 기기 상태, 경계 시간에 민감합니다.</p>
+    </div>
+    <aside class="hero-meta">
+      <div class="meta-card">
+        <h2><span data-lang="en">Human factors</span><span data-lang="ko">사람 쪽 요인</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Start rhythm</li>
+          <li data-lang="ko">시작 리듬</li>
+          <li data-lang="en">Finger fatigue</li>
+          <li data-lang="ko">손가락 피로</li>
+          <li data-lang="en">Posture drift</li>
+          <li data-lang="ko">자세 흔들림</li>
+        </ul>
       </div>
-      <aside class="hero-meta">
-        <div class="meta-card">
-          <h2>Big human factors</h2>
-          <ul class="meta-list">
-            <li>Start rhythm</li>
-            <li>Finger fatigue</li>
-            <li>Posture drift</li>
-          </ul>
-        </div>
-        <div class="meta-card">
-          <h2>Big system factors</h2>
-          <ul class="meta-list">
-            <li>Browser main-thread load</li>
-            <li>Device input latency</li>
-            <li>Background apps and power settings</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="meta-card">
+        <h2><span data-lang="en">System factors</span><span data-lang="ko">시스템 요인</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Browser main-thread load</li>
+          <li data-lang="ko">브라우저 메인 스레드 부하</li>
+          <li data-lang="en">Device input latency</li>
+          <li data-lang="ko">기기 입력 지연</li>
+          <li data-lang="en">Background apps and power settings</li>
+          <li data-lang="ko">백그라운드 앱과 전원 설정</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="panel article-body">
+    <section>
+      <h2><span data-lang="en">1. Human rhythm changes quickly</span><span data-lang="ko">1. 사람의 리듬은 생각보다 빨리 변합니다</span></h2>
+      <p data-lang="en">A burst-style test contains several phases even when it feels like one action: the first hit, rhythm lock-in, the stable middle, and the early fatigue drop. A 1-second run magnifies the start phase. Longer runs show fatigue more clearly.</p>
+      <p data-lang="ko">순간 측정 테스트는 한 번의 동작처럼 느껴져도 실제로는 첫 클릭, 리듬이 잡히는 구간, 안정 구간, 초기 피로 구간이 섞여 있습니다. 1초 모드는 시작 구간의 영향을 크게 받고, 긴 모드는 피로를 더 분명하게 드러냅니다.</p>
     </section>
 
-    <section class="panel article-body">
-      <section>
-        <h2>1. Human rhythm changes faster than most people think</h2>
-        <p>A burst-style test can feel like one continuous action while actually containing several phases: the first hit, the rhythm lock-in, the stable middle, and the early fatigue drop. Those phases are short, but they are real. A 1-second run exaggerates the start phase, while a longer run makes the fatigue phase more visible.</p>
-        <p>That is why a user can feel “the same” across attempts and still see slightly different numbers. Tiny differences in the first few taps or clicks can shift a short test more than expected, especially when the total duration is only one second.</p>
-      </section>
-
-      <section>
-        <h2>2. Fatigue changes the longer modes</h2>
-        <p>Once a run extends into 10 seconds or 60 seconds, fatigue becomes harder to ignore. The same user who starts strong may lose smoothness, tighten the wrist, or drift off rhythm. The result is not merely fewer clicks. It is a different pattern of movement, and that shows up on the score.</p>
-        <p>This is why NEONCPS treats the 60-second mode as an endurance and rhythm check rather than as the same type of measurement as a 1-second burst. The number still matters, but the interpretation changes with the mode.</p>
-      </section>
-
-      <section>
-        <h2>3. Device and browser conditions change the path to the score</h2>
-        <p>The browser still has to receive your input, queue work, update time, and render the page. A device under load may not feel obviously broken while still becoming a little less stable. Extra tabs, battery-saver modes, heavy background apps, or thermal throttling can all make input timing less consistent.</p>
-        <p>On mobile, the hardware and operating-system path is different again. Touch latency, screen sampling, grip stability, and the difference between thumb and index tapping can all move the result. None of that makes the score invalid. It simply means the score belongs to a specific setup, not to an abstract universal standard.</p>
-      </section>
-
-      <section>
-        <h2>4. Why the modes feel different</h2>
-        <table class="metric-table">
-          <tr>
-            <th>Mode</th>
-            <th>What it tends to emphasize</th>
-          </tr>
-          <tr>
-            <td>1 second</td>
-            <td>Start reaction and burst rhythm. This mode is the most sensitive to tiny timing changes.</td>
-          </tr>
-          <tr>
-            <td>5 seconds</td>
-            <td>A practical baseline for many users because it is short enough to limit fatigue but long enough to reduce random boundary noise.</td>
-          </tr>
-          <tr>
-            <td>10 seconds</td>
-            <td>Useful for seeing whether rhythm stays stable after the initial burst.</td>
-          </tr>
-          <tr>
-            <td>60 seconds</td>
-            <td>Endurance, pacing, and fatigue management rather than pure burst speed.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2>5. The most useful comparison protocol</h2>
-        <ul>
-          <li>Pick one mode, ideally 5 or 10 seconds, and keep it fixed for comparison.</li>
-          <li>Use the same device, same browser, same finger, and same posture.</li>
-          <li>Run three attempts instead of trusting one outlier score.</li>
-          <li>Use the middle run as your practical benchmark when the three values are close.</li>
-          <li>Do not compare a mobile thumb run to a desktop mouse run as if they mean the same thing.</li>
-        </ul>
-        <p>This approach is not flashy, but it is the most honest way to use a tool like NEONCPS. You get a number that is stable enough to be useful without pretending the web can eliminate every timing variable.</p>
-      </section>
-
-      <section>
-        <h2>References used for this explanation</h2>
-        <ul class="reference-list">
-          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11461208/" rel="noopener noreferrer">Finger-specific effects of age on tapping speed and motor fatigability</a></li>
-          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916091/" rel="noopener noreferrer">Associations Between Smartphone-Based Finger Tapping and Cognitive Performance in Older Adults</a></li>
-          <li><a href="https://w3c.github.io/longtasks/" rel="noopener noreferrer">W3C Long Tasks API</a></li>
-          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/High_precision_timing" rel="noopener noreferrer">MDN: High precision timing</a></li>
-        </ul>
-      </section>
-
-      <section class="article-callout">
-        <p>If your CPS changes a little, the first assumption should be “conditions moved” rather than “the page is broken.” The goal is not to freeze every variable. The goal is to keep enough of them fixed that repeated runs mean something.</p>
-      </section>
+    <section>
+      <h2><span data-lang="en">2. Fatigue changes longer modes</span><span data-lang="ko">2. 긴 모드에서는 피로의 영향이 커집니다</span></h2>
+      <p data-lang="en">Once a run extends into 10 seconds or 60 seconds, fatigue becomes part of the result. The hand may tighten, the rhythm may drift, and the score can drop even if the start was strong.</p>
+      <p data-lang="ko">10초나 60초처럼 길어지면 피로가 결과의 일부가 됩니다. 시작은 강해도 손에 힘이 들어가거나 리듬이 흔들리면서 점수가 내려갈 수 있습니다.</p>
     </section>
-  </main>
+
+    <section>
+      <h2><span data-lang="en">3. Device and browser conditions matter</span><span data-lang="ko">3. 기기와 브라우저 상태도 중요합니다</span></h2>
+      <p data-lang="en">The browser still has to receive input, process work, update time, and render the page. Extra tabs, battery saver, thermal throttling, or heavy background apps can make timing less stable even when the page looks fine.</p>
+      <p data-lang="ko">브라우저는 입력을 받고, 작업을 처리하고, 시간을 갱신하고, 화면을 다시 그려야 합니다. 탭이 많거나 절전 모드, 발열 제한, 무거운 백그라운드 앱이 있으면 화면이 멀쩡해 보여도 타이밍이 덜 안정적일 수 있습니다.</p>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">4. Why the modes feel different</span><span data-lang="ko">4. 모드마다 체감이 다른 이유</span></h2>
+      <table class="metric-table">
+        <tr>
+          <th><span data-lang="en">Mode</span><span data-lang="ko">모드</span></th>
+          <th><span data-lang="en">Typical meaning</span><span data-lang="ko">주된 의미</span></th>
+        </tr>
+        <tr>
+          <td>1s</td>
+          <td><span data-lang="en">Burst start and timing sensitivity.</span><span data-lang="ko">순간 시작과 경계 시간 민감성.</span></td>
+        </tr>
+        <tr>
+          <td>5s</td>
+          <td><span data-lang="en">Practical baseline with less fatigue and less random noise.</span><span data-lang="ko">피로와 랜덤 흔들림이 비교적 적은 실용 기준.</span></td>
+        </tr>
+        <tr>
+          <td>10s</td>
+          <td><span data-lang="en">Balance between speed and steadiness.</span><span data-lang="ko">속도와 안정성의 균형.</span></td>
+        </tr>
+        <tr>
+          <td>60s</td>
+          <td><span data-lang="en">Endurance, pacing, and fatigue management.</span><span data-lang="ko">지속력, 페이스 유지, 피로 관리.</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">5. Practical comparison protocol</span><span data-lang="ko">5. 실전 비교 프로토콜</span></h2>
+      <ul>
+        <li data-lang="en">Pick one mode, ideally 5s or 10s, and keep it fixed.</li>
+        <li data-lang="ko">가능하면 5초 또는 10초 한 모드를 정해 고정하세요.</li>
+        <li data-lang="en">Use the same device, browser, finger, and posture.</li>
+        <li data-lang="ko">같은 기기, 브라우저, 손가락, 자세를 유지하세요.</li>
+        <li data-lang="en">Run three attempts instead of trusting one outlier.</li>
+        <li data-lang="ko">튀는 한 번보다 세 번 측정을 보세요.</li>
+        <li data-lang="en">Use the middle run as the practical benchmark when the values are close.</li>
+        <li data-lang="ko">값이 비슷하면 가운데 기록을 실전 기준으로 삼는 것이 좋습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">References</span><span data-lang="ko">참고 자료</span></h2>
+      <ul class="reference-list">
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11461208/" rel="noopener noreferrer">Finger-specific effects of age on tapping speed and motor fatigability</a></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916091/" rel="noopener noreferrer">Associations Between Smartphone-Based Finger Tapping and Cognitive Performance in Older Adults</a></li>
+        <li><a href="https://w3c.github.io/longtasks/" rel="noopener noreferrer">W3C Long Tasks API</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/High_precision_timing" rel="noopener noreferrer">MDN: High precision timing</a></li>
+      </ul>
+    </section>
+
+    <section class="article-callout">
+      <p data-lang="en">The goal is not to freeze every variable. The goal is to keep enough variables fixed that repeated runs mean something.</p>
+      <p data-lang="ko">목표는 모든 변수를 멈추는 것이 아니라, 반복 측정이 의미를 가질 만큼 충분한 변수를 고정하는 것입니다.</p>
+    </section>
+  </section>
+</main>
 
   <footer class="shell footer-note">
-    <p>Next, read <a href="/guides/mobile-vs-mouse-cps/">mobile versus mouse CPS</a> for a device-specific comparison rule, or return to the <a href="/guides/">guide library</a>.</p>
+    <p data-lang="en">Continue with the device-comparison guide for mobile versus mouse CPS.</p>
+    <p data-lang="ko">다음으로 모바일과 마우스 CPS 비교 가이드를 읽어보세요.</p>
   </footer>
 </body>
 </html>

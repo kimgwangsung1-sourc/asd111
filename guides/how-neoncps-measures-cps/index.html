@@ -7,151 +7,166 @@
   <meta name="description" content="How NEONCPS measures CPS: input rule, timing rule, score formula, and the practical limits of browser-based click speed testing.">
   <meta name="author" content="NEONCPS">
   <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://neoncps.com/guides/how-neoncps-measures-cps/">
   <meta property="og:title" content="How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits">
   <meta property="og:description" content="Understand what the NEONCPS score counts, how timing works, and why browser-based CPS is best for repeatable comparison in the same setup.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://neoncps.com/guides/how-neoncps-measures-cps/">
   <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits">
+  <meta name="twitter:description" content="Understand what the NEONCPS score counts, how timing works, and why browser-based CPS is best for repeatable comparison in the same setup.">
+  <meta name="twitter:image" content="https://neoncps.com/og-image.png">
+  <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits</title>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "How NEONCPS Measures CPS",
-    "url": "https://neoncps.com/guides/how-neoncps-measures-cps/",
-    "description": "Input rule, timing rule, and interpretation limits for the NEONCPS CPS score.",
-    "dateModified": "2026-03-18",
-    "author": {
-      "@type": "Organization",
-      "name": "NEONCPS"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "NEONCPS"
-    }
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How NEONCPS Measures CPS",
+  "url": "https://neoncps.com/guides/how-neoncps-measures-cps/",
+  "description": "Input rule, timing rule, and interpretation limits for the NEONCPS CPS score.",
+  "dateModified": "2026-03-18"
+}
   </script>
+  <script defer src="/docs.js"></script>
 </head>
-<body>
-  <header class="shell topbar">
-    <div>
-      <p class="eyebrow">Methodology Guide</p>
-      <h1>How NEONCPS measures CPS</h1>
-      <p class="sub">This page explains the score the way a careful visitor actually needs it explained: what is counted, what is excluded, how time is measured, and why the final number is useful for repeat runs in the same setup rather than a universal ranking across every device.</p>
+<body class="lang-en">
+<header class="shell topbar">
+  <div class="topbar-row">
+    <div class="title-block">
+      <p class="eyebrow"><span class="lang-inline" data-lang="en">Methodology Guide</span><span class="lang-inline" data-lang="ko">측정 원리 가이드</span></p>
+      <h1><span data-lang="en">How NEONCPS measures CPS</span><span data-lang="ko">NEONCPS가 CPS를 재는 방법</span></h1>
+      <p class="sub" data-lang="en">This page explains what is counted, what is excluded, how time is measured, and why the final number is best used for repeat runs in the same setup.</p>
+      <p class="sub" data-lang="ko">이 페이지는 무엇을 집계하고 무엇을 제외하는지, 시간을 어떻게 재는지, 그리고 왜 최종 숫자가 같은 환경에서의 반복 비교에 가장 적합한지를 설명합니다.</p>
     </div>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/">CPS Test</a>
-      <a href="/guides/" aria-current="page">Guides</a>
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/">Editorial Policy</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
-  </header>
+    <div class="topbar-actions">
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/"><span class="lang-inline" data-lang="en">CPS Test</span><span class="lang-inline" data-lang="ko">CPS 테스트</span></a>
+    <a href="/guides/" aria-current="page"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a>
+    <a href="/about/"><span class="lang-inline" data-lang="en">About</span><span class="lang-inline" data-lang="ko">소개</span></a>
+    <a href="/editorial-policy/"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 기준</span></a>
+    <a href="/privacy/"><span class="lang-inline" data-lang="en">Privacy</span><span class="lang-inline" data-lang="ko">개인정보</span></a>
+  </nav>
+</header>
 
-  <main class="shell article-shell">
-    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>How NEONCPS measures CPS</span></div>
+<main class="shell article-shell">
+  <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span data-lang="en">How NEONCPS measures CPS</span><span data-lang="ko">NEONCPS가 CPS를 재는 방법</span></div>
 
-    <section class="panel hero-grid">
-      <div class="hero-copy">
-        <span class="kicker">Reviewed March 18, 2026 UTC</span>
-        <h1>The score is simple on purpose</h1>
-        <p>NEONCPS calculates CPS as total counted inputs divided by the selected duration. The simplicity is intentional. A short browser utility is most useful when the visitor can see the rule, repeat the test, and interpret the number without hidden weighting or account-based normalization.</p>
-        <p>That simplicity still needs context. A browser score is shaped by human rhythm, device input behavior, and browser timing. Knowing that boundary is part of using the tool correctly.</p>
+  <section class="panel hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="lang-inline" data-lang="en">Reviewed March 18, 2026 UTC</span><span class="lang-inline" data-lang="ko">2026년 3월 18일 UTC 검토</span></span>
+      <h1><span data-lang="en">The score is simple on purpose</span><span data-lang="ko">점수는 의도적으로 단순합니다</span></h1>
+      <p data-lang="en">NEONCPS calculates CPS as total counted inputs divided by the selected duration. The simplicity is intentional. A short browser utility is most useful when the visitor can see the rule, repeat the test, and understand the result without hidden weighting.</p>
+      <p data-lang="ko">NEONCPS는 선택한 시간 동안 집계된 총 입력 수를 시간으로 나누어 CPS를 계산합니다. 이 단순함은 의도된 것입니다. 짧은 브라우저 유틸리티는 규칙이 보이고, 반복할 수 있고, 숨은 가중치 없이 결과를 이해할 수 있을 때 가장 유용합니다.</p>
+    </div>
+    <aside class="hero-meta">
+      <div class="meta-card">
+        <h2><span data-lang="en">Core formula</span><span data-lang="ko">기본 공식</span></h2>
+        <p><strong>CPS = total counted inputs / selected seconds</strong></p>
       </div>
-      <aside class="hero-meta">
-        <div class="meta-card">
-          <h2>Core formula</h2>
-          <p><strong>CPS = total counted inputs / selected seconds</strong></p>
-        </div>
-        <div class="meta-card">
-          <h2>Input rule</h2>
-          <p>NEONCPS counts primary pointer input during the active test window and ignores right-click input.</p>
-        </div>
-        <div class="meta-card">
-          <h2>Best use</h2>
-          <p>Repeatable comparison on the same device, in the same browser, with the same posture and input style.</p>
-        </div>
-      </aside>
+      <div class="meta-card">
+        <h2><span data-lang="en">Input rule</span><span data-lang="ko">입력 기준</span></h2>
+        <p data-lang="en">Primary pointer input during the active window. Right-click is ignored.</p>
+        <p data-lang="ko">측정 구간의 기본 포인터 입력만 집계하고 우클릭은 제외합니다.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="panel article-body">
+    <section>
+      <h2><span data-lang="en">1. What gets counted</span><span data-lang="ko">1. 무엇을 세는가</span></h2>
+      <p data-lang="en">The page uses a narrow rule: count the primary click or tap events that happen during the selected test duration. That rule keeps desktop and mobile comparisons cleaner and avoids score inflation from inputs that do not represent the same action.</p>
+      <p data-lang="ko">이 페이지는 좁은 기준을 사용합니다. 선택한 시간 동안 발생한 기본 클릭 또는 탭만 세는 방식입니다. 이렇게 해야 데스크톱과 모바일 비교가 조금 더 깔끔해지고, 같은 동작이 아닌 입력으로 점수가 부풀려지는 일을 줄일 수 있습니다.</p>
+      <ul>
+        <li data-lang="en">Primary pointer input is the target because it matches the intended click or tap motion.</li>
+        <li data-lang="ko">기본 포인터 입력은 의도한 클릭/탭 동작과 가장 잘 맞기 때문에 기준이 됩니다.</li>
+        <li data-lang="en">Right-click is excluded because it is not part of the intended comparison rule.</li>
+        <li data-lang="ko">우클릭은 비교 기준에 포함되지 않으므로 제외됩니다.</li>
+        <li data-lang="en">The explanatory copy is kept aligned with the real score rule.</li>
+        <li data-lang="ko">설명 문구는 실제 점수 계산 규칙과 맞춰 유지합니다.</li>
+      </ul>
     </section>
 
-    <section class="panel article-body">
-      <section>
-        <h2>1. What gets counted</h2>
-        <p>The page is designed around a narrow rule: count the primary click or tap events that happen during the selected test duration. That rule keeps the test focused on the same type of action across desktop and mobile. It also avoids score inflation from inputs that do not represent the same motion or intent.</p>
-        <p>In practice, this matters because web interfaces can receive input from several directions. A page can react to mouse buttons, touch points, pen input, keyboard activation, accessibility tooling, and synthetic events. If a CPS tool treats every possible activation path as the same thing, the comparison becomes noisy very quickly. NEONCPS therefore keeps the rule deliberately narrower than “anything that can trigger a click-like action.”</p>
-        <ul>
-          <li>Primary pointer input is the target event family because it maps most closely to the real click or tap motion users expect from the test.</li>
-          <li>Right-click is excluded because it is not part of the intended comparison rule.</li>
-          <li>The same rule is used for the score display and the explanatory copy so visitors are not being told one thing while the code does another.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>2. When counting starts and stops</h2>
-        <p>NEONCPS begins measurement only after the visible countdown finishes. That matters for fairness. Without a clear start boundary, users would be mixing reaction time, anticipation, and warm-up behavior into the score before the test was officially running.</p>
-        <p>Once the countdown ends, the page measures inputs over the selected duration such as 1, 5, 10, or 60 seconds. The remaining-time display is driven by the browser's high-resolution timing APIs, which are more appropriate for a short benchmark than a wall-clock reading. The final score is then calculated with the chosen duration, not with a fuzzy estimate based on animation timing alone.</p>
-        <p>Even so, browser timing is not magic. The browser still runs tasks on the main thread, and heavy page activity can influence how smoothly input and rendering are processed. That is one reason NEONCPS is best used as a repeated self-comparison tool instead of a universal hardware leaderboard.</p>
-      </section>
-
-      <section>
-        <h2>3. Why the score is useful</h2>
-        <p>The value of a CPS score is not that it reveals an absolute truth about your hand. Its value is that it gives you one consistent rule that you can repeat under matching conditions. If you keep the device, browser, posture, and mode stable, the score becomes a practical way to compare your own runs and notice how rhythm or fatigue changes over time.</p>
-        <p>This is why the surrounding guidance on NEONCPS emphasizes repeatability instead of global ranking. A 7 CPS run on a touch device and a 7 CPS run on a gaming mouse may look identical on paper while coming from very different input paths. The number is still useful, but only when interpreted inside the right context.</p>
-      </section>
-
-      <section>
-        <h2>4. What the score does not claim</h2>
-        <table class="metric-table">
-          <tr>
-            <th>Claim</th>
-            <th>Why NEONCPS avoids it</th>
-          </tr>
-          <tr>
-            <td>This number is your universal click-speed rank.</td>
-            <td>Different devices, browsers, and timing conditions can produce different results even for the same person.</td>
-          </tr>
-          <tr>
-            <td>Mouse and touch scores are directly equal.</td>
-            <td>The input path, contact method, and latency profile are different enough that direct comparison is weak.</td>
-          </tr>
-          <tr>
-            <td>One run tells the whole story.</td>
-            <td>Short runs are sensitive to timing boundaries, while long runs expose fatigue and rhythm breakdown.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2>5. Best practice for using the score well</h2>
-        <ul>
-          <li>Use the same mode for repeated comparison instead of jumping between 1-second burst runs and long endurance runs.</li>
-          <li>Keep the device, browser, and posture fixed when you want a fair before-versus-after result.</li>
-          <li>Prefer a small set of repeated attempts over a single best run.</li>
-          <li>Read the result together with total clicks and duration, not as an isolated label.</li>
-        </ul>
-        <p>That last point matters more than it looks. Showing total clicks, duration, and CPS together gives the user enough context to understand where the number came from. A utility page should not make the user guess its scoring rule.</p>
-      </section>
-
-      <section>
-        <h2>References used for this explanation</h2>
-        <ul class="reference-list">
-          <li><a href="https://www.w3.org/TR/pointerevents3/" rel="noopener noreferrer">W3C Pointer Events Level 3</a></li>
-          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" rel="noopener noreferrer">MDN: Performance.now()</a></li>
-          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame" rel="noopener noreferrer">MDN: requestAnimationFrame()</a></li>
-          <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html" rel="noopener noreferrer">WHATWG HTML Standard: event loop and task processing</a></li>
-        </ul>
-      </section>
-
-      <section class="article-callout">
-        <p>NEONCPS is honest when it says less, not more. The test counts a specific kind of input over a specific window and returns a simple score. The right way to make that useful is to explain the rule clearly and repeat it under matching conditions.</p>
-      </section>
+    <section>
+      <h2><span data-lang="en">2. When counting starts and stops</span><span data-lang="ko">2. 집계는 언제 시작하고 끝나는가</span></h2>
+      <p data-lang="en">Measurement starts only after the visible countdown finishes. That avoids mixing anticipation and pre-start movement into the score. Once the countdown ends, the page counts inputs over the selected duration such as 1, 5, 10, or 60 seconds.</p>
+      <p data-lang="ko">측정은 보이는 카운트다운이 끝난 뒤에만 시작됩니다. 그래야 시작 전에 미리 준비한 동작이나 예상 반응이 점수에 섞이지 않습니다. 카운트다운이 끝나면 1초, 5초, 10초, 60초 같은 선택 시간 동안 입력을 셉니다.</p>
+      <p data-lang="en">The remaining-time display uses the browser's high-resolution timing APIs, but browser timing is still affected by the task queue and device load. That is why the score is best used for repeatable self-comparison, not for universal ranking across all hardware.</p>
+      <p data-lang="ko">남은 시간 표시는 브라우저의 고해상도 타이밍 API를 사용하지만, 브라우저 타이밍도 작업 큐와 기기 부하의 영향을 받습니다. 그래서 이 점수는 모든 하드웨어를 가르는 절대 순위보다, 같은 환경에서의 반복 비교에 더 적합합니다.</p>
     </section>
-  </main>
+
+    <section>
+      <h2><span data-lang="en">3. Why the score is useful</span><span data-lang="ko">3. 이 점수가 왜 유용한가</span></h2>
+      <p data-lang="en">A CPS score is useful because it gives one consistent rule that can be repeated under matching conditions. If the device, browser, posture, and mode stay fixed, the score becomes a practical way to compare your own runs and notice rhythm or fatigue changes.</p>
+      <p data-lang="ko">CPS 점수가 유용한 이유는 같은 조건에서 반복할 수 있는 일관된 규칙을 주기 때문입니다. 기기, 브라우저, 자세, 모드를 고정하면 자기 자신의 기록을 비교하고 리듬이나 피로 변화를 알아보는 실용적인 기준이 됩니다.</p>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">4. What the score does not claim</span><span data-lang="ko">4. 이 점수가 주장하지 않는 것</span></h2>
+      <table class="metric-table">
+        <tr>
+          <th><span data-lang="en">Claim</span><span data-lang="ko">주장</span></th>
+          <th><span data-lang="en">Why it is avoided</span><span data-lang="ko">피하는 이유</span></th>
+        </tr>
+        <tr>
+          <td><span data-lang="en">This is a universal click-speed rank.</span><span data-lang="ko">이 숫자가 절대적인 클릭 속도 순위다.</span></td>
+          <td><span data-lang="en">Different devices, browsers, and timing conditions move the result.</span><span data-lang="ko">기기, 브라우저, 타이밍 조건이 결과를 바꿀 수 있기 때문입니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Mouse and touch scores are directly equal.</span><span data-lang="ko">마우스와 터치 점수는 바로 동등 비교할 수 있다.</span></td>
+          <td><span data-lang="en">The input path and latency profile are too different.</span><span data-lang="ko">입력 경로와 지연 특성이 너무 다르기 때문입니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">One run tells the whole story.</span><span data-lang="ko">한 번의 기록이면 충분하다.</span></td>
+          <td><span data-lang="en">Short runs are boundary-sensitive and long runs expose fatigue.</span><span data-lang="ko">짧은 기록은 경계 시간에 민감하고, 긴 기록은 피로를 크게 드러냅니다.</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">5. Best practice</span><span data-lang="ko">5. 권장 사용법</span></h2>
+      <ul>
+        <li data-lang="en">Use the same mode when you want a fair before-versus-after comparison.</li>
+        <li data-lang="ko">전후 비교를 할 때는 같은 모드를 사용하세요.</li>
+        <li data-lang="en">Keep the device, browser, and posture fixed.</li>
+        <li data-lang="ko">기기, 브라우저, 자세를 고정하세요.</li>
+        <li data-lang="en">Prefer a small set of repeated attempts over one lucky peak score.</li>
+        <li data-lang="ko">운 좋게 나온 최고점 하나보다 반복 시도의 묶음을 보세요.</li>
+        <li data-lang="en">Read total clicks, duration, and CPS together.</li>
+        <li data-lang="ko">총 클릭 수, 시간, CPS를 함께 보세요.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">References</span><span data-lang="ko">참고 자료</span></h2>
+      <ul class="reference-list">
+        <li><a href="https://www.w3.org/TR/pointerevents3/" rel="noopener noreferrer">W3C Pointer Events Level 3</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" rel="noopener noreferrer">MDN: Performance.now()</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame" rel="noopener noreferrer">MDN: requestAnimationFrame()</a></li>
+        <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html" rel="noopener noreferrer">WHATWG HTML Standard: event loop and task processing</a></li>
+      </ul>
+    </section>
+
+    <section class="article-callout">
+      <p data-lang="en">The score becomes valuable when the rule is clear and the same setup can be repeated. That is the standard NEONCPS uses.</p>
+      <p data-lang="ko">규칙이 분명하고 같은 환경에서 다시 재볼 수 있을 때 점수는 가치가 생깁니다. 그것이 NEONCPS가 따르는 기준입니다.</p>
+    </section>
+  </section>
+</main>
 
   <footer class="shell footer-note">
-    <p>Continue with <a href="/guides/why-cps-scores-change/">why CPS scores change between attempts</a> or go back to the <a href="/guides/">guide library</a>.</p>
+    <p data-lang="en">Continue with the guide on why CPS scores change between attempts.</p>
+    <p data-lang="ko">다음으로 기록이 시도마다 달라지는 이유 가이드를 읽어보세요.</p>
   </footer>
 </body>
 </html>

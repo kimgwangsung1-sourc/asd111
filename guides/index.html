@@ -7,6 +7,7 @@
   <meta name="description" content="NEONCPS resource library covering CPS methodology, score interpretation, mobile versus mouse comparison, safety, and editorial standards.">
   <meta name="author" content="NEONCPS">
   <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://neoncps.com/guides/">
   <meta property="og:title" content="NEONCPS Guides | CPS Methodology, Interpretation, and Safety">
   <meta property="og:description" content="Read the NEONCPS guide library for practical CPS methodology, fair comparison rules, safety notes, and original supporting explanations.">
@@ -15,154 +16,178 @@
   <meta property="og:image" content="https://neoncps.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NEONCPS Guides | CPS Methodology, Interpretation, and Safety">
-  <meta name="twitter:description" content="Original NEONCPS guides about CPS measurement, fair score comparison, safety, and site standards.">
+  <meta name="twitter:description" content="Read the NEONCPS guide library for practical CPS methodology, fair comparison rules, safety notes, and original supporting explanations.">
   <meta name="twitter:image" content="https://neoncps.com/og-image.png">
+  <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>NEONCPS Guides | CPS Methodology, Interpretation, and Safety</title>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "url": "https://neoncps.com/guides/",
-    "name": "NEONCPS Guides",
-    "description": "Reference library for CPS measurement methodology, interpretation, device comparison, and safe practice.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "url": "https://neoncps.com/",
-      "name": "NEONCPS"
-    },
-    "dateModified": "2026-03-18"
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": "https://neoncps.com/guides/",
+  "name": "NEONCPS Guides",
+  "description": "Reference library for CPS measurement methodology, interpretation, device comparison, and safe practice.",
+  "dateModified": "2026-03-18"
+}
   </script>
+  <script defer src="/docs.js"></script>
 </head>
-<body>
-  <header class="shell topbar">
-    <div>
-      <p class="eyebrow">NEONCPS Resource Library</p>
-      <h1>CPS guides that explain the score, not just show it</h1>
-      <p class="sub">This section expands the main CPS tool into a small reference library. Each page is written to match how NEONCPS actually counts input, what those scores can and cannot tell you, and how to compare results without misleading yourself.</p>
+<body class="lang-en">
+<header class="shell topbar">
+  <div class="topbar-row">
+    <div class="title-block">
+      <p class="eyebrow"><span class="lang-inline" data-lang="en">NEONCPS Resource Library</span><span class="lang-inline" data-lang="ko">NEONCPS 자료실</span></p>
+      <h1><span data-lang="en">CPS guides that explain the score, not just show it</span><span data-lang="ko">점수만 보여주지 않고 설명까지 하는 CPS 가이드</span></h1>
+      <p class="sub" data-lang="en">This section expands the main CPS tool into a small reference library. Each page matches how NEONCPS actually counts input and how the result should be interpreted.</p>
+      <p class="sub" data-lang="ko">이 섹션은 메인 CPS 도구를 작은 참고 자료실로 확장한 것입니다. 각 페이지는 NEONCPS의 실제 측정 방식과 그 결과를 어떻게 해석해야 하는지에 맞춰 작성되었습니다.</p>
     </div>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/">CPS Test</a>
-      <a href="/guides/" aria-current="page">Guides</a>
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/">Editorial Policy</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
-  </header>
+    <div class="topbar-actions">
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/"><span class="lang-inline" data-lang="en">CPS Test</span><span class="lang-inline" data-lang="ko">CPS 테스트</span></a>
+    <a href="/guides/" aria-current="page"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a>
+    <a href="/about/"><span class="lang-inline" data-lang="en">About</span><span class="lang-inline" data-lang="ko">소개</span></a>
+    <a href="/editorial-policy/"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 기준</span></a>
+    <a href="/privacy/"><span class="lang-inline" data-lang="en">Privacy</span><span class="lang-inline" data-lang="ko">개인정보</span></a>
+  </nav>
+</header>
 
-  <main class="shell article-shell">
-    <div class="breadcrumbs"><a href="/">Home</a> / <span>Guides</span></div>
+<main class="shell article-shell">
+  <div class="breadcrumbs"><a href="/">Home</a> / <span data-lang="en">Guides</span><span data-lang="ko">가이드</span></div>
 
-    <section class="panel hero-grid">
-      <div class="hero-copy">
-        <span class="kicker">Updated March 18, 2026 UTC</span>
-        <h1>What this library is for</h1>
-        <p>Google reviewers and normal visitors usually ask the same question in different words: does this site add enough value beyond a button and a score? This library exists to answer that clearly. The goal is to document measurement logic, explain score limits, publish comparison rules, and show the editorial standards behind the main tool.</p>
-        <p>None of these pages promise a universal ranking system. They focus on repeatable comparison under matching conditions, because that is the most honest use of a browser-based CPS test.</p>
+  <section class="panel hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="lang-inline" data-lang="en">Updated March 18, 2026 UTC</span><span class="lang-inline" data-lang="ko">2026년 3월 18일 UTC 갱신</span></span>
+      <h1><span data-lang="en">What this library is for</span><span data-lang="ko">이 자료실이 필요한 이유</span></h1>
+      <p data-lang="en">A utility page becomes low-value when it stops at a button and a score. This library exists to explain the measurement rule, the limits of the score, the difference between devices, and the standards behind the site.</p>
+      <p data-lang="ko">유틸리티 사이트가 버튼과 숫자에서 멈추면 가치가 약해집니다. 이 자료실은 측정 규칙, 점수의 한계, 기기 차이, 사이트 운영 기준까지 함께 설명하기 위해 만들었습니다.</p>
+      <p data-lang="en">NEONCPS stays narrow on purpose. Instead of adding random pages, it adds supporting material that helps users understand the same core tool more honestly.</p>
+      <p data-lang="ko">NEONCPS는 의도적으로 주제를 좁게 유지합니다. 무작위 페이지를 늘리는 대신, 같은 도구를 더 정확하게 이해하도록 돕는 보조 문서를 추가합니다.</p>
+    </div>
+    <aside class="hero-meta">
+      <div class="meta-card">
+        <h2><span data-lang="en">Included here</span><span data-lang="ko">포함된 내용</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Methodology notes tied to the live input logic.</li>
+          <li data-lang="ko">실제 입력 로직에 맞춘 측정 원리 설명.</li>
+          <li data-lang="en">Original guidance on score interpretation and device comparison.</li>
+          <li data-lang="ko">점수 해석과 기기 비교에 대한 독립 설명.</li>
+          <li data-lang="en">Safety, maintenance, and editorial standards.</li>
+          <li data-lang="ko">안전성, 유지보수, 편집 기준.</li>
+        </ul>
       </div>
-      <aside class="hero-meta">
-        <div class="meta-card">
-          <h2>What is included</h2>
-          <ul class="meta-list">
-            <li>Methodology notes tied to the live NEONCPS input logic.</li>
-            <li>Original guidance on score interpretation and device differences.</li>
-            <li>Safety and correction standards for an input-heavy utility site.</li>
-          </ul>
-        </div>
-        <div class="meta-card">
-          <h2>What is not claimed</h2>
-          <ul class="meta-list">
-            <li>No medical or diagnostic use.</li>
-            <li>No claim that mouse and touch scores are directly equal.</li>
-            <li>No promise that one run is more meaningful than repeated runs in the same setup.</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="meta-card">
+        <h2><span data-lang="en">Not claimed here</span><span data-lang="ko">여기서 주장하지 않는 것</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">No medical or diagnostic use.</li>
+          <li data-lang="ko">의료나 진단 목적이 아닙니다.</li>
+          <li data-lang="en">No universal ranking across all devices.</li>
+          <li data-lang="ko">모든 기기를 아우르는 절대 순위를 주장하지 않습니다.</li>
+          <li data-lang="en">No promise that one lucky run tells the whole story.</li>
+          <li data-lang="ko">한 번 잘 나온 기록이 전체 실력을 대표한다고 보지 않습니다.</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="panel article-body">
+    <section>
+      <h2><span data-lang="en">Main guides</span><span data-lang="ko">핵심 가이드</span></h2>
+      <div class="card-grid">
+        <a class="panel link-card" href="/guides/how-neoncps-measures-cps/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Methodology</span><span class="lang-inline" data-lang="ko">측정 원리</span></span>
+          <strong><span data-lang="en">How NEONCPS measures CPS</span><span data-lang="ko">NEONCPS가 CPS를 재는 방법</span></strong>
+          <p data-lang="en">Input rule, timing rule, and what the score does not claim.</p>
+          <p data-lang="ko">입력 기준, 시간 계산 방식, 점수가 의미하지 않는 것까지 정리했습니다.</p>
+        </a>
+        <a class="panel link-card" href="/guides/why-cps-scores-change/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Interpretation</span><span class="lang-inline" data-lang="ko">점수 해석</span></span>
+          <strong><span data-lang="en">Why CPS scores change between attempts</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></strong>
+          <p data-lang="en">Fatigue, rhythm, browser load, and timing boundaries.</p>
+          <p data-lang="ko">피로, 리듬, 브라우저 부하, 경계 시간의 영향을 설명합니다.</p>
+        </a>
+        <a class="panel link-card" href="/guides/mobile-vs-mouse-cps/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Device Comparison</span><span class="lang-inline" data-lang="ko">기기 비교</span></span>
+          <strong><span data-lang="en">Mobile versus mouse CPS</span><span data-lang="ko">모바일과 마우스 CPS 비교</span></strong>
+          <p data-lang="en">Why touch and mouse scores should not share one simple ranking.</p>
+          <p data-lang="ko">터치와 마우스 점수를 하나의 단순 순위로 보면 안 되는 이유를 다룹니다.</p>
+        </a>
+        <a class="panel link-card" href="/guides/safe-cps-practice/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Safety</span><span class="lang-inline" data-lang="ko">안전성</span></span>
+          <strong><span data-lang="en">Safe CPS practice and improvement</span><span data-lang="ko">안전한 연습과 향상 방법</span></strong>
+          <p data-lang="en">Short-session routine focused on repeatability instead of strain.</p>
+          <p data-lang="ko">무리보다 반복 비교에 초점을 둔 짧은 세션 프로토콜입니다.</p>
+        </a>
+      </div>
     </section>
 
-    <section class="panel article-body">
-      <section>
-        <h2>Main guides</h2>
-        <div class="card-grid">
-          <a class="panel link-card" href="/guides/how-neoncps-measures-cps/">
-            <span class="kicker">Methodology</span>
-            <strong>How NEONCPS measures CPS</strong>
-            <p>A practical breakdown of the input rule, timing rule, and the limits of web-based measurement.</p>
-          </a>
-          <a class="panel link-card" href="/guides/why-cps-scores-change/">
-            <span class="kicker">Interpretation</span>
-            <strong>Why CPS scores change between attempts</strong>
-            <p>What fatigue, browser load, timing boundaries, and device conditions do to repeat runs.</p>
-          </a>
-          <a class="panel link-card" href="/guides/mobile-vs-mouse-cps/">
-            <span class="kicker">Device Comparison</span>
-            <strong>Mobile versus mouse CPS</strong>
-            <p>Why touch and mouse results can both be valid yet still not belong on the same leaderboard.</p>
-          </a>
-          <a class="panel link-card" href="/guides/safe-cps-practice/">
-            <span class="kicker">Safety</span>
-            <strong>Safe CPS practice and improvement</strong>
-            <p>A short protocol for training, rest, and avoiding the worst forms of repetitive overuse.</p>
-          </a>
-        </div>
-      </section>
-
-      <section>
-        <h2>Supporting pages</h2>
-        <div class="card-grid">
-          <a class="panel link-card" href="/about/">
-            <span class="kicker">About</span>
-            <strong>Who runs NEONCPS and why it exists</strong>
-            <p>Scope, update cadence, correction route, and the operating purpose of the site.</p>
-          </a>
-          <a class="panel link-card" href="/editorial-policy/">
-            <span class="kicker">Standards</span>
-            <strong>Editorial and review policy</strong>
-            <p>How NEONCPS evaluates sources, updates content, handles corrections, and avoids deceptive UX.</p>
-          </a>
-          <a class="panel link-card" href="/privacy/">
-            <span class="kicker">Policy</span>
-            <strong>Privacy and ad transparency</strong>
-            <p>Information about analytics, ads, the contact form, and user choices.</p>
-          </a>
-        </div>
-      </section>
-
-      <section>
-        <h2>How to use this library</h2>
-        <table class="metric-table">
-          <tr>
-            <th>Use case</th>
-            <th>Best starting page</th>
-          </tr>
-          <tr>
-            <td>You want to know exactly what the score counts.</td>
-            <td><a href="/guides/how-neoncps-measures-cps/">How NEONCPS measures CPS</a></td>
-          </tr>
-          <tr>
-            <td>You want to understand why results move around.</td>
-            <td><a href="/guides/why-cps-scores-change/">Why CPS scores change between attempts</a></td>
-          </tr>
-          <tr>
-            <td>You want a fair rule for mouse versus touch comparison.</td>
-            <td><a href="/guides/mobile-vs-mouse-cps/">Mobile versus mouse CPS</a></td>
-          </tr>
-          <tr>
-            <td>You want a low-risk practice routine.</td>
-            <td><a href="/guides/safe-cps-practice/">Safe CPS practice and improvement</a></td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="article-callout">
-        <p>NEONCPS is deliberately narrow in scope. That is a design choice, not an accident. The site focuses on one utility, then adds the surrounding explanation needed for a user to understand what the number means before ads are ever considered.</p>
-      </section>
+    <section>
+      <h2><span data-lang="en">Supporting pages</span><span data-lang="ko">보조 페이지</span></h2>
+      <div class="card-grid">
+        <a class="panel link-card" href="/about/">
+          <span class="kicker">About</span>
+          <strong><span data-lang="en">Who runs NEONCPS and why it exists</span><span data-lang="ko">누가 NEONCPS를 운영하고 왜 존재하는가</span></strong>
+          <p data-lang="en">Site purpose, maintenance scope, and correction route.</p>
+          <p data-lang="ko">사이트 목적, 유지 범위, 정정 경로를 설명합니다.</p>
+        </a>
+        <a class="panel link-card" href="/editorial-policy/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Standards</span><span class="lang-inline" data-lang="ko">기준</span></span>
+          <strong><span data-lang="en">Editorial and review policy</span><span data-lang="ko">편집 및 검토 정책</span></strong>
+          <p data-lang="en">How pages are reviewed, updated, and kept non-deceptive.</p>
+          <p data-lang="ko">페이지를 어떻게 검토하고 갱신하며 기만적 UI를 피하는지 정리합니다.</p>
+        </a>
+        <a class="panel link-card" href="/privacy/">
+          <span class="kicker"><span class="lang-inline" data-lang="en">Policy</span><span class="lang-inline" data-lang="ko">정책</span></span>
+          <strong><span data-lang="en">Privacy and ad transparency</span><span data-lang="ko">개인정보 및 광고 투명성</span></strong>
+          <p data-lang="en">Analytics, ads, contact form data, and user choices.</p>
+          <p data-lang="ko">분석, 광고, 문의 폼 정보, 사용자 선택권을 설명합니다.</p>
+        </a>
+      </div>
     </section>
-  </main>
+
+    <section>
+      <h2><span data-lang="en">How to use this library</span><span data-lang="ko">이 자료실 이용 방법</span></h2>
+      <table class="metric-table">
+        <tr>
+          <th><span data-lang="en">Use case</span><span data-lang="ko">궁금한 점</span></th>
+          <th><span data-lang="en">Best starting page</span><span data-lang="ko">먼저 볼 페이지</span></th>
+        </tr>
+        <tr>
+          <td><span data-lang="en">You want to know exactly what the score counts.</span><span data-lang="ko">점수가 정확히 무엇을 세는지 알고 싶다.</span></td>
+          <td><a href="/guides/how-neoncps-measures-cps/"><span data-lang="en">How NEONCPS measures CPS</span><span data-lang="ko">NEONCPS가 CPS를 재는 방법</span></a></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">You want to know why runs move around.</span><span data-lang="ko">기록이 왜 흔들리는지 알고 싶다.</span></td>
+          <td><a href="/guides/why-cps-scores-change/"><span data-lang="en">Why CPS scores change</span><span data-lang="ko">기록이 시도마다 달라지는 이유</span></a></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">You want a fair device-comparison rule.</span><span data-lang="ko">기기별 공정한 비교 기준이 필요하다.</span></td>
+          <td><a href="/guides/mobile-vs-mouse-cps/"><span data-lang="en">Mobile versus mouse CPS</span><span data-lang="ko">모바일과 마우스 CPS 비교</span></a></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">You want a lower-risk practice routine.</span><span data-lang="ko">무리하지 않는 연습 루틴이 필요하다.</span></td>
+          <td><a href="/guides/safe-cps-practice/"><span data-lang="en">Safe CPS practice</span><span data-lang="ko">안전한 연습과 향상 방법</span></a></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="article-callout">
+      <p data-lang="en">NEONCPS stays useful when the surrounding pages help a visitor interpret the number more accurately than the raw score alone.</p>
+      <p data-lang="ko">NEONCPS의 가치는 숫자 하나만 보여주는 것이 아니라, 그 숫자를 더 정확하게 해석할 수 있도록 주변 설명을 함께 제공할 때 유지됩니다.</p>
+    </section>
+  </section>
+</main>
 
   <footer class="shell footer-note">
-    <p>NEONCPS keeps these pages small, specific, and tied to the live tool. If a guide falls out of sync with the test logic, the correction path is published on the <a href="/editorial-policy/">Editorial Policy</a> and <a href="/about/">About</a> pages.</p>
+    <p data-lang="en">If a guide stops matching the live tool, it should be revised. That is part of the site standard.</p>
+    <p data-lang="ko">가이드가 실제 도구와 어긋나면 수정해야 합니다. 그것이 이 사이트의 운영 기준입니다.</p>
   </footer>
 </body>
 </html>

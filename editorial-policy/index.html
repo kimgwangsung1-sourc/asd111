@@ -7,139 +7,167 @@
   <meta name="description" content="NEONCPS editorial policy covering source standards, update rules, correction handling, deceptive UX avoidance, and utility-page review criteria.">
   <meta name="author" content="NEONCPS">
   <meta name="google-adsense-account" content="ca-pub-9418686584056529">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://neoncps.com/editorial-policy/">
   <meta property="og:title" content="NEONCPS Editorial Policy | Source, Update, and UX Standards">
   <meta property="og:description" content="See how NEONCPS reviews claims, updates pages, handles corrections, and avoids deceptive ad or navigation practices.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://neoncps.com/editorial-policy/">
   <meta property="og:image" content="https://neoncps.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NEONCPS Editorial Policy | Source, Update, and UX Standards">
+  <meta name="twitter:description" content="See how NEONCPS reviews claims, updates pages, handles corrections, and avoids deceptive ad or navigation practices.">
+  <meta name="twitter:image" content="https://neoncps.com/og-image.png">
+  <link rel="icon" href="/favicon.png" sizes="256x256" type="image/png">
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <title>NEONCPS Editorial Policy | Source, Update, and UX Standards</title>
   <link rel="stylesheet" href="/docs.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "url": "https://neoncps.com/editorial-policy/",
-    "name": "NEONCPS Editorial Policy",
-    "description": "Source, update, correction, and user-experience standards for NEONCPS.",
-    "dateModified": "2026-03-18",
-    "isPartOf": {
-      "@type": "WebSite",
-      "url": "https://neoncps.com/",
-      "name": "NEONCPS"
-    }
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "https://neoncps.com/editorial-policy/",
+  "name": "NEONCPS Editorial Policy",
+  "description": "Source, update, correction, and user-experience standards for NEONCPS.",
+  "dateModified": "2026-03-18"
+}
   </script>
+  <script defer src="/docs.js"></script>
 </head>
-<body>
-  <header class="shell topbar">
-    <div>
-      <p class="eyebrow">Editorial Policy</p>
-      <h1>How NEONCPS decides what belongs on the site</h1>
-      <p class="sub">This policy explains the review standard behind NEONCPS pages. It covers source quality, update triggers, correction handling, and the site-wide rule that ads or UI elements must never pretend to be navigation, downloads, or product features.</p>
+<body class="lang-en">
+<header class="shell topbar">
+  <div class="topbar-row">
+    <div class="title-block">
+      <p class="eyebrow"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 정책</span></p>
+      <h1><span data-lang="en">How NEONCPS decides what belongs on the site</span><span data-lang="ko">무엇이 사이트에 올라갈 가치가 있는지 NEONCPS가 판단하는 기준</span></h1>
+      <p class="sub" data-lang="en">This policy explains the review standard behind NEONCPS pages: source quality, update triggers, correction handling, and the rule that ads or UI must never pretend to be navigation or downloads.</p>
+      <p class="sub" data-lang="ko">이 문서는 NEONCPS 페이지의 검토 기준을 설명합니다. 출처 품질, 업데이트 기준, 정정 처리, 그리고 광고나 UI가 탐색이나 다운로드처럼 위장하면 안 된다는 원칙을 다룹니다.</p>
     </div>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/">CPS Test</a>
-      <a href="/guides/">Guides</a>
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/" aria-current="page">Editorial Policy</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
-  </header>
+    <div class="topbar-actions">
+      <button class="topbar-card" id="langToggle" type="button"><span>🌐</span><span id="langToggleText" data-i18n="langButton">LANG</span></button>
+      <button class="topbar-card" id="themeToggle" type="button"><span id="themeIcon">🌙</span><span data-i18n="theme">THEME</span></button>
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/"><span class="lang-inline" data-lang="en">CPS Test</span><span class="lang-inline" data-lang="ko">CPS 테스트</span></a>
+    <a href="/guides/"><span class="lang-inline" data-lang="en">Guides</span><span class="lang-inline" data-lang="ko">가이드</span></a>
+    <a href="/about/"><span class="lang-inline" data-lang="en">About</span><span class="lang-inline" data-lang="ko">소개</span></a>
+    <a href="/editorial-policy/" aria-current="page"><span class="lang-inline" data-lang="en">Editorial Policy</span><span class="lang-inline" data-lang="ko">편집 기준</span></a>
+    <a href="/privacy/"><span class="lang-inline" data-lang="en">Privacy</span><span class="lang-inline" data-lang="ko">개인정보</span></a>
+  </nav>
+</header>
 
-  <main class="shell article-shell">
-    <div class="breadcrumbs"><a href="/">Home</a> / <span>Editorial Policy</span></div>
+<main class="shell article-shell">
+  <div class="breadcrumbs"><a href="/">Home</a> / <span data-lang="en">Editorial Policy</span><span data-lang="ko">편집 정책</span></div>
 
-    <section class="panel hero-grid">
-      <div class="hero-copy">
-        <span class="kicker">Reviewed March 18, 2026 UTC</span>
-        <h1>The standard for a utility page is clarity plus honest limits</h1>
-        <p>NEONCPS does not treat a utility page as finished just because the button works. If the score is easy to misuse, the surrounding explanation is part of the product. If the explanation becomes stale or generic, the page loses value even if the code still runs.</p>
-        <p>For that reason, content decisions are tied to live behavior, user benefit, and trust. A short page is acceptable only if it is precise, original, and genuinely useful. Otherwise it should be improved or removed.</p>
+  <section class="panel hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="lang-inline" data-lang="en">Reviewed March 18, 2026 UTC</span><span class="lang-inline" data-lang="ko">2026년 3월 18일 UTC 검토</span></span>
+      <h1><span data-lang="en">A utility page needs clarity plus honest limits</span><span data-lang="ko">유틸리티 페이지에는 명확함과 정직한 한계 설명이 필요합니다</span></h1>
+      <p data-lang="en">NEONCPS does not treat a page as complete just because the button works. If the score is easy to misuse, the surrounding explanation is part of the product. If the explanation becomes stale, the page loses value even if the code still runs.</p>
+      <p data-lang="ko">버튼이 작동한다고 해서 페이지가 완성됐다고 보지 않습니다. 점수가 오해되기 쉽다면 주변 설명도 제품의 일부입니다. 설명이 낡으면 코드가 살아 있어도 페이지의 가치는 떨어집니다.</p>
+    </div>
+    <aside class="hero-meta">
+      <div class="meta-card">
+        <h2><span data-lang="en">Core review questions</span><span data-lang="ko">핵심 검토 질문</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Does the text match the live tool?</li>
+          <li data-lang="ko">문서가 실제 도구와 맞는가?</li>
+          <li data-lang="en">Does the page tell the visitor something specific beyond the score?</li>
+          <li data-lang="ko">점수 외에 구체적인 설명을 제공하는가?</li>
+          <li data-lang="en">Is the navigation honest and non-deceptive?</li>
+          <li data-lang="ko">탐색 구조가 정직하고 기만적이지 않은가?</li>
+        </ul>
       </div>
-      <aside class="hero-meta">
-        <div class="meta-card">
-          <h2>Core review questions</h2>
-          <ul class="meta-list">
-            <li>Does the text match the live tool?</li>
-            <li>Does the page tell a visitor something specific they could not get from the score alone?</li>
-            <li>Is the navigation honest and non-deceptive?</li>
-          </ul>
-        </div>
-        <div class="meta-card">
-          <h2>Correction triggers</h2>
-          <ul class="meta-list">
-            <li>Logic change in the tool.</li>
-            <li>Broken link or outdated claim.</li>
-            <li>User report that wording is misleading or incomplete.</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="meta-card">
+        <h2><span data-lang="en">Update triggers</span><span data-lang="ko">갱신 트리거</span></h2>
+        <ul class="meta-list">
+          <li data-lang="en">Logic change in the tool.</li>
+          <li data-lang="ko">도구 로직 변경.</li>
+          <li data-lang="en">Broken links or outdated claims.</li>
+          <li data-lang="ko">깨진 링크나 오래된 주장.</li>
+          <li data-lang="en">Reports that wording is misleading or incomplete.</li>
+          <li data-lang="ko">문장이 오해를 부르거나 부족하다는 제보.</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="panel article-body">
+    <section>
+      <h2><span data-lang="en">Source standard</span><span data-lang="ko">출처 기준</span></h2>
+      <p data-lang="en">Pages about CPS methodology, device behavior, fatigue, timing, or safety should be grounded in one or more of the following: the live NEONCPS code path, web standards and platform documentation, official policy documentation, or credible research relevant to repeated finger tapping, input latency, or repetitive use.</p>
+      <p data-lang="ko">CPS 측정 원리, 기기 동작, 피로, 타이밍, 안전성을 설명하는 페이지는 다음 중 하나 이상에 근거해야 합니다. 실제 NEONCPS 코드 경로, 웹 표준과 플랫폼 문서, 공식 정책 문서, 반복 태핑·입력 지연·반복 사용과 관련된 신뢰 가능한 연구 자료입니다.</p>
     </section>
 
-    <section class="panel article-body">
-      <section>
-        <h2>Source standard</h2>
-        <p>Pages that explain CPS methodology, device behavior, fatigue, timing, or safety should be based on one or more of the following: the live NEONCPS code path, web standards and platform documentation, official policy documentation, or credible research relevant to repeated finger tapping, input latency, or repetitive use.</p>
-        <p>External sources are used to sharpen the explanation, not to pad pages with summaries that could appear anywhere. When a reference does not help a visitor interpret the NEONCPS test more honestly, it should not be included just for volume.</p>
-      </section>
-
-      <section>
-        <h2>Update rule</h2>
-        <ul>
-          <li>If the page changes how it counts input, timing, or result display, related explanatory text should be reviewed in the same update cycle.</li>
-          <li>If site navigation changes, trust statements and policy pages should be rechecked so they still describe the real user journey.</li>
-          <li>If an article becomes shallow, redundant, or disconnected from the utility, it should be rewritten or removed rather than preserved for traffic alone.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Correction handling</h2>
-        <p>NEONCPS accepts correction requests through the contact form on the home page. The intended workflow is simple: verify the report, identify the affected claim or page, revise the language so it matches reality, and keep the correction local to the page that made the claim.</p>
-        <p>Silent accumulation of outdated caveats is not acceptable. A small site earns trust by making small corrections quickly and explicitly, not by pretending old text is still close enough.</p>
-      </section>
-
-      <section>
-        <h2>User experience and ad placement rule</h2>
-        <p>Ads, buttons, or cards must never imitate site navigation, fake downloads, system warnings, or hidden product steps. The main interactive elements on NEONCPS should remain obviously functional: starting the test, copying a result, opening a guide, or submitting the contact form.</p>
-        <ul>
-          <li>No buttons that suggest installation when nothing is being installed.</li>
-          <li>No links that exist only to force an extra click without adding information.</li>
-          <li>No ad styling that makes an advertisement look like the next required step of the tool.</li>
-          <li>No empty category or archive pages created just to hold keywords.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Thin-content check for new pages</h2>
-        <table class="metric-table">
-          <tr>
-            <th>Question</th>
-            <th>Required answer</th>
-          </tr>
-          <tr>
-            <td>Does the page solve a real visitor question tied to the CPS tool?</td>
-            <td>It should answer a concrete question such as methodology, score variance, device differences, or safe practice.</td>
-          </tr>
-          <tr>
-            <td>Is the wording specific to NEONCPS?</td>
-            <td>It should mention the actual score rule or practical interpretation standard used on this site.</td>
-          </tr>
-          <tr>
-            <td>Would the page still be worth reading if ads were removed?</td>
-            <td>If not, it does not belong on the site yet.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="article-callout">
-        <p>The simplest policy on NEONCPS is this: a page should help the user understand the tool more accurately than they could by looking at the number alone. If it does not do that, it is not ready.</p>
-      </section>
+    <section>
+      <h2><span data-lang="en">Update rule</span><span data-lang="ko">업데이트 규칙</span></h2>
+      <ul>
+        <li data-lang="en">When the page changes how it counts input, timing, or result display, related explanatory text should be reviewed in the same cycle.</li>
+        <li data-lang="ko">입력 집계, 시간 계산, 결과 표시가 바뀌면 관련 설명도 같은 주기 안에서 검토해야 합니다.</li>
+        <li data-lang="en">If navigation changes, trust statements and policy pages should be rechecked as well.</li>
+        <li data-lang="ko">탐색 구조가 바뀌면 신뢰 문구와 정책 페이지도 같이 다시 확인해야 합니다.</li>
+        <li data-lang="en">If an article becomes shallow, redundant, or detached from the utility, it should be rewritten or removed.</li>
+        <li data-lang="ko">문서가 얕아지거나 중복되거나 도구와 분리되면 다시 쓰거나 제거해야 합니다.</li>
+      </ul>
     </section>
-  </main>
+
+    <section>
+      <h2><span data-lang="en">Correction handling</span><span data-lang="ko">정정 처리</span></h2>
+      <p data-lang="en">NEONCPS accepts correction requests through the home-page contact form. The intended flow is simple: verify the report, identify the affected claim, revise the page so it matches reality, and keep the fix local to the claim that was wrong.</p>
+      <p data-lang="ko">NEONCPS는 홈 페이지 문의 폼을 통해 정정 요청을 받습니다. 절차는 단순합니다. 제보를 확인하고, 영향을 받는 문장을 찾고, 현실과 맞도록 페이지를 고치고, 잘못된 주장이 있던 위치를 바로잡습니다.</p>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">User experience and ad rule</span><span data-lang="ko">사용자 경험과 광고 원칙</span></h2>
+      <p data-lang="en">Ads, buttons, or cards must never imitate site navigation, fake downloads, system warnings, or hidden product steps. The main interactive elements should remain obviously functional.</p>
+      <p data-lang="ko">광고, 버튼, 카드가 사이트 탐색, 가짜 다운로드, 시스템 경고, 숨겨진 단계처럼 보이게 해서는 안 됩니다. 주요 상호작용 요소는 항상 실제 기능으로 보여야 합니다.</p>
+      <ul>
+        <li data-lang="en">No buttons that suggest installation when nothing is being installed.</li>
+        <li data-lang="ko">설치가 없는데 설치처럼 보이게 하는 버튼을 만들지 않습니다.</li>
+        <li data-lang="en">No links that force extra clicks without adding information.</li>
+        <li data-lang="ko">정보 없이 클릭만 강요하는 링크를 만들지 않습니다.</li>
+        <li data-lang="en">No ad styling that looks like the next required step of the tool.</li>
+        <li data-lang="ko">광고가 도구의 다음 단계처럼 보이게 꾸미지 않습니다.</li>
+        <li data-lang="en">No empty archive or category pages for keywords only.</li>
+        <li data-lang="ko">키워드만 위한 빈 카테고리나 아카이브 페이지를 만들지 않습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span data-lang="en">Thin-content check for new pages</span><span data-lang="ko">새 페이지의 빈약한 콘텐츠 점검 기준</span></h2>
+      <table class="metric-table">
+        <tr>
+          <th><span data-lang="en">Question</span><span data-lang="ko">질문</span></th>
+          <th><span data-lang="en">Required answer</span><span data-lang="ko">필수 기준</span></th>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Does the page solve a real visitor question tied to the tool?</span><span data-lang="ko">이 페이지가 도구와 연결된 실제 질문을 해결하는가?</span></td>
+          <td><span data-lang="en">It should answer methodology, score variance, device difference, or safe use.</span><span data-lang="ko">측정 원리, 점수 변동, 기기 차이, 안전한 사용 같은 구체적 질문에 답해야 합니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Is the wording specific to NEONCPS?</span><span data-lang="ko">문장이 NEONCPS에 특화돼 있는가?</span></td>
+          <td><span data-lang="en">It should mention the real score rule or interpretation standard used here.</span><span data-lang="ko">실제 점수 계산 규칙이나 이 사이트의 해석 기준이 드러나야 합니다.</span></td>
+        </tr>
+        <tr>
+          <td><span data-lang="en">Would the page still be worth reading without ads?</span><span data-lang="ko">광고가 없어도 읽을 가치가 있는가?</span></td>
+          <td><span data-lang="en">If not, it is not ready.</span><span data-lang="ko">그렇지 않다면 아직 준비되지 않은 페이지입니다.</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="article-callout">
+      <p data-lang="en">A page should help the user understand the tool more accurately than the number alone. If it does not do that, it is not ready to stay.</p>
+      <p data-lang="ko">페이지는 숫자 하나보다 더 정확하게 도구를 이해하도록 도와야 합니다. 그 역할을 못 한다면 남아 있을 준비가 된 것이 아닙니다.</p>
+    </section>
+  </section>
+</main>
 
   <footer class="shell footer-note">
-    <p>Privacy details are published on the <a href="/privacy/">Privacy Policy</a> page. Site purpose and contact route are summarized on the <a href="/about/">About</a> page.</p>
+    <p data-lang="en">Site purpose is summarized on the About page, and privacy details stay on the Privacy page.</p>
+    <p data-lang="ko">사이트 목적은 소개 페이지에, 개인정보 세부 내용은 개인정보 페이지에 정리되어 있습니다.</p>
   </footer>
 </body>
 </html>
