@@ -1,0 +1,40 @@
+{
+  "name": "NEONCPS",
+  "short_name": "NEONCPS",
+  "description": "Free CPS click speed test for desktop and mobile with original methodology, score interpretation, and repeatable comparison guides.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "CPS Test",
+      "url": "/"
+    },
+    {
+      "name": "Guides",
+      "url": "/guides/"
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy/"
+    }
+  ]
+}
