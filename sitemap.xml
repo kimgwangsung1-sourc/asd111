@@ -33,6 +33,18 @@
   </url>
   <url>
     <loc>https://neoncps.com/guides/why-cps-scores-change/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://neoncps.com/guides/why-cps-scores-change/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://neoncps.com/ko/guides/why-cps-scores-change/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://neoncps.com/guides/why-cps-scores-change/" />
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://neoncps.com/ko/guides/why-cps-scores-change/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://neoncps.com/guides/why-cps-scores-change/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://neoncps.com/ko/guides/why-cps-scores-change/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://neoncps.com/guides/why-cps-scores-change/" />
     <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -153,6 +153,10 @@ export async function onRequest(context) {
   html = replaceOrThrow(html, '<span data-i18n="start">START</span>', '<span data-i18n="start">시작</span>', 'start button');
   html = replaceOrThrow(html, '<div class="timer-text" id="timer">5.00s</div>', '<div class="timer-text" id="timer">5.00초</div>', 'timer default');
   html = replaceOrThrow(html, '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">PRESS START, THEN TAP THE PAD</div>', '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">START 버튼을 누른 뒤 패드를 탭하세요</div>', 'idle message');
+  if (!html.includes('/guides/why-cps-scores-change/')) {
+    throw new Error('Template replacement failed: korean guide link');
+  }
+  html = html.replaceAll('/guides/why-cps-scores-change/', '/ko/guides/why-cps-scores-change/');
   html = replaceOrThrow(
     html,
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,

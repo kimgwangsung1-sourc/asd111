@@ -57,6 +57,9 @@
   }
 
   function detectDefaultLang() {
+    const path = window.location.pathname || '';
+    if (path.startsWith('/ko/')) return 'ko';
+
     const stored = safeStorageGet('neon_lang', '');
     if (stored === 'ko' || stored === 'en') return stored;
 
@@ -77,10 +80,37 @@
     updateThemeIcon();
   }
 
+  function findAlternateLanguageUrl(lang) {
+    const selector = `link[rel="alternate"][hreflang="${lang}"]`;
+    const link = document.querySelector(selector);
+
+    if (!link) return '';
+
+    const href = link.getAttribute('href') || '';
+    if (!href) return '';
+
+    try {
+      const nextUrl = new URL(href, window.location.href);
+      return nextUrl.toString() === window.location.href ? '' : nextUrl.toString();
+    } catch (err) {
+      return '';
+    }
+  }
+
   if (langToggle) {
     langToggle.addEventListener('click', () => {
       const isKorean = body.classList.contains('lang-ko');
-      setLanguage(isKorean ? 'en' : 'ko');
+      const nextLang = isKorean ? 'en' : 'ko';
+      const alternateUrl = findAlternateLanguageUrl(nextLang);
+
+      safeStorageSet('neon_lang', nextLang);
+
+      if (alternateUrl) {
+        window.location.href = alternateUrl;
+        return;
+      }
+
+      setLanguage(nextLang);
     });
   }
 
