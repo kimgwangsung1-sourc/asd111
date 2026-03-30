@@ -28,7 +28,7 @@ const koreanStructuredData = {
       about: { "@id": `${KOREAN_ORIGIN}#app` },
       publisher: { "@id": `${CANONICAL_ORIGIN}/#organization` },
       inLanguage: "ko",
-      dateModified: "2026-03-18"
+      dateModified: "2026-03-30"
     },
     {
       "@type": "SoftwareApplication",
