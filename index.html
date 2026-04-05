@@ -2270,6 +2270,16 @@
             return 'resultModeDefault';
         }
 
+        function getLocalizedGuideHref(href) {
+            if (currentLang !== 'ko') return href;
+
+            if (href === '/guides/why-cps-scores-change/') {
+                return '/ko/guides/why-cps-scores-change/';
+            }
+
+            return href;
+        }
+
         function getResultGuideConfig(mode) {
             const targetMode = RESULT_TIME_OPTIONS.includes(mode) ? mode : selectedTime;
 
@@ -2323,7 +2333,7 @@
 
             if (resultGuideLink && resultGuideLabel) {
                 const guideConfig = getResultGuideConfig(targetMode);
-                resultGuideLink.href = guideConfig.href;
+                resultGuideLink.href = getLocalizedGuideHref(guideConfig.href);
                 resultGuideLabel.textContent = t(guideConfig.textKey || 'resultGuideDefault');
             }
         }

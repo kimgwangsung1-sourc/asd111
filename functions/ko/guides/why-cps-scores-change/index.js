@@ -39,7 +39,7 @@ export async function onRequest(context) {
   html = replaceOrThrow(html, /<html lang="[^"]+">/, '<html lang="ko">', "html lang");
   html = replaceOrThrow(
     html,
-    /<link rel="canonical" href="[^"]+">/,
+    /<link rel="canonical" href="[^"]+">\s*<link rel="alternate" hreflang="en" href="[^"]+">\s*<link rel="alternate" hreflang="ko" href="[^"]+">\s*<link rel="alternate" hreflang="x-default" href="[^"]+">/,
     `<link rel="canonical" href="${KOREAN_GUIDE_URL}">\n  <link rel="alternate" hreflang="en" href="${ENGLISH_GUIDE_URL}">\n  <link rel="alternate" hreflang="ko" href="${KOREAN_GUIDE_URL}">\n  <link rel="alternate" hreflang="x-default" href="${ENGLISH_GUIDE_URL}">`,
     "canonical and hreflang"
   );

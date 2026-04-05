@@ -45,6 +45,13 @@
     });
   }
 
+  function updateHomeLinks(lang) {
+    const homeHref = lang === 'ko' ? '/ko/' : '/';
+    document.querySelectorAll('a[href="/"], a[href="/ko/"]').forEach((link) => {
+      link.setAttribute('href', homeHref);
+    });
+  }
+
   function setLanguage(lang) {
     const nextLang = lang === 'ko' ? 'ko' : 'en';
     root.classList.toggle('lang-ko', nextLang === 'ko');
@@ -54,6 +61,7 @@
     root.setAttribute('lang', nextLang);
     safeStorageSet('neon_lang', nextLang);
     applyTranslations(nextLang);
+    updateHomeLinks(nextLang);
   }
 
   function detectDefaultLang() {
