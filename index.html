@@ -1407,6 +1407,14 @@
         body.modal-open .slime-container {
             opacity: 0 !important;
         }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body class="lang-en">
@@ -2404,9 +2412,8 @@
             langToggle.addEventListener('click', () => {
                 const targetLang = currentLang === 'en' ? 'ko' : 'en';
                 const nextUrl = getLanguagePageUrl(targetLang);
-                setLanguage(targetLang);
-                updateLanguageMetadata(targetLang);
-                window.history.replaceState({ lang: targetLang }, '', nextUrl);
+                safeStorageSet('neon_lang', targetLang);
+                window.location.assign(nextUrl);
             });
         }
         setLanguage(currentLang);

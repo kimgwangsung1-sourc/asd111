@@ -19,8 +19,8 @@ html.light body {
   --text: #18212b;
   --muted: #5f6a75;
   --line: rgba(15, 23, 42, 0.12);
-  --accent: #0088ff;
-  --accent-soft: rgba(0, 136, 255, 0.08);
+  --accent: #006dcc;
+  --accent-soft: rgba(0, 109, 204, 0.08);
 }
 
 * {
@@ -398,5 +398,19 @@ html.lang-en body .lang-inline[data-lang="ko"] {
 
   .panel {
     padding: 20px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

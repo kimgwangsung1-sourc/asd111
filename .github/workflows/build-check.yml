@@ -18,8 +18,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: 패키지 설치
-        run: npm install
+      - name: 필수 정적 파일 확인
+        shell: bash
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f main.js
+          test -f tracking.js
+          test -f sitemap.xml
+          test -f robots.txt
 
-      - name: 빌드 검사
-        run: npm run build
+      - name: JavaScript 문법 검사
+        shell: bash
+        run: find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check

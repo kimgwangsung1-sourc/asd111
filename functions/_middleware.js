@@ -1,11 +1,18 @@
 const REDIRECT_HOSTS = new Set(["asd111.pages.dev", "www.neoncps.com"]);
+const TRAILING_SLASH_PATHS = new Set([
+  "/ko",
+  "/ko/guides/why-cps-scores-change"
+]);
 const CANONICAL_ORIGIN = "https://neoncps.com";
 
 export function onRequest(context) {
   const url = new URL(context.request.url);
+  const canonicalPath = TRAILING_SLASH_PATHS.has(url.pathname)
+    ? `${url.pathname}/`
+    : url.pathname;
 
-  if (REDIRECT_HOSTS.has(url.hostname)) {
-    const redirectUrl = new URL(`${url.pathname}${url.search}`, CANONICAL_ORIGIN);
+  if (REDIRECT_HOSTS.has(url.hostname) || canonicalPath !== url.pathname) {
+    const redirectUrl = new URL(`${canonicalPath}${url.search}`, CANONICAL_ORIGIN);
     const headers = new Headers({ Location: redirectUrl.toString() });
 
     if (url.hostname === "asd111.pages.dev") {
