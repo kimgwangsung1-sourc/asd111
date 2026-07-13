@@ -12,9 +12,6 @@
 /ko/
   Content-Language: ko
 
-/guides/
-  Content-Language: en
-
 /guides/*
   Content-Language: en
 

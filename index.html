@@ -1421,12 +1421,12 @@
     <main class="page-main" id="mainContent">
     <div class="topbar">
         <div class="info-tabs" role="tablist" aria-label="Info tabs">
-            <button class="info-tab" id="tab-how" role="tab" aria-controls="panel-how" aria-selected="false" data-target="panel-how" data-i18n="navHow">HOW IT WORKS</button>
-            <button class="info-tab" id="tab-usage" role="tab" aria-controls="panel-usage" aria-selected="false" data-target="panel-usage" data-i18n="navUsage">USAGE</button>
-            <button class="info-tab" id="tab-health" role="tab" aria-controls="panel-health" aria-selected="false" data-target="panel-health" data-i18n="navSafety">SAFETY</button>
-            <button class="info-tab" id="tab-faq" role="tab" aria-controls="panel-faq" aria-selected="false" data-target="panel-faq" data-i18n="navFaq">FAQ</button>
-            <button class="info-tab" id="tab-contact" role="tab" aria-controls="panel-contact" aria-selected="false" data-target="panel-contact" data-i18n="navContact">CONTACT</button>
-            <button class="info-tab" id="tab-policy" role="tab" aria-controls="panel-policy" aria-selected="false" data-target="panel-policy" data-i18n="navPolicy">POLICY</button>
+            <button class="info-tab" id="tab-how" role="tab" aria-controls="panel-how" aria-selected="false" tabindex="0" data-target="panel-how" data-i18n="navHow">HOW IT WORKS</button>
+            <button class="info-tab" id="tab-usage" role="tab" aria-controls="panel-usage" aria-selected="false" tabindex="-1" data-target="panel-usage" data-i18n="navUsage">USAGE</button>
+            <button class="info-tab" id="tab-health" role="tab" aria-controls="panel-health" aria-selected="false" tabindex="-1" data-target="panel-health" data-i18n="navSafety">SAFETY</button>
+            <button class="info-tab" id="tab-faq" role="tab" aria-controls="panel-faq" aria-selected="false" tabindex="-1" data-target="panel-faq" data-i18n="navFaq">FAQ</button>
+            <button class="info-tab" id="tab-contact" role="tab" aria-controls="panel-contact" aria-selected="false" tabindex="-1" data-target="panel-contact" data-i18n="navContact">CONTACT</button>
+            <button class="info-tab" id="tab-policy" role="tab" aria-controls="panel-policy" aria-selected="false" tabindex="-1" data-target="panel-policy" data-i18n="navPolicy">POLICY</button>
         </div>
         <div class="topbar-group utilities">
             <div class="lang-selector">
@@ -1692,10 +1692,10 @@
     </div>
 
     <div class="time-selector">
-        <button class="time-btn" data-seconds="1">1s</button>
-        <button class="time-btn active" data-seconds="5">5s</button>
-        <button class="time-btn" data-seconds="10">10s</button>
-        <button class="time-btn" data-seconds="60">60s</button>
+        <button class="time-btn" data-seconds="1" aria-pressed="false">1s</button>
+        <button class="time-btn active" data-seconds="5" aria-pressed="true">5s</button>
+        <button class="time-btn" data-seconds="10" aria-pressed="false">10s</button>
+        <button class="time-btn" data-seconds="60" aria-pressed="false">60s</button>
     </div>
 
     <div class="test-container">
@@ -1941,7 +1941,7 @@
                 <li>Feedback path: receive correction requests through the contact form.</li>
             </ul>
             <p data-lang="ko">
-                마지막 점검일: 2026년 3월 18일 UTC.
+                마지막 점검일: 2026년 3월 30일 UTC.
             </p>
             <p data-lang="en">
                 Last reviewed: March 30, 2026 UTC.
@@ -2490,8 +2490,17 @@
                 tab.setAttribute('aria-selected', 'false');
             });
         }
-        infoTabs.forEach((tab) => {
+        function focusInfoTab(targetTab) {
+            infoTabs.forEach((tab) => {
+                tab.setAttribute('tabindex', tab === targetTab ? '0' : '-1');
+            });
+            targetTab.focus();
+        }
+        infoTabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
+                infoTabs.forEach((item) => {
+                    item.setAttribute('tabindex', item === tab ? '0' : '-1');
+                });
                 const targetId = tab.getAttribute('data-target');
                 const target = document.getElementById(targetId);
                 const isOpen = target && target.classList.contains('open');
@@ -2502,6 +2511,16 @@
                     tab.classList.add('active');
                     tab.setAttribute('aria-selected', 'true');
                 }
+            });
+            tab.addEventListener('keydown', (event) => {
+                let nextIndex = null;
+                if (event.key === 'ArrowRight') nextIndex = (index + 1) % infoTabs.length;
+                if (event.key === 'ArrowLeft') nextIndex = (index - 1 + infoTabs.length) % infoTabs.length;
+                if (event.key === 'Home') nextIndex = 0;
+                if (event.key === 'End') nextIndex = infoTabs.length - 1;
+                if (nextIndex === null) return;
+                event.preventDefault();
+                focusInfoTab(infoTabs[nextIndex]);
             });
         });
 
@@ -2637,7 +2656,9 @@
         function syncTimeButtons() {
             timeBtns.forEach((btn) => {
                 const btnSeconds = Number((btn.textContent || '').replace('s', '').trim());
-                btn.classList.toggle('active', btnSeconds === selectedTime);
+                const isSelected = btnSeconds === selectedTime;
+                btn.classList.toggle('active', isSelected);
+                btn.setAttribute('aria-pressed', String(isSelected));
             });
         }
 
@@ -2842,8 +2863,7 @@
             selectedTime = seconds;
             timeLeft = seconds;
             
-            timeBtns.forEach(btn => btn.classList.remove('active'));
-            if (btnEl) btnEl.classList.add('active');
+            syncTimeButtons();
             
             resetTest();
         }
@@ -3101,8 +3121,14 @@
         const contactForm = document.getElementById('contactForm');
         const contactStatus = document.getElementById('contactStatus');
         if (contactForm) {
+            const contactSubmit = contactForm.querySelector('button[type="submit"]');
+            let isContactSubmitting = false;
             contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                if (isContactSubmitting) return;
+                isContactSubmitting = true;
+                if (contactSubmit) contactSubmit.disabled = true;
+                contactForm.setAttribute('aria-busy', 'true');
                 contactStatus.className = 'contact-status';
                 contactStatus.textContent = t('contactSending');
                 try {
@@ -3122,6 +3148,10 @@
                 } catch (err) {
                     contactStatus.classList.add('error');
                     contactStatus.textContent = t('contactNetwork');
+                } finally {
+                    isContactSubmitting = false;
+                    if (contactSubmit) contactSubmit.disabled = false;
+                    contactForm.removeAttribute('aria-busy');
                 }
             });
         }

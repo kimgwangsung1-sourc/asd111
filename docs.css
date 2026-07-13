@@ -116,7 +116,7 @@ html.lang-en body .lang-inline[data-lang="ko"] {
 }
 
 .title-block h1,
-.hero-copy h1 {
+.hero-copy h2 {
   margin: 0 0 12px;
   line-height: 1.25;
   font-size: clamp(30px, 5vw, 42px);
