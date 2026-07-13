@@ -1461,13 +1461,13 @@
                 The goal is not just search traffic, but to give direct visitors a useful CPS test and practical explanation.
             </p>
             <p data-lang="ko">
-                이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.
+                이메일과 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요. 이름은 선택사항입니다.
             </p>
             <p data-lang="en">
-                Please enter your name, email, and message below, then press "Send".
+                Enter your email and message below, then press "Send". Your name is optional.
             </p>
             <ul data-lang="ko">
-                <li>문의 방법: 이름, 이메일, 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요.</li>
+                <li>문의 방법: 이메일과 문의 내용을 적어주신 뒤 "문의 보내기"를 눌러주세요. 이름은 선택사항입니다.</li>
                 <li>운영 범위: 클릭/탭 속도 테스트 유틸리티 및 관련 안내 콘텐츠</li>
                 <li>수정 기준: 측정 방식이 바뀌면 안내 문구도 함께 갱신합니다.</li>
                 <li>정정 요청: 잘못된 설명이나 오해를 부를 표현은 문의 폼으로 제보할 수 있습니다.</li>
@@ -1479,12 +1479,13 @@
                 <li>Corrections: use the contact form if you find unclear or inaccurate explanations.</li>
             </ul>
             <form action="https://formspree.io/f/xgolzzzp" method="POST" id="contactForm" autocomplete="on">
+                <input type="hidden" name="subject" value="NEONCPS Contact Request">
                 <div class="field">
                     <label for="contactName">
-                        <span data-lang="ko" class="lang-inline">이름</span>
-                        <span data-lang="en" class="lang-inline">Name</span>
+                        <span data-lang="ko" class="lang-inline">이름 (선택)</span>
+                        <span data-lang="en" class="lang-inline">Name (optional)</span>
                     </label>
-                    <input id="contactName" name="name" type="text" data-placeholder-key="contactNamePlaceholder" placeholder="Enter your name" autocomplete="name" required>
+                    <input id="contactName" name="name" type="text" data-placeholder-key="contactNamePlaceholder" placeholder="Name (optional)" autocomplete="name">
                 </div>
                 <div class="field">
                     <label for="contactEmail">
@@ -1499,6 +1500,15 @@
                         <span data-lang="en" class="lang-inline">Message</span>
                     </label>
                     <textarea id="contactMessage" name="message" rows="4" data-placeholder-key="contactMessagePlaceholder" placeholder="Enter your message" autocomplete="off" required></textarea>
+                </div>
+                <div class="field">
+                    <label for="contactPrivacyConsent">
+                        <input id="contactPrivacyConsent" name="privacy_consent" type="checkbox" value="agreed" required>
+                        <span data-lang="ko" class="lang-inline"><a href="/privacy/">개인정보처리방침</a>을 확인했으며 문의 처리에 동의합니다.</span>
+                        <span data-lang="en" class="lang-inline">I have read the <a href="/privacy/">Privacy Policy</a> and consent to the processing of my inquiry.</span>
+                    </label>
+                    <p data-lang="ko">주민등록번호, 비밀번호, 결제정보, 건강정보 같은 민감정보는 입력하지 마세요.</p>
+                    <p data-lang="en">Do not enter sensitive information such as identification numbers, passwords, payment details, or health information.</p>
                 </div>
                 <div class="actions">
                     <button class="btn-restart" type="submit">
@@ -1650,7 +1660,7 @@
                 <li>마우스와 터치 기록을 바로 비교해도 되나요? 권장하지 않습니다. 입력 하드웨어와 브라우저 조건이 달라 점수 해석 기준도 달라질 수 있습니다.</li>
                 <li>브라우저 탭이나 백그라운드 앱이 많으면 영향이 있나요? 네. 메인 스레드 부하와 입력 처리 지연 때문에 기록이 덜 안정적일 수 있습니다.</li>
                 <li>왜 우클릭이나 키보드는 점수에 포함되지 않나요? 이 도구는 클릭/터치 기반 비교를 위해 기본 포인터 입력만 같은 규칙으로 집계합니다.</li>
-                <li>점수는 서버에 저장되나요? 아니요. 이 페이지는 결과를 화면에 계산해 보여주며, 사용자가 직접 링크를 복사하지 않는 한 기록을 저장하지 않습니다.</li>
+                <li>점수는 서버에 저장되나요? 아니요. 결과는 브라우저에서 계산되며, 모드별 최근 3회 기록은 사용자의 기기 내 로컬 스토리지에만 저장됩니다.</li>
             </ul>
             <ul data-lang="en">
                 <li>What is CPS? CPS means clicks per second. It is calculated as total clicks divided by the selected test time.</li>
@@ -1659,7 +1669,7 @@
                 <li>Can I compare mouse and touch scores directly? Not reliably. Different input hardware and browser conditions change how scores should be interpreted.</li>
                 <li>Do many open tabs or background apps matter? Yes. Main-thread load and input-event delay can make timing less stable.</li>
                 <li>Why are right-click and keyboard presses not counted? This tool uses one simple rule for comparison and counts only primary pointer input.</li>
-                <li>Are results stored on the server? No. The score is calculated on the page and shown to you unless you choose to copy the result link yourself.</li>
+                <li>Are results stored on the server? No. Results are calculated in your browser, and the three most recent runs for each mode are stored only in local storage on your device.</li>
             </ul>
             <div class="info-panel-link-group">
                 <a class="info-panel-link" href="/guides/">
@@ -2136,7 +2146,7 @@
                 retry: "RETRY",
                 copiedAlert: "Link copied",
                 toastClose: "Close",
-                contactNamePlaceholder: "Enter your name",
+                contactNamePlaceholder: "Name (optional)",
                 contactMessagePlaceholder: "Enter your message",
                 contactSending: "Sending...",
                 contactSuccess: "Your message was sent successfully. Thank you.",
@@ -2183,7 +2193,7 @@
                 retry: "다시하기",
                 copiedAlert: "링크가 복사되었습니다",
                 toastClose: "닫기",
-                contactNamePlaceholder: "이름을 입력하세요",
+                contactNamePlaceholder: "이름 (선택)",
                 contactMessagePlaceholder: "문의 내용을 입력하세요",
                 contactSending: "전송 중입니다...",
                 contactSuccess: "문의가 정상적으로 전송되었습니다. 감사합니다.",
