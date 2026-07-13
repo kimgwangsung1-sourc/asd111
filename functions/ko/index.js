@@ -153,13 +153,22 @@ export async function onRequest(context) {
   html = replaceOrThrow(html, '<span data-i18n="start">START</span>', '<span data-i18n="start">시작</span>', 'start button');
   html = replaceOrThrow(html, '<div class="timer-text" id="timer">5.00s</div>', '<div class="timer-text" id="timer">5.00초</div>', 'timer default');
   html = replaceOrThrow(html, '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">PRESS START, THEN TAP THE PAD</div>', '<div class="idle-msg" id="idleMsg" data-i18n="idleMsg">START 버튼을 누른 뒤 패드를 탭하세요</div>', 'idle message');
-  if (!html.includes('/guides/why-cps-scores-change/')) {
-    throw new Error('Template replacement failed: korean guide link');
+  const localizedDocumentPaths = [
+    "/guides/",
+    "/guides/how-neoncps-measures-cps/",
+    "/guides/why-cps-scores-change/",
+    "/guides/mobile-vs-mouse-cps/",
+    "/guides/safe-cps-practice/",
+    "/about/",
+    "/editorial-policy/"
+  ];
+
+  for (const path of localizedDocumentPaths) {
+    const englishHref = `href="${path}"`;
+    if (html.includes(englishHref)) {
+      html = html.replaceAll(englishHref, `href="/ko${path}"`);
+    }
   }
-  html = html.replaceAll('/guides/why-cps-scores-change/', (match, offset, source) => {
-    const alreadyKorean = source.slice(Math.max(0, offset - 3), offset) === '/ko';
-    return alreadyKorean ? match : `/ko${match}`;
-  });
   html = replaceOrThrow(
     html,
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,

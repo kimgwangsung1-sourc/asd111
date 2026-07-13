@@ -16,6 +16,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="canonical" href="https://neoncps.com/guides/how-neoncps-measures-cps/">
+  <link rel="alternate" hreflang="en" href="https://neoncps.com/guides/how-neoncps-measures-cps/">
+  <link rel="alternate" hreflang="ko" href="https://neoncps.com/ko/guides/how-neoncps-measures-cps/">
+  <link rel="alternate" hreflang="x-default" href="https://neoncps.com/guides/how-neoncps-measures-cps/">
   <meta property="og:title" content="How NEONCPS Measures CPS | Input Rule, Timing Rule, and Limits">
   <meta property="og:description" content="Understand what the NEONCPS score counts, how timing works, and why browser-based CPS is best for repeatable comparison in the same setup.">
   <meta property="og:type" content="article">
@@ -33,18 +36,16 @@
   <script src="/tracking.js"></script>
   <script>
   (function () {
+    var path = window.location.pathname || '';
+    var lang = path === '/ko' || path.startsWith('/ko/') ? 'ko' : 'en';
+    document.documentElement.classList.add(lang === 'ko' ? 'lang-ko' : 'lang-en');
+    document.documentElement.setAttribute('lang', lang);
     try {
-      var storedLang = localStorage.getItem('neon_lang');
-      var lang = storedLang === 'ko' || storedLang === 'en'
-        ? storedLang
-        : ((navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en');
-      document.documentElement.classList.add(lang === 'ko' ? 'lang-ko' : 'lang-en');
-      document.documentElement.setAttribute('lang', lang);
       if ((localStorage.getItem('neon_theme') || 'dark') === 'light') {
         document.documentElement.classList.add('light');
       }
     } catch (err) {
-      document.documentElement.classList.add('lang-en');
+      // Keep the default theme when storage is unavailable.
     }
   })();
 </script>
@@ -65,7 +66,8 @@
   "headline": "How NEONCPS Measures CPS",
   "url": "https://neoncps.com/guides/how-neoncps-measures-cps/",
   "description": "Input rule, timing rule, and interpretation limits for the NEONCPS CPS score.",
-  "dateModified": "2026-03-30"
+  "dateModified": "2026-03-30",
+  "inLanguage": "en"
 }
   </script>
   <script defer src="/docs.js"></script>

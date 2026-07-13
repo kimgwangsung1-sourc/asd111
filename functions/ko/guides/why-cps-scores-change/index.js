@@ -2,6 +2,16 @@ const CANONICAL_ORIGIN = "https://neoncps.com";
 const ENGLISH_GUIDE_URL = `${CANONICAL_ORIGIN}/guides/why-cps-scores-change/`;
 const KOREAN_GUIDE_URL = `${CANONICAL_ORIGIN}/ko/guides/why-cps-scores-change/`;
 const STABLE_CSP = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms https://static.cloudflareinsights.com https://ep2.adtrafficquality.google; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://csi.gstatic.com https://www.clarity.ms https://*.clarity.ms https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://googleads.g.doubleclick.net https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://ep2.adtrafficquality.google https://www.google.com; form-action 'self' https://formspree.io; upgrade-insecure-requests";
+const LOCALIZED_PATHS = [
+  "/",
+  "/guides/",
+  "/guides/how-neoncps-measures-cps/",
+  "/guides/why-cps-scores-change/",
+  "/guides/mobile-vs-mouse-cps/",
+  "/guides/safe-cps-practice/",
+  "/about/",
+  "/editorial-policy/"
+];
 
 const koreanStructuredData = {
   "@context": "https://schema.org",
@@ -104,10 +114,11 @@ export async function onRequest(context) {
 </script>`,
     "initial language script"
   );
-  if (!html.includes('href="/"')) {
-    throw new Error("Template replacement failed: korean home links");
+  for (const path of LOCALIZED_PATHS) {
+    const englishHref = `href="${path}"`;
+    const koreanPath = path === "/" ? "/ko/" : `/ko${path}`;
+    html = html.replaceAll(englishHref, `href="${koreanPath}"`);
   }
-  html = html.replaceAll('href="/"', 'href="/ko/"');
   html = replaceOrThrow(
     html,
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,

@@ -31,3 +31,7 @@ jobs:
       - name: JavaScript 문법 검사
         shell: bash
         run: find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check
+
+      - name: 한국어 URL 일관성 검사
+        shell: bash
+        run: node scripts/check-localized-routes.mjs

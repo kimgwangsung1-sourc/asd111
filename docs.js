@@ -32,6 +32,16 @@
   const langToggle = document.getElementById('langToggle');
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
+  const localizedPaths = new Set([
+    '/',
+    '/guides/',
+    '/guides/how-neoncps-measures-cps/',
+    '/guides/why-cps-scores-change/',
+    '/guides/mobile-vs-mouse-cps/',
+    '/guides/safe-cps-practice/',
+    '/about/',
+    '/editorial-policy/'
+  ]);
 
   function updateThemeIcon() {
     if (!themeIcon) return;
@@ -45,10 +55,26 @@
     });
   }
 
-  function updateHomeLinks(lang) {
-    const homeHref = lang === 'ko' ? '/ko/' : '/';
-    document.querySelectorAll('a[href="/"], a[href="/ko/"]').forEach((link) => {
-      link.setAttribute('href', homeHref);
+  function updateLocalizedLinks(lang) {
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('/')) return;
+
+      try {
+        const url = new URL(href, window.location.origin);
+        const englishPath = url.pathname.startsWith('/ko/')
+          ? url.pathname.slice(3)
+          : url.pathname;
+
+        if (!localizedPaths.has(englishPath)) return;
+
+        url.pathname = lang === 'ko'
+          ? (englishPath === '/' ? '/ko/' : `/ko${englishPath}`)
+          : englishPath;
+        link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+      } catch (err) {
+        // Keep the original link if it cannot be parsed.
+      }
     });
   }
 
@@ -61,23 +87,12 @@
     root.setAttribute('lang', nextLang);
     safeStorageSet('neon_lang', nextLang);
     applyTranslations(nextLang);
-    updateHomeLinks(nextLang);
+    updateLocalizedLinks(nextLang);
   }
 
   function detectDefaultLang() {
     const path = window.location.pathname || '';
-    if (path.startsWith('/ko/')) return 'ko';
-
-    const stored = safeStorageGet('neon_lang', '');
-    if (stored === 'ko' || stored === 'en') return stored;
-
-    const referrer = document.referrer || '';
-    if (referrer.startsWith('https://neoncps.com/ko/')) return 'ko';
-
-    const docLang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
-    if (docLang.startsWith('ko')) return 'ko';
-
-    return (navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en';
+    return path === '/ko' || path.startsWith('/ko/') ? 'ko' : 'en';
   }
 
   function setTheme(theme) {

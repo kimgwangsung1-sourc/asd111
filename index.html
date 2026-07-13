@@ -2291,8 +2291,8 @@
         function getLocalizedGuideHref(href) {
             if (currentLang !== 'ko') return href;
 
-            if (href === '/guides/why-cps-scores-change/') {
-                return '/ko/guides/why-cps-scores-change/';
+            if (href.startsWith('/guides/')) {
+                return `/ko${href}`;
             }
 
             return href;

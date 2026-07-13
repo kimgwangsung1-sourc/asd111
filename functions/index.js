@@ -13,6 +13,7 @@ export function onRequest(context) {
   return context.env.ASSETS.fetch(context.request).then((response) => {
     const headers = new Headers(response.headers);
     headers.set("content-security-policy", STABLE_CSP);
+    headers.set("content-language", "en");
 
     return new Response(response.body, {
       status: response.status,

@@ -36,18 +36,16 @@
   <script src="/tracking.js"></script>
   <script>
   (function () {
+    var path = window.location.pathname || '';
+    var lang = path === '/ko' || path.startsWith('/ko/') ? 'ko' : 'en';
+    document.documentElement.classList.add(lang === 'ko' ? 'lang-ko' : 'lang-en');
+    document.documentElement.setAttribute('lang', lang);
     try {
-      var storedLang = localStorage.getItem('neon_lang');
-      var lang = storedLang === 'ko' || storedLang === 'en'
-        ? storedLang
-        : ((navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en');
-      document.documentElement.classList.add(lang === 'ko' ? 'lang-ko' : 'lang-en');
-      document.documentElement.setAttribute('lang', lang);
       if ((localStorage.getItem('neon_theme') || 'dark') === 'light') {
         document.documentElement.classList.add('light');
       }
     } catch (err) {
-      document.documentElement.classList.add('lang-en');
+      // Keep the default theme when storage is unavailable.
     }
   })();
 </script>
@@ -68,7 +66,8 @@
   "headline": "Why CPS Scores Change Between Attempts",
   "url": "https://neoncps.com/guides/why-cps-scores-change/",
   "description": "Practical explanation of score variance in browser-based CPS testing.",
-  "dateModified": "2026-03-30"
+  "dateModified": "2026-03-30",
+  "inLanguage": "en"
 }
   </script>
   <script defer src="/docs.js"></script>
