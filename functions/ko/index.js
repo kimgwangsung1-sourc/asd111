@@ -156,7 +156,10 @@ export async function onRequest(context) {
   if (!html.includes('/guides/why-cps-scores-change/')) {
     throw new Error('Template replacement failed: korean guide link');
   }
-  html = html.replaceAll('/guides/why-cps-scores-change/', '/ko/guides/why-cps-scores-change/');
+  html = html.replaceAll('/guides/why-cps-scores-change/', (match, offset, source) => {
+    const alreadyKorean = source.slice(Math.max(0, offset - 3), offset) === '/ko';
+    return alreadyKorean ? match : `/ko${match}`;
+  });
   html = replaceOrThrow(
     html,
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
